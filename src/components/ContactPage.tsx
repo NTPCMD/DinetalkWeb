@@ -132,10 +132,12 @@ const handleSubmit = (e: React.FormEvent) => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full" size="lg">
+                <div className="mt-6">
+                  <Button type="submit" className="w-full" size="lg">
                   <Send className="w-4 h-4 mr-2" />
                   Send Message
-                </Button>
+                  </Button>
+                </div>
               </form>
             </CardContent>
           </Card>
