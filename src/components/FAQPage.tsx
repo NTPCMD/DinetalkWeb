@@ -5,7 +5,11 @@ import {
   AccordionTrigger,
 } from './ui/accordion';
 
-export function FAQPage() {
+interface FAQPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export function FAQPage({ onNavigate }: FAQPageProps) {
   const faqs = [
     {
       question: 'How does the AI receptionist work?',
@@ -69,6 +73,14 @@ export function FAQPage() {
           <p className="mb-6 opacity-90">
             Our team is here to help. Get in touch and we'll answer any questions you have.
           </p>
+          <div className="flex items-center justify-center">
+            <button
+              className="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-md font-medium hover:opacity-95"
+              onClick={() => onNavigate?.('demo')}
+            >
+              Book a Meeting
+            </button>
+          </div>
         </div>
       </div>
     </div>
