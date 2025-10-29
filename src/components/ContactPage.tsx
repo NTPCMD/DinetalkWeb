@@ -69,7 +69,15 @@ const handleSubmit = (e: React.FormEvent) => {
           <Card>
             <CardContent className="p-6 md:p-8">
               <h2 className="text-2xl mb-6">Send us a Message</h2>
-              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
                 <div>
                   <Label htmlFor="name">Name *</Label>
                   <Input
