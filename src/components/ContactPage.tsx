@@ -68,7 +68,7 @@ const handleSubmit = (e: React.FormEvent) => {
           {/* Contact Form */}
           <Card>
             <CardContent className="p-6 md:p-8">
-              <h2 className="text-2xl mb-6">Send us a Message</h2>
+              <h2 className="text-2xl mb-8">Send us a Message</h2>
               <form
                 name="contact"
                 method="POST"
@@ -79,7 +79,7 @@ const handleSubmit = (e: React.FormEvent) => {
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
                 <div>
-                  <Label htmlFor="name">Name *</Label>
+                  <Label htmlFor="name" className="mb-2">Name *</Label>
                   <Input
                     id="name"
                     name="name"
@@ -87,13 +87,12 @@ const handleSubmit = (e: React.FormEvent) => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="mt-2"
                     placeholder="Your name"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="email" className="mb-2">Email *</Label>
                   <Input
                     id="email"
                     name="email"
@@ -101,33 +100,31 @@ const handleSubmit = (e: React.FormEvent) => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="mt-2"
                     placeholder="your@email.com"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Phone</Label>
+                  <Label htmlFor="phone" className="mb-2">Phone</Label>
                   <Input
                     id="phone"
                     name="phone"
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="mt-2"
                     placeholder="(optional)"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="message">Message *</Label>
+                  <Label htmlFor="message" className="mb-2">Message *</Label>
                   <Textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="mt-2 min-h-[150px]"
+                    className="min-h-[150px]"
                     placeholder="Tell us about your restaurant and how we can help..."
                   />
                 </div>
