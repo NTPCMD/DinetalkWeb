@@ -16,17 +16,19 @@ export function BookDemoPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Calendar Section (Calendly) */}
           <Card>
-<CardContent className="p-6"><div className="rounded-2xl overflow-hidden shadow-xl fade-in-up" style={{ minHeight: "720px" }}>
-  <iframe
-    src="https://calendly.com/newtownpunjabi/new-meeting?primary_color=e58e23"
-    width="100%"
-    height="720"
-    frameBorder="0"
-  ></iframe>
-</div></CardContent>
             <CardHeader>
               <CardTitle>Schedule Your Demo</CardTitle>
             </CardHeader>
+            <CardContent className="p-6">
+              <div className="rounded-2xl overflow-hidden shadow-xl fade-in-up" style={{ minHeight: "720px" }}>
+                <iframe
+                  src="https://calendly.com/newtownpunjabi/new-meeting?primary_color=e58e23"
+                  width="100%"
+                  height="720"
+                  frameBorder="0"
+                ></iframe>
+              </div>
+            </CardContent>
             <CardContent>
               <div className="mt-6 p-4 bg-muted rounded-lg">
                 <div className="flex items-start gap-2">
