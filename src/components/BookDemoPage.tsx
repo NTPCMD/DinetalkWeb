@@ -22,7 +22,7 @@ export function BookDemoPage() {
             <CardContent className="p-6">
               <div className="rounded-2xl overflow-hidden shadow-xl fade-in-up" style={{ minHeight: "720px" }}>
                 <iframe
-                  src="https://calendly.com/newtownpunjabi/new-meeting?primary_color=e58e23"
+                  src="https://calendly.com/newtownpunjabi/new-meeting?primaryColor=f97316&textColor=000000"
                   width="100%"
                   height="720"
                   frameBorder="0"
