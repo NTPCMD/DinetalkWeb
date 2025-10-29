@@ -174,26 +174,51 @@ const handleSubmit = (e: React.FormEvent) => {
             </Card>
 
             <Card className="bg-secondary border-0">
-              <CardContent className="p-6">
-                <h3 className="text-xl mb-4">Business Hours</h3>
-                <div className="space-y-2 text-muted-foreground">
-                  <div className="flex justify-between">
-                    <span>Monday - Friday:</span>
-                    <span>9:00 AM - 5:00 PM</span>
+                <CardContent className="p-6">
+                  <h3 className="text-xl mb-4">Weekly Hours</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <div className="flex justify-between">
+                      <span>Sunday</span>
+                      <span>12:00 PM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Monday</span>
+                      <span>5:00 PM - 10:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Tuesday</span>
+                      <span>5:00 PM - 10:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Wednesday</span>
+                      <span>5:00 PM - 10:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Thursday</span>
+                      <span>5:00 PM - 10:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Friday</span>
+                      <span>5:00 PM - 11:45 PM</span>
+                    </div>
+                    <div>
+                      <div className="flex justify-between">
+                        <span>Saturday (early)</span>
+                        <span>12:00 AM - 1:00 AM</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Saturday (day)</span>
+                        <span>12:00 PM - 11:45 PM</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Saturday:</span>
-                    <span>10:00 AM - 2:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday:</span>
-                    <span>Closed</span>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground/80 mt-4">
-                  * Our AI receptionist is available 24/7 for demos
-                </p>
-              </CardContent>
+                  <p className="text-sm text-muted-foreground/80 mt-4">
+                    Australia/Perth
+                  </p>
+                  <p className="text-sm text-muted-foreground/80 mt-2">
+                    * Our AI receptionist is available 24/7 for demos
+                  </p>
+                </CardContent>
             </Card>
 
             <Card className="bg-primary text-white border-0">
