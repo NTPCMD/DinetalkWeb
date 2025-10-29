@@ -75,6 +75,7 @@ const handleSubmit = (e: React.FormEvent) => {
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
+                className="space-y-6"
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
@@ -201,7 +202,7 @@ const handleSubmit = (e: React.FormEvent) => {
                       <span>Friday</span>
                       <span>5:00 PM - 11:45 PM</span>
                     </div>
-                    <div>
+                    <div className="space-y-2 mt-2">
                       <div className="flex justify-between">
                         <span>Saturday (early)</span>
                         <span>12:00 AM - 1:00 AM</span>
