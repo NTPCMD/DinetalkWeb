@@ -1,0 +1,25 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>DineTalk Website Layout</title>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </head>
+
+    <body>
+      <div id="root"></div>
+
+      <!-- Netlify hidden form for build-time detection -->
+      <form name="contact" data-netlify="true" netlify hidden>
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
+      </form>
+
+      <script type="module" src="/src/main.tsx"></script>
+    </body>
+  </html>
+  
