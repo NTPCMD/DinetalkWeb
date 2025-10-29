@@ -28,14 +28,6 @@ export function BookDemoPage() {
               <CardTitle>Schedule Your Demo</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* Placeholder for calendar - in a real app, this would be an embedded calendar like Calendly */}
-              <div className="bg-secondary rounded-lg p-12 flex flex-col items-center justify-center min-h-[400px]">
-                <CalendarIcon className="w-16 h-16 text-primary mb-4" />
-                <p className="text-center text-muted-foreground mb-6">
-                  Calendar integration would appear here
-                </p>
-                <Button className="w-full max-w-xs">Select a Time Slot</Button>
-              </div>
               <div className="mt-6 p-4 bg-muted rounded-lg">
                 <div className="flex items-start gap-2">
                   <Clock className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
