@@ -107,10 +107,10 @@ export function BookDemoPage() {
                 <h3 className="text-xl mb-3">Try the AI Now</h3>
                 <p className="text-muted-foreground mb-4">
                   Want to experience DineTalk immediately? Call our demo line and interact with our
-                  AI receptionist.
+                  AI receptionist: <strong>+61 8 6010 4462</strong>
                 </p>
-                <Button variant="outline" className="w-full">
-                  Get Demo Phone Number
+                <Button asChild variant="outline" className="w-full">
+                  <a href="tel:+61860104462">Call +61 8 6010 4462</a>
                 </Button>
               </CardContent>
             </Card>

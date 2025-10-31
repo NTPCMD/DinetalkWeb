@@ -134,13 +134,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </p>
               <div className="flex items-center justify-center gap-4">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1758518727077-ffb66ffccced?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHBlcnNvbiUyMHNtaWxpbmd8ZW58MXx8fHwxNzYxMTM5OTIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Restaurant owner"
+                  src="https://share.google/images/3ZnlzIAYiXSl40n0j"
+                  alt="Jashan"
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div className="text-left">
-                  <p>Sarah Mitchell</p>
-                  <p className="text-muted-foreground">Owner, The Rustic Table</p>
+                  <p>Jashan</p>
+                  <p className="text-muted-foreground">Owner, Jashan da Dhaba</p>
                 </div>
               </div>
             </CardContent>
