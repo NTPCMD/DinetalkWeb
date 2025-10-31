@@ -1,7 +1,7 @@
 
   # DineTalk Website Layout
 
-  This is a code bundle for DineTalk Website Layout. The original project is available at https://www.figma.com/design/wTBoAUJsLRI0hmzWp4Oggl/DineTalk-Website-Layout.
+  This is a code bundle for DineTalk Website Layout. The original project is available at 
 
   ## Running the code
 
