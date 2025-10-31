@@ -134,7 +134,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </p>
               <div className="flex items-center justify-center gap-4">
                 <ImageWithFallback
-                  src="https://share.google/images/3ZnlzIAYiXSl40n0j"
+                  src="https://dogswampsc.com.au/assets/content/images/IMG-20241126-WA0016256821.jpeg"
                   alt="Jashan"
                   className="w-16 h-16 rounded-full object-cover"
                 />
