@@ -105,7 +105,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose reveal`} data-reveal>
+              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose reveal hero-heading`} data-reveal>
                 AI Restaurant Receptionist &amp; Ordering System
               </h1>
               <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'}`} data-reveal>
