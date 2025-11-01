@@ -1537,10 +1537,13 @@
 
 
 :root {
-  --font-size: 16px;
-  --background: #363640;
-  --foreground: #f6f4f0;
-  --card: #40424d;
+  --font-size: 17px;
+  /* Palette refinement */
+  --primary: #FF6B00; /* brand orange */
+  --accent: #FF8C00; /* gradient end */
+  --background: #0E0E0E; /* warm off-black */
+  --foreground: #ffffff;
+  --card: #1f1f1f;
   --card-foreground: #f6f4f0;
   --popover: #40424d;
   --popover-foreground: #f6f4f0;
@@ -1621,6 +1624,43 @@ html {
 
 /* Smooth anchor scrolling for better UX */
 html { scroll-behavior: smooth; }
+
+/* Navigation states */
+.nav-transparent {
+  background: transparent;
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+.nav-solid {
+  background: linear-gradient(180deg, rgba(14,14,14,0.98), rgba(14,14,14,1));
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Ensure buttons are touch-friendly */
+[data-slot="button"] {
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 12px;
+  padding-block: 8px;
+}
+
+/* Hero text shadow for readability */
+.hero-text-shadow {
+  text-shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+/* Section divider (subtle orange gradient) */
+.section-divider {
+  height: 36px;
+  background: linear-gradient(90deg, rgba(255,107,0,0.10), rgba(255,140,0,0.06));
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .feature-card, .fade-in-up, [data-slot="button"] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
 @property --tw-translate-x {
   syntax: "*";
