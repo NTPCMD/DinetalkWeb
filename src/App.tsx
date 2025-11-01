@@ -44,3 +44,27 @@ export default function App() {
     </div>
   );
 }
+
+// Reveal-on-scroll: observe elements with [data-reveal] and add 'in-view' when visible
+// This runs once when the app mounts.
+// Note: we attach to window since pages are client-rendered inside the single-page app.
+if (typeof window !== 'undefined') {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          el.classList.add('in-view');
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  // Observe existing elements with data-reveal
+  setTimeout(() => {
+    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    // also observe icon draw elements by observing their parent containers
+    document.querySelectorAll('[data-reveal-icon]').forEach((el) => io.observe(el));
+  }, 500);
+}

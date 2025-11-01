@@ -66,7 +66,7 @@ const handleSubmit = (e: React.FormEvent) => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Contact Form */}
-          <Card>
+          <Card data-reveal>
             <CardContent className="p-6 md:p-8">
               <h2 className="text-2xl mb-8">Send us a Message</h2>
               <form
@@ -142,7 +142,7 @@ const handleSubmit = (e: React.FormEvent) => {
 
           {/* Contact Information */}
           <div className="space-y-6">
-            <Card>
+            <Card data-reveal>
               <CardContent className="p-6">
                 <h2 className="text-2xl mb-6">Contact Information</h2>
                 <div className="space-y-6">

@@ -1,4 +1,5 @@
 import { Phone, Calendar, Zap, CheckCircle } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -8,23 +9,63 @@ interface HomePageProps {
 }
 
 export function HomePage({ onNavigate }: HomePageProps) {
+  const [typed, setTyped] = useState('');
+  const [showTagline, setShowTagline] = useState(false);
+  const heroRef = useRef<HTMLElement | null>(null);
+
+  // Typewriter effect for headline
+  useEffect(() => {
+    const full = 'We take your calls, so you can focus on the food.';
+    let i = 0;
+    const t = setInterval(() => {
+      setTyped(full.slice(0, i + 1));
+      i += 1;
+      if (i >= full.length) {
+        clearInterval(t);
+        // after a short pause, fade title and show tagline
+        setTimeout(() => {
+          setShowTagline(true);
+        }, 600);
+      }
+    }, 40);
+    return () => clearInterval(t);
+  }, []);
+
+  // Parallax background for hero (desktop only)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth < 768) return; // disable on mobile
+    const onScroll = () => {
+      if (!heroRef.current) return;
+      const y = window.scrollY || window.pageYOffset;
+      heroRef.current.style.backgroundPosition = `center calc(50% + ${y * 0.12}px)`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const features = [
     {
-      icon: <Phone className="w-8 h-8 text-primary" />,
+      icon: <div className="draw-icon" data-reveal-icon><Phone className="w-8 h-8 text-primary" /></div>,
       title: 'Answers Calls Instantly',
       description: 'Never miss a call again. Our AI answers every call in seconds, 24/7.',
     },
     {
-      icon: <Calendar className="w-8 h-8 text-primary" />,
+      icon: <div className="draw-icon" data-reveal-icon><Calendar className="w-8 h-8 text-primary" /></div>,
       title: 'Takes Reservations',
       description: 'Seamlessly handle bookings and reservations without lifting a finger.',
     },
     {
-      icon: <Zap className="w-8 h-8 text-primary" />,
+      icon: <div className="draw-icon" data-reveal-icon><Zap className="w-8 h-8 text-primary" /></div>,
       title: 'Integrates with POS',
       description: 'Works with your existing systems for a smooth workflow.',
     },
   ];
+
+  function TypewriterText({ text }: { text: string }) {
+    return <>{typed}</>;
+  }
 
   const steps = [
     {
@@ -47,14 +88,19 @@ export function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-  <section className="bg-gradient-to-br from-background to-secondary py-12 md:py-20">
+      <section
+        className="bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
+        data-reveal
+        ref={heroRef as any}
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose">
-                We take your calls, so you can focus on the food.
+              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose reveal`} data-reveal>
+                <TypewriterText text={`We take your calls, so you can focus on the food.`} />
               </h1>
-              <p className="text-xl mb-8 text-foreground/90">
+              <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'}`} data-reveal>
                 DineTalk is an AI receptionist for restaurants that handles calls, bookings, and
                 orders — 24/7.
               </p>
@@ -67,7 +113,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </Button>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl">
+            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                 alt="Restaurant phone call"
@@ -78,8 +124,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-background">
+  {/* Features Section */}
+  <section className="py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4">Why Choose DineTalk?</h2>
@@ -101,8 +147,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 bg-secondary">
+  {/* How It Works Section */}
+  <section className="py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4">How It Works</h2>
@@ -122,8 +168,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="py-20 bg-background">
+  {/* Testimonial Section */}
+  <section className="py-20 bg-background" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl mb-8">Trusted by Local Restaurants</h2>
           <Card className="bg-card border-0">
@@ -148,8 +194,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
+  {/* CTA Section */}
+  <section className="py-20 bg-primary text-white" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl mb-6">Ready to Transform Your Restaurant?</h2>
           <p className="text-xl mb-8 opacity-90">

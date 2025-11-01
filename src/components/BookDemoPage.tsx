@@ -15,7 +15,7 @@ export function BookDemoPage() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Calendar Section (Calendly) */}
-          <Card>
+          <Card data-reveal>
             <CardHeader>
               <CardTitle>Schedule Your Demo</CardTitle>
             </CardHeader>
@@ -47,7 +47,7 @@ export function BookDemoPage() {
 
           {/* What to Expect Section */}
           <div>
-            <Card className="mb-6">
+            <Card className="mb-6" data-reveal>
               <CardHeader>
                 <CardTitle>What to Expect</CardTitle>
               </CardHeader>

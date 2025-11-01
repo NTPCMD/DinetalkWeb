@@ -23,8 +23,8 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-  <section className="bg-gradient-to-br from-background to-secondary py-12 md:py-20">
+  {/* Hero Section */}
+  <section className="bg-gradient-to-br from-background to-secondary py-12 md:py-20" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl mb-6">About DineTalk</h1>
           <p className="text-xl text-foreground/90">
@@ -34,8 +34,8 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-20 bg-background">
+  {/* Mission Section */}
+  <section className="py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -69,8 +69,8 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-secondary">
+  {/* Values Section */}
+  <section className="py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4">Our Values</h2>
@@ -90,8 +90,8 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section */}
-      <section className="py-20 bg-background">
+  {/* Story Section */}
+  <section className="py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-2xl overflow-hidden shadow-xl">
@@ -127,8 +127,8 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
+  {/* CTA Section */}
+  <section className="py-20 bg-primary text-white" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl mb-6">Join Us on Our Mission</h2>
           <p className="text-xl mb-8 opacity-90">

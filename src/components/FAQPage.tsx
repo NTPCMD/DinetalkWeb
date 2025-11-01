@@ -53,7 +53,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </p>
         </div>
 
-        <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8">
+  <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8" data-reveal>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
@@ -68,7 +68,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
-        <div className="mt-12 bg-primary text-white rounded-2xl p-8 text-center">
+  <div className="mt-12 bg-primary text-white rounded-2xl p-8 text-center" data-reveal>
           <h2 className="text-2xl mb-4">Still have questions?</h2>
           <p className="mb-6 opacity-90">
             Our team is here to help. Get in touch and we'll answer any questions you have.
