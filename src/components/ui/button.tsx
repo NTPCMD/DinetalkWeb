@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRef } from "react";
 import { Slot } from "@radix-ui/react-slot@1.1.2";
 import { cva, type VariantProps } from "class-variance-authority@0.7.1";
 
@@ -45,12 +46,42 @@ function Button({
     asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
+  const elRef = useRef<HTMLElement | null>(null);
+
+  const { onClick, ...rest } = props as any;
+
+  const handleClick = (e: React.MouseEvent) => {
+    try {
+      if (typeof onClick === "function") onClick(e);
+    } catch (err) {
+      // swallow handler errors to not break ripple
+      console.error(err);
+    }
+
+    const el = elRef.current;
+    if (!el || !(el instanceof HTMLElement)) return;
+
+    const rect = el.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    ripple.className = "ripple";
+    const sizePx = Math.max(rect.width, rect.height) * 1.2;
+    ripple.style.width = ripple.style.height = `${sizePx}px`;
+    ripple.style.left = `${e.clientX - rect.left - sizePx / 2}px`;
+    ripple.style.top = `${e.clientY - rect.top - sizePx / 2}px`;
+    el.appendChild(ripple);
+    // remove after animation
+    ripple.addEventListener("animationend", () => ripple.remove());
+  };
 
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <Comp
+      ref={elRef as any}
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
+      onClick={handleClick}
+      {...rest}
     />
   );
 }

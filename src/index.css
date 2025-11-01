@@ -1871,13 +1871,33 @@ html {
 
 /* Primary button hover effect (scale + accent background) */
 [data-slot="button"] {
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease-out;
 }
 @media (hover: hover) {
   [data-slot="button"]:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(229,142,35,0.16);
     background-color: var(--accent) !important;
     color: var(--accent-foreground) !important;
+  }
+}
+
+/* Ripple / gradient sweep */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0);
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0) 60%);
+  animation: ripple 600ms cubic-bezier(.22,.9,.36,1) forwards;
+  will-change: transform, opacity;
+}
+@keyframes ripple {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
   }
 }
 
