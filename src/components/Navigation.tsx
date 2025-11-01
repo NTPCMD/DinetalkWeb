@@ -13,6 +13,16 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // scroll handler to toggle nav background
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const navItems = [
     { name: 'Home', path: 'home' },
     { name: 'About', path: 'about' },
@@ -95,13 +105,3 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     </nav>
   );
 }
-
-  // scroll handler to toggle nav background
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
