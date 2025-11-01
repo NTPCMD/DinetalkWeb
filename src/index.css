@@ -1619,6 +1619,9 @@ html {
   font-size: var(--font-size);
 }
 
+/* Smooth anchor scrolling for better UX */
+html { scroll-behavior: smooth; }
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

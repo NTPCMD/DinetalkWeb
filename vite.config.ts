@@ -53,6 +53,7 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      minify: 'esbuild',
     },
     server: {
       port: 3000,

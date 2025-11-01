@@ -26,6 +26,7 @@ export function BookDemoPage() {
                   width="100%"
                   height="720"
                   frameBorder="0"
+                  loading="lazy"
                 ></iframe>
               </div>
             </CardContent>

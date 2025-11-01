@@ -96,20 +96,20 @@ export function HomePage({ onNavigate }: HomePageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section
+        id="hero"
         className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
         data-reveal
         ref={heroRef as any}
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose reveal`} data-reveal>
-                <TypewriterText text={`We take your calls, so you can focus on the food.`} />
+                AI Restaurant Receptionist &amp; Ordering System
               </h1>
               <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'}`} data-reveal>
-                DineTalk is an AI receptionist for restaurants that handles calls, bookings, and
-                orders — 24/7.
+                DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
                 <Button size="lg" onClick={() => onNavigate('demo')}>
@@ -125,11 +125,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="dot" />
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
+              <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Restaurant phone call"
+                src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                alt="AI receptionist taking restaurant booking over phone"
                 className="w-full h-auto object-cover"
+                loading="lazy"
               />
             </div>
           </div>
