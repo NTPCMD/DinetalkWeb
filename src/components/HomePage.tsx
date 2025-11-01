@@ -11,6 +11,7 @@ interface HomePageProps {
 export function HomePage({ onNavigate }: HomePageProps) {
   const [typed, setTyped] = useState('');
   const [showTagline, setShowTagline] = useState(false);
+  const [showCTA, setShowCTA] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
 
   // Typewriter effect for headline
@@ -43,6 +44,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Fade in CTAs after 0.8s (independent small delay)
+  useEffect(() => {
+    const id = setTimeout(() => setShowCTA(true), 800);
+    return () => clearTimeout(id);
   }, []);
 
   const features = [
@@ -89,7 +96,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section
-        className="bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
+        className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
         data-reveal
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
@@ -104,13 +111,18 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 DineTalk is an AI receptionist for restaurants that handles calls, bookings, and
                 orders — 24/7.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
                 <Button size="lg" onClick={() => onNavigate('demo')}>
                   Book a Demo
                 </Button>
                 <Button size="lg" variant="outline" onClick={() => onNavigate('demo')}>
                   Try Live AI Demo
                 </Button>
+              </div>
+
+              {/* small bounce scroll indicator */}
+              <div className="scroll-indicator hidden md:flex" aria-hidden>
+                <div className="dot" />
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
@@ -135,13 +147,20 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-2 hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <div className="mb-4">{feature.icon}</div>
-                  <h3 className="text-xl mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </CardContent>
-              </Card>
+              <div
+                key={index}
+                className="feature-card"
+                data-reveal
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                <Card className="border-2 hover:border-primary transition-colors">
+                  <CardContent className="p-6">
+                    <div className="mb-4">{feature.icon}</div>
+                    <h3 className="text-xl mb-3">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
         </div>

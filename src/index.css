@@ -1915,3 +1915,50 @@ html {
   fill: var(--primary);
 }
 
+/* CTA fade-in */
+.cta-fade {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.cta-fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.5rem;
+  width: 32px;
+  height: 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.scroll-indicator .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--primary);
+  animation: scroll-bounce 1.6s infinite;
+}
+@keyframes scroll-bounce {
+  0%, 20% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Feature card fade-up (staggerable) */
+.feature-card {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.feature-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
