@@ -17,37 +17,43 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     phone: '',
     message: '',
   });
+  const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'submitting'>('idle');
 
   const encode = (data: Record<string, string>) =>
-  Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
+    Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
 
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  const form = e.target as HTMLFormElement;
-  const data = {
-    "form-name": "contact",
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-  };
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: encode(data),
-  })
-    .then(() => {
-      alert("Thanks! We’ll be in touch by email.");
-      setFormData({ name: "", email: "", phone: "", message: "" });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const data = {
+      'form-name': 'contact',
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
+    setStatus('submitting');
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode(data),
     })
-    .catch(() => alert("Sorry, something went wrong. Please try again."));
-};
+      .then(() => {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        form.reset();
+      })
+      .catch(() => setStatus('error'));
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    if (status !== 'idle') {
+      setStatus('idle');
+    }
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -64,18 +70,18 @@ const handleSubmit = (e: React.FormEvent) => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 items-start">
           {/* Contact Form */}
-          <Card data-reveal>
-            <CardContent className="p-6 md:p-8">
-              <h2 className="text-2xl mb-8">Send us a Message</h2>
+          <Card data-reveal className="self-start">
+            <CardContent className="p-6 md:p-8 flex flex-col gap-6">
+              <h2 className="text-2xl">Send us a Message</h2>
               <form
                 name="contact"
                 method="POST"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
-                className="space-y-6"
+                className="flex flex-col gap-5"
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
@@ -130,11 +136,21 @@ const handleSubmit = (e: React.FormEvent) => {
                   />
                 </div>
 
-                <div className="mt-6">
-                  <Button type="submit" className="w-full" size="lg">
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Message
+                <div className="flex flex-col gap-3">
+                  <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
+                    <Send className="w-4 h-4 mr-2" />
+                    {status === 'submitting' ? 'Sending...' : 'Send Message'}
                   </Button>
+                  {status === 'success' && (
+                    <p className="text-sm text-emerald-500" role="status">
+                      Thanks! We’ll be in touch by email.
+                    </p>
+                  )}
+                  {status === 'error' && (
+                    <p className="text-sm text-destructive" role="status">
+                      Sorry, something went wrong. Please try again.
+                    </p>
+                  )}
                 </div>
               </form>
             </CardContent>

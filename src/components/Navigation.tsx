@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
@@ -31,7 +30,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   ];
 
   return (
-    <nav className={`border-b border-border sticky top-0 z-50 ${scrolled ? 'nav-solid' : 'nav-transparent'}`}>
+    <nav
+      className={`nav-base border-b border-border sticky top-0 z-50 ${
+        scrolled ? 'nav-solid' : ''
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -48,16 +51,28 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <button
                 key={item.path}
                 onClick={() => onNavigate(item.path)}
-                className={`transition-colors ${
+                className={`nav-link relative font-medium transition-colors duration-200 ${
                   currentPage === item.path
                     ? 'text-primary'
-                    : 'text-foreground hover:text-primary'
+                    : 'text-foreground hover:text-primary/90'
                 }`}
+                aria-current={currentPage === item.path ? 'page' : undefined}
               >
                 {item.name}
               </button>
             ))}
-            <Button onClick={() => onNavigate('demo')}>Book a Demo</Button>
+            <Button
+              onClick={() => onNavigate('demo')}
+              variant={currentPage === 'demo' ? 'default' : 'secondary'}
+              className={
+                currentPage === 'demo'
+                  ? 'shadow-button'
+                  : 'hover:text-accent-foreground'
+              }
+              aria-current={currentPage === 'demo' ? 'page' : undefined}
+            >
+              Book a Demo
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,11 +95,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     onNavigate(item.path);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left transition-colors ${
+                  className={`nav-link text-left font-medium transition-colors duration-200 ${
                     currentPage === item.path
                       ? 'text-primary'
-                      : 'text-foreground hover:text-primary'
+                      : 'text-foreground hover:text-primary/90'
                   }`}
+                  aria-current={currentPage === item.path ? 'page' : undefined}
                 >
                   {item.name}
                 </button>

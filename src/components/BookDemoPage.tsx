@@ -1,8 +1,40 @@
-import { Calendar as CalendarIcon, Clock, CheckCircle } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { Clock, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 
+const CALENDLY_URL = 'https://calendly.com/newtownpunjabi/new-meeting?primaryColor=f97316&textColor=000000';
+let calendlyIframe: HTMLIFrameElement | null = null;
+
 export function BookDemoPage() {
+  const embedRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!embedRef.current) return;
+
+    let frame = calendlyIframe;
+    if (!frame) {
+      frame = document.createElement('iframe');
+      frame.src = CALENDLY_URL;
+      frame.width = '100%';
+      frame.height = '720';
+      frame.title = 'Calendly scheduling form';
+      frame.setAttribute('loading', 'eager');
+      frame.setAttribute('frameBorder', '0');
+      frame.style.border = '0';
+    }
+
+    calendlyIframe = frame;
+    const container = embedRef.current;
+    container.appendChild(frame);
+
+    return () => {
+      if (container && frame && container.contains(frame)) {
+        container.removeChild(frame);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,15 +52,11 @@ export function BookDemoPage() {
               <CardTitle>Schedule Your Demo</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
-              <div className="rounded-2xl overflow-hidden shadow-xl fade-in-up" style={{ minHeight: "720px" }}>
-                <iframe
-                  src="https://calendly.com/newtownpunjabi/new-meeting?primaryColor=f97316&textColor=000000"
-                  width="100%"
-                  height="720"
-                  frameBorder="0"
-                  loading="lazy"
-                ></iframe>
-              </div>
+              <div
+                className="rounded-2xl overflow-hidden shadow-xl fade-in-up"
+                style={{ minHeight: '720px' }}
+                ref={embedRef}
+              />
             </CardContent>
             <CardContent>
               <div className="mt-6 p-4 bg-muted rounded-lg">

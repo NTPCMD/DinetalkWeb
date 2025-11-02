@@ -9,28 +9,8 @@ interface HomePageProps {
 }
 
 export function HomePage({ onNavigate }: HomePageProps) {
-  const [typed, setTyped] = useState('');
-  const [showTagline, setShowTagline] = useState(false);
   const [showCTA, setShowCTA] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
-
-  // Typewriter effect for headline
-  useEffect(() => {
-    const full = 'We take your calls, so you can focus on the food.';
-    let i = 0;
-    const t = setInterval(() => {
-      setTyped(full.slice(0, i + 1));
-      i += 1;
-      if (i >= full.length) {
-        clearInterval(t);
-        // after a short pause, fade title and show tagline
-        setTimeout(() => {
-          setShowTagline(true);
-        }, 600);
-      }
-    }, 40);
-    return () => clearInterval(t);
-  }, []);
 
   // Parallax background for hero (desktop only)
   useEffect(() => {
@@ -70,10 +50,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
     },
   ];
 
-  function TypewriterText({ text }: { text: string }) {
-    return <>{typed}</>;
-  }
-
   const steps = [
     {
       number: '1',
@@ -98,17 +74,16 @@ export function HomePage({ onNavigate }: HomePageProps) {
       <section
         id="hero"
         className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
-        data-reveal
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose reveal hero-heading`} data-reveal>
+              <h1 className="text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose hero-heading">
                 AI Restaurant Receptionist &amp; Ordering System
               </h1>
-              <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'}`} data-reveal>
+              <p className="text-xl mb-8 text-foreground/90">
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>

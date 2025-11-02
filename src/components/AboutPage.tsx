@@ -1,8 +1,13 @@
 import { Target, Users, Heart, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Button } from './ui/button';
 
-export function AboutPage() {
+interface AboutPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export function AboutPage({ onNavigate }: AboutPageProps) {
   const values = [
     {
       icon: <Heart className="w-8 h-8 text-primary" />,
@@ -134,6 +139,14 @@ export function AboutPage() {
           <p className="text-xl mb-8 opacity-90">
             Discover how DineTalk can transform your restaurant's operations.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" onClick={() => onNavigate?.('demo')}>
+              Book a Demo
+            </Button>
+            <Button size="lg" variant="outline" onClick={() => onNavigate?.('contact')} className="text-primary bg-white hover:bg-white/90">
+              Contact Us
+            </Button>
+          </div>
         </div>
       </section>
     </div>
