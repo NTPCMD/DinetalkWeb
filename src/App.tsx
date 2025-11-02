@@ -26,9 +26,9 @@ export default function App() {
       case 'demo':
         return <BookDemoPage />;
       case 'about':
-        return <AboutPage />;
+        return <AboutPage onNavigate={handleNavigate} />;
       case 'faq':
-        return <FAQPage />;
+        return <FAQPage onNavigate={handleNavigate} />;
       case 'contact':
         return <ContactPage onNavigate={handleNavigate} />;
       default:

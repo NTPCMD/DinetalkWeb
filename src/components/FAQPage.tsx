@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
+import { Button } from './ui/button';
 
 interface FAQPageProps {
   onNavigate?: (page: string) => void;
@@ -73,13 +74,22 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           <p className="mb-6 opacity-90">
             Our team is here to help. Get in touch and we'll answer any questions you have.
           </p>
-          <div className="flex items-center justify-center">
-            <button
-              className="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-md font-medium hover:opacity-95"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
               onClick={() => onNavigate?.('demo')}
+              size="lg"
+              className="bg-white text-primary hover:bg-white/95"
             >
               Book a Meeting
-            </button>
+            </Button>
+            <Button
+              onClick={() => onNavigate?.('contact')}
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white/10"
+            >
+              Contact Us
+            </Button>
           </div>
         </div>
       </div>
