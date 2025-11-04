@@ -12,7 +12,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const firstMobileLinkRef = useRef<HTMLButtonElement | null>(null);
-  const previousOverflow = useRef<string>('');
+  const previousOverflow = useRef({
+    bodyOverflow: '',
+    htmlOverflow: '',
+    bodyPaddingRight: '',
+  });
 
   // scroll handler to toggle nav background
   useEffect(() => {
@@ -41,19 +45,33 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   useEffect(() => {
     const body = document.body;
-    if (!body) {
+    const html = document.documentElement;
+    if (!body || !html) {
       return;
     }
 
     if (mobileMenuOpen) {
-      previousOverflow.current = body.style.overflow;
+      previousOverflow.current = {
+        bodyOverflow: body.style.overflow,
+        htmlOverflow: html.style.overflow,
+        bodyPaddingRight: body.style.paddingRight,
+      };
+      const scrollbarWidth = window.innerWidth - html.clientWidth;
+      if (scrollbarWidth > 0) {
+        body.style.paddingRight = `${scrollbarWidth}px`;
+      }
       body.style.overflow = 'hidden';
+      html.style.overflow = 'hidden';
     } else {
-      body.style.overflow = previousOverflow.current;
+      body.style.overflow = previousOverflow.current.bodyOverflow;
+      html.style.overflow = previousOverflow.current.htmlOverflow;
+      body.style.paddingRight = previousOverflow.current.bodyPaddingRight;
     }
 
     return () => {
-      body.style.overflow = previousOverflow.current;
+      body.style.overflow = previousOverflow.current.bodyOverflow;
+      html.style.overflow = previousOverflow.current.htmlOverflow;
+      body.style.paddingRight = previousOverflow.current.bodyPaddingRight;
     };
   }, [mobileMenuOpen]);
 
@@ -103,7 +121,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 className={`nav-link relative font-medium transition-colors duration-200 ${
                   currentPage === item.path
                     ? 'text-primary'
-                    : 'text-foreground hover:text-primary/90'
+                    : 'text-secondary-foreground hover:text-primary/90'
                 }`}
                 aria-current={currentPage === item.path ? 'page' : undefined}
               >

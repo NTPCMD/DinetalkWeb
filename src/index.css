@@ -1627,10 +1627,10 @@ html { scroll-behavior: smooth; }
 
 /* Navigation states */
 .nav-base {
-  background: var(--background);
-  background: color-mix(in srgb, var(--background) 92%, transparent);
-  color: var(--foreground);
-  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--sidebar) 88%, rgba(8, 10, 18, 0.92));
+  color: var(--sidebar-foreground);
+  backdrop-filter: blur(14px);
+  border-color: color-mix(in srgb, var(--sidebar) 52%, rgba(255, 255, 255, 0.12));
   transition: background-color 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
 }
 .nav-base .nav-link::after {
@@ -1652,11 +1652,10 @@ html { scroll-behavior: smooth; }
   transform: scaleX(1);
 }
 .nav-solid {
-  background: var(--secondary);
-  background: color-mix(in srgb, var(--secondary) 92%, rgba(0,0,0,0.15));
-  box-shadow: 0 10px 30px rgba(0,0,0,0.16);
-  color: var(--secondary-foreground);
-  border-color: color-mix(in srgb, var(--secondary) 70%, rgba(255,255,255,0.18));
+  background: color-mix(in srgb, var(--sidebar) 94%, rgba(0, 0, 0, 0.35));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: var(--sidebar-foreground);
+  border-color: color-mix(in srgb, var(--sidebar) 68%, rgba(255, 255, 255, 0.16));
   z-index: 9999; /* ensure header stays on top */
 }
 .shadow-button {

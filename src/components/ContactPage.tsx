@@ -116,7 +116,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-20">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-20 pb-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl mb-6">Get in Touch</h1>
@@ -125,9 +125,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 items-start">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 lg:gap-12 items-start">
           {/* Contact Form */}
-          <Card data-reveal className="self-start">
+          <Card data-reveal className="self-start h-full">
             <CardContent className="p-6 md:p-8 flex flex-col gap-6">
               <h2 className="text-2xl">Send us a Message</h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
@@ -223,7 +223,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
           {/* Contact Information */}
           <div className="space-y-6">
-            <Card data-reveal>
+            <Card data-reveal className="h-full">
               <CardContent className="p-6">
                 <h2 className="text-2xl mb-6">Contact Information</h2>
                 <div className="space-y-6">
