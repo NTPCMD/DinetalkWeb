@@ -4,9 +4,10 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { usePageMetadata } from '../hooks/usePageMetadata';
+import { PageKey } from '../routes';
 
 interface HomePageProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: PageKey) => void;
 }
 
 export function HomePage({ onNavigate }: HomePageProps) {
@@ -55,24 +56,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
         url: 'https://dinetalk.com.au',
         description:
           'DineTalk is an AI-powered receptionist and booking automation platform for hospitality venues in Australia.',
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'DineTalk',
-        url: 'https://dinetalk.com.au',
-        logo: 'https://dinetalk.com.au/assets/logo.png',
-        sameAs: [
-          'https://www.instagram.com/dinetalk_ai',
-          'https://www.linkedin.com/company/dinetalk',
-        ],
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+61 400 000 000',
-          contactType: 'Customer Support',
-          areaServed: 'AU',
-          availableLanguage: 'English',
-        },
       },
     ],
   });
@@ -200,7 +183,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media" data-reveal>
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="AI receptionist answering restaurant phone call"
+                alt="Modern restaurant interior with a telephone on the host stand"
                 className="w-full h-auto object-cover"
                 loading="eager"
               />

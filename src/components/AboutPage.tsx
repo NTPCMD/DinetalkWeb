@@ -3,9 +3,10 @@ import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';
+import { PageKey } from '../routes';
 
 interface AboutPageProps {
-  onNavigate?: (page: string) => void;
+  onNavigate?: (page: PageKey) => void;
 }
 
 export function AboutPage({ onNavigate }: AboutPageProps) {

@@ -1,8 +1,9 @@
 import { Button } from './ui/button';
+import { PageKey } from '../routes';
 
 interface MobileStickyCTAProps {
-  onNavigate: (page: string) => void;
-  currentPage: string;
+  onNavigate: (page: PageKey) => void;
+  currentPage: PageKey;
 }
 
 export function MobileStickyCTA({ onNavigate, currentPage }: MobileStickyCTAProps) {

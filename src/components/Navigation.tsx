@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
+import { PageKey, PAGE_PATHS } from '../routes';
 
 interface NavigationProps {
-  currentPage: string;
-  onNavigate: (page: string) => void;
+  currentPage: PageKey;
+  onNavigate: (page: PageKey) => void;
 }
 
 export function Navigation({ currentPage, onNavigate }: NavigationProps) {
@@ -22,12 +23,21 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', path: 'home' },
-    { name: 'About', path: 'about' },
-    { name: 'FAQ', path: 'faq' },
-    { name: 'Contact', path: 'contact' },
+  const navItems: { name: string; page: PageKey }[] = [
+    { name: 'Home', page: 'home' },
+    { name: 'About', page: 'about' },
+    { name: 'FAQ', page: 'faq' },
+    { name: 'Contact', page: 'contact' },
   ];
+
+  const handleLinkClick = (event: MouseEvent<HTMLAnchorElement>, page: PageKey) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+      return;
+    }
+
+    event.preventDefault();
+    onNavigate(page);
+  };
 
   return (
     <nav
@@ -38,32 +48,34 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <button
-            onClick={() => onNavigate('home')}
+          <a
+            href={PAGE_PATHS.home}
+            onClick={(event) => handleLinkClick(event, 'home')}
             className="flex items-center"
             aria-label="Navigate to DineTalk home page"
           >
             <img src={logo} alt="DineTalk" className="h-14 w-auto" />
-          </button>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
-                key={item.path}
-                onClick={() => onNavigate(item.path)}
+              <a
+                key={item.page}
+                href={PAGE_PATHS[item.page]}
+                onClick={(event) => handleLinkClick(event, item.page)}
                 className={`nav-link relative font-medium transition-colors duration-200 ${
-                  currentPage === item.path
+                  currentPage === item.page
                     ? 'text-primary'
                     : 'text-foreground hover:text-primary/90'
                 }`}
-                aria-current={currentPage === item.path ? 'page' : undefined}
+                aria-current={currentPage === item.page ? 'page' : undefined}
               >
                 {item.name}
-              </button>
+              </a>
             ))}
             <Button
-              onClick={() => onNavigate('demo')}
+              asChild
               variant={currentPage === 'demo' ? 'default' : 'secondary'}
               className={
                 currentPage === 'demo'
@@ -73,7 +85,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               aria-current={currentPage === 'demo' ? 'page' : undefined}
               aria-label="Book a DineTalk demo"
             >
-              Book a Demo
+              <a
+                href={PAGE_PATHS.demo}
+                onClick={(event) => handleLinkClick(event, 'demo')}
+              >
+                Book a Demo
+              </a>
             </Button>
           </div>
 
@@ -94,31 +111,33 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <div id="mobile-menu" className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <button
-                  key={item.path}
-                  onClick={() => {
-                    onNavigate(item.path);
+                <a
+                  key={item.page}
+                  href={PAGE_PATHS[item.page]}
+                  onClick={(event) => {
+                    handleLinkClick(event, item.page);
                     setMobileMenuOpen(false);
                   }}
                   className={`nav-link text-left font-medium transition-colors duration-200 ${
-                    currentPage === item.path
+                    currentPage === item.page
                       ? 'text-primary'
                       : 'text-foreground hover:text-primary/90'
                   }`}
-                  aria-current={currentPage === item.path ? 'page' : undefined}
+                  aria-current={currentPage === item.page ? 'page' : undefined}
                 >
                   {item.name}
-                </button>
+                </a>
               ))}
-              <Button
-                onClick={() => {
-                  onNavigate('demo');
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full"
-                aria-label="Book a DineTalk demo"
-              >
-                Book a Demo
+              <Button asChild className="w-full" aria-label="Book a DineTalk demo">
+                <a
+                  href={PAGE_PATHS.demo}
+                  onClick={(event) => {
+                    handleLinkClick(event, 'demo');
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  Book a Demo
+                </a>
               </Button>
             </div>
           </div>

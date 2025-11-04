@@ -6,9 +6,10 @@ import {
 } from './ui/accordion';
 import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';
+import { PageKey } from '../routes';
 
 interface FAQPageProps {
-  onNavigate?: (page: string) => void;
+  onNavigate?: (page: PageKey) => void;
 }
 
 export function FAQPage({ onNavigate }: FAQPageProps) {

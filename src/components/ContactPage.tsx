@@ -7,9 +7,10 @@ import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { PageKey } from '../routes';
 
 interface ContactPageProps {
-  onNavigate?: (page: string) => void;
+  onNavigate?: (page: PageKey) => void;
 }
 
 export function ContactPage({ onNavigate }: ContactPageProps) {
@@ -61,8 +62,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+61 8 6010 4462',
-          contactType: 'Sales',
+          telephone: '+61403982811',
+          contactType: 'Customer Support',
           areaServed: 'AU',
           availableLanguage: 'English',
         },
@@ -75,9 +76,12 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
       .join('&');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
+
+    if (status === 'submitting') return;
+
+    const form = e.currentTarget;
     const data = {
       'form-name': 'contact',
       name: formData.name,
@@ -85,18 +89,29 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
       phone: formData.phone,
       message: formData.message,
     };
+
     setStatus('submitting');
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode(data),
-    })
-      .then(() => {
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-        form.reset();
-      })
-      .catch(() => setStatus('error'));
+
+    try {
+      const response = await fetch('/?no-cache=1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: encode(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      form.reset();
+    } catch (error) {
+      console.error('Unable to submit contact form', error);
+      setStatus('error');
+    }
   };
 
   const handleChange = (
@@ -131,6 +146,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 method="POST"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
+                action="/contact"
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-5"
               >
@@ -229,9 +245,10 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Call Us</h3>
-                      <a href="tel:+61860104462" className="text-primary hover:underline">
-                        +61 8 6010 4462
+                      <a href="tel:+61403982811" className="text-primary hover:underline">
+                        0403 982 811
                       </a>
+                      <p className="text-sm text-muted-foreground">Customer support (Australia)</p>
                     </div>
                   </div>
 
@@ -326,6 +343,21 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 >
                   Schedule a Call
                 </Button>
+              </CardContent>
+            </Card>
+
+            <Card data-reveal className="border-0 shadow-none bg-muted/60">
+              <CardContent className="p-6">
+                <h3 className="text-xl mb-3 text-foreground">Try the AI demo line</h3>
+                <p className="text-muted-foreground mb-4">
+                  Hear DineTalk in action anytime by calling our dedicated AI receptionist demo line.
+                </p>
+                <a
+                  href="tel:+61860104462"
+                  className="inline-flex items-center gap-2 text-primary hover:underline"
+                >
+                  <Phone className="w-5 h-5" /> +61 8 6010 4462
+                </a>
               </CardContent>
             </Card>
           </div>

@@ -2,7 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dinetalk.com.au/</loc>
-    <lastmod>2025-11-02</lastmod>
+    <lastmod>2025-11-04</lastmod>
     <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://dinetalk.com.au/about</loc>
+    <lastmod>2025-11-04</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://dinetalk.com.au/faq</loc>
+    <lastmod>2025-11-04</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dinetalk.com.au/contact</loc>
+    <lastmod>2025-11-04</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://dinetalk.com.au/book-demo</loc>
+    <lastmod>2025-11-04</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://dinetalk.com.au/privacy</loc>
+    <lastmod>2025-11-04</lastmod>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://dinetalk.com.au/terms</loc>
+    <lastmod>2025-11-04</lastmod>
+    <priority>0.50</priority>
   </url>
 </urlset>
