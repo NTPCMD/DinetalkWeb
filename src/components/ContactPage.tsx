@@ -6,7 +6,6 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
-import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 
 interface ContactPageProps {
@@ -71,9 +70,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     ],
   });
 
-  const perthSkylineImageBase =
-    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80';
-
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -116,20 +112,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-20 pb-32">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-40 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl mb-6">Get in Touch</h1>
+        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <h1 className="text-4xl md:text-5xl tracking-tight">Get in Touch</h1>
           <p className="text-xl text-muted-foreground">
             Have questions about AI restaurant receptionists or booking automation? We’d love to hear from you.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 lg:gap-12 items-start">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
-            <CardContent className="p-6 md:p-8 flex flex-col gap-6">
-              <h2 className="text-2xl">Send us a Message</h2>
+            <CardContent className="p-6 md:p-8 flex flex-col gap-4">
+              <h2 className="text-2xl tracking-tight">Send us a Message</h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
                 {status === 'success' && (
                   <Alert variant="success" className="border border-emerald-400/40">
@@ -161,7 +157,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
                 <div>
-                  <Label htmlFor="name" className="mb-2">Name *</Label>
+                  <Label htmlFor="name" className="mb-4 leading-snug">Name *</Label>
                   <Input
                     id="name"
                     name="name"
@@ -174,7 +170,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="mb-2">Email *</Label>
+                  <Label htmlFor="email" className="mb-4 leading-snug">Email *</Label>
                   <Input
                     id="email"
                     name="email"
@@ -187,7 +183,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="phone" className="mb-2">Phone</Label>
+                  <Label htmlFor="phone" className="mb-4 leading-snug">Phone</Label>
                   <Input
                     id="phone"
                     name="phone"
@@ -199,7 +195,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="message" className="mb-2">Message *</Label>
+                  <Label htmlFor="message" className="mb-4 leading-snug">Message *</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -222,10 +218,10 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </Card>
 
           {/* Contact Information */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <Card data-reveal className="h-full">
-              <CardContent className="p-6">
-                <h2 className="text-2xl mb-6">Contact Information</h2>
+              <CardContent className="p-6 md:p-8">
+                <h2 className="text-2xl mb-6 tracking-tight">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -282,8 +278,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </Card>
 
             <Card className="bg-secondary border-0">
-                <CardContent className="p-6">
-                  <h3 className="text-xl mb-4">Weekly Hours</h3>
+                <CardContent className="p-6 md:p-8">
+                  <h3 className="text-xl mb-4 tracking-tight">Weekly Hours</h3>
                   <div className="space-y-2 text-muted-foreground">
                     <div className="flex justify-between">
                       <span>Sunday</span>
@@ -329,23 +325,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 </CardContent>
             </Card>
 
-            <Card data-reveal className="overflow-hidden border-0 shadow-none">
-              <CardContent className="p-0">
-                <ImageWithFallback
-                  src={`${perthSkylineImageBase}&w=1200`}
-                  srcSet={`${perthSkylineImageBase}&w=640 640w, ${perthSkylineImageBase}&w=960 960w, ${perthSkylineImageBase}&w=1200 1200w`}
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  alt="Perth, Western Australia skyline at sunset"
-                  className="w-full h-48 object-cover"
-                  width={1200}
-                  height={600}
-                />
-              </CardContent>
-            </Card>
-
             <Card className="bg-primary text-primary-foreground border-0">
-              <CardContent className="p-6">
-                <h3 className="text-xl mb-3">Prefer to talk?</h3>
+              <CardContent className="p-6 md:p-8">
+                <h3 className="text-xl mb-3 tracking-tight">Prefer to talk?</h3>
                 <p className="mb-4 text-primary-foreground/90">
                   Book a free demo call and speak directly with our team.
                 </p>

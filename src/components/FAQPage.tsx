@@ -104,7 +104,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
                 <AccordionTrigger className="text-left">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-muted-foreground mt-3 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
