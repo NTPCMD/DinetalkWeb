@@ -1693,9 +1693,27 @@ html { scroll-behavior: smooth; }
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .feature-card, .fade-in-up, .cta-fade, .hero-intro, .hero-media, .hero-trust, [data-slot="button"] {
+  .reveal,
+  .feature-card,
+  .fade-in-up,
+  .cta-fade,
+  .hero-intro,
+  .hero-media,
+  .hero-trust,
+  [data-slot="button"] {
     transition: none !important;
     animation: none !important;
+  }
+
+  .reveal,
+  .feature-card,
+  .fade-in-up,
+  .cta-fade,
+  .hero-intro,
+  .hero-media,
+  .hero-trust {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
