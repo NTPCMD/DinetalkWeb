@@ -116,16 +116,16 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-20 pb-32">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl mb-6">Get in Touch</h1>
+        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <h1 className="text-4xl md:text-5xl tracking-tight">Get in Touch</h1>
           <p className="text-xl text-muted-foreground">
             Have questions about AI restaurant receptionists or booking automation? We’d love to hear from you.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 lg:gap-12 items-start">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
             <CardContent className="p-6 md:p-8 flex flex-col gap-6">
@@ -222,10 +222,10 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </Card>
 
           {/* Contact Information */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <Card data-reveal className="h-full">
-              <CardContent className="p-6">
-                <h2 className="text-2xl mb-6">Contact Information</h2>
+              <CardContent className="p-6 md:p-8">
+                <h2 className="text-2xl mb-6 tracking-tight">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -282,8 +282,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </Card>
 
             <Card className="bg-secondary border-0">
-                <CardContent className="p-6">
-                  <h3 className="text-xl mb-4">Weekly Hours</h3>
+                <CardContent className="p-6 md:p-8">
+                  <h3 className="text-xl mb-4 tracking-tight">Weekly Hours</h3>
                   <div className="space-y-2 text-muted-foreground">
                     <div className="flex justify-between">
                       <span>Sunday</span>
@@ -344,8 +344,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </Card>
 
             <Card className="bg-primary text-primary-foreground border-0">
-              <CardContent className="p-6">
-                <h3 className="text-xl mb-3">Prefer to talk?</h3>
+              <CardContent className="p-6 md:p-8">
+                <h3 className="text-xl mb-3 tracking-tight">Prefer to talk?</h3>
                 <p className="mb-4 text-primary-foreground/90">
                   Book a free demo call and speak directly with our team.
                 </p>
