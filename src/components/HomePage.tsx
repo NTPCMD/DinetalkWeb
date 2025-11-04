@@ -5,6 +5,12 @@ import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 
+const HERO_IMAGE_BASE =
+  'https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&utm_source=figma&utm_medium=referral';
+
+const OWNER_IMAGE_BASE =
+  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxyZXN0YXVyYW50JTIwb3duZXJ8ZW58MXx8fHwxNzYxMTg3NDU0fDA&ixlib=rb-4.1.0&q=80';
+
 interface HomePageProps {
   onNavigate: (page: string) => void;
 }
@@ -199,10 +205,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
             </div>
               <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media" data-reveal>
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src={`${HERO_IMAGE_BASE}&w=1280`}
+                srcSet={`${HERO_IMAGE_BASE}&w=640 640w, ${HERO_IMAGE_BASE}&w=960 960w, ${HERO_IMAGE_BASE}&w=1400 1400w`}
+                sizes="(min-width: 1280px) 560px, (min-width: 768px) 50vw, 100vw"
                 alt="AI receptionist answering restaurant phone call"
                 className="w-full h-auto object-cover"
                 loading="eager"
+                width={1280}
+                height={853}
               />
             </div>
           </div>
@@ -252,7 +262,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                   {step.number}
                 </div>
                 <h3 className="text-xl mb-3">{step.title}</h3>
@@ -278,10 +288,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </p>
               <div className="flex items-center justify-center gap-4">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxyZXN0YXVyYW50JTIwb3duZXJ8ZW58MXx8fHwxNzYxMTg3NDU0fDA&ixlib=rb-4.1.0&q=80&w=240"
+                  src={`${OWNER_IMAGE_BASE}&w=240`}
+                  srcSet={`${OWNER_IMAGE_BASE}&w=160 160w, ${OWNER_IMAGE_BASE}&w=240 240w, ${OWNER_IMAGE_BASE}&w=320 320w`}
+                  sizes="64px"
                   alt="Portrait of an Australian restaurant owner smiling"
                   className="w-16 h-16 rounded-full object-cover"
-                  loading="lazy"
+                  width={240}
+                  height={240}
                 />
                 <div className="text-left">
                   <p>Jashan</p>
@@ -299,10 +312,10 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
   {/* CTA Section */}
-  <section className="py-20 bg-primary text-white" data-reveal>
+  <section className="py-20 bg-primary text-primary-foreground" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl mb-6">Ready to Transform Your Restaurant?</h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 text-primary-foreground/80">
             Join hundreds of restaurants using DineTalk to handle their calls.
           </p>
           <Button

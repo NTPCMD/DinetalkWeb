@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>DineTalk favicon</title>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb36b" />
+      <stop offset="100%" stop-color="#ff6f3c" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#1c1e27" />
+  <path
+    d="M20 16h14c8.284 0 15 6.716 15 15s-6.716 15-15 15H28v6c0 1.657-1.343 3-3 3s-3-1.343-3-3V19c0-1.657 1.343-3 3-3Zm8 24h6c4.418 0 8-3.582 8-8s-3.582-8-8-8h-6v16Z"
+    fill="url(#grad)"
+  />
+</svg>

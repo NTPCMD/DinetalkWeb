@@ -112,16 +112,16 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
-        <div className="mt-12 bg-primary text-white rounded-2xl p-8 text-center" data-reveal>
+        <div className="mt-12 bg-primary text-primary-foreground rounded-2xl p-8 text-center" data-reveal>
           <h2 className="text-2xl mb-4">Still have questions?</h2>
-          <p className="mb-6 opacity-90">
+          <p className="mb-6 text-primary-foreground/80">
             Our team is here to help. Get in touch and we'll answer any questions you have.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               onClick={() => onNavigate?.('demo')}
               size="lg"
-              className="bg-white text-primary hover:bg-white/95"
+              variant="secondary"
               aria-label="Book a meeting with DineTalk"
             >
               Book a Meeting
@@ -130,7 +130,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
               onClick={() => onNavigate?.('contact')}
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white/10"
+              className="border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/20"
               aria-label="Contact the DineTalk team"
             >
               Contact Us
