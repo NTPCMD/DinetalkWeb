@@ -62,7 +62,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+61 8 6010 4462',
+          telephone: '+61 403 982 811',
           contactType: 'Sales',
           areaServed: 'AU',
           availableLanguage: 'English',
@@ -243,9 +243,23 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Call Us</h3>
+                      <a href="tel:+61403982811" className="text-primary hover:underline">
+                        0403 982 811
+                      </a>
+                      <p className="text-sm text-muted-foreground mt-1">Customer support &amp; sales</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">Demo Line</h3>
                       <a href="tel:+61860104462" className="text-primary hover:underline">
                         +61 8 6010 4462
                       </a>
+                      <p className="text-sm text-muted-foreground mt-1">Listen to the AI receptionist in action</p>
                     </div>
                   </div>
 

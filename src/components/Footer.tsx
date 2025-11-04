@@ -59,18 +59,18 @@ export function Footer({ onNavigate }: FooterProps) {
               >
                 Contact
               </button>
-              <a
-                href="https://dinetalk.com.au/privacy"
-                className="text-muted-foreground hover:text-primary transition-colors"
+              <button
+                onClick={() => onNavigate('privacy')}
+                className="text-muted-foreground hover:text-primary transition-colors text-left"
               >
                 Privacy Policy
-              </a>
-              <a
-                href="https://dinetalk.com.au/terms"
-                className="text-muted-foreground hover:text-primary transition-colors"
+              </button>
+              <button
+                onClick={() => onNavigate('terms')}
+                className="text-muted-foreground hover:text-primary transition-colors text-left"
               >
                 Terms of Service
-              </a>
+              </button>
             </div>
           </div>
 
@@ -81,6 +81,17 @@ export function Footer({ onNavigate }: FooterProps) {
               <div className="flex items-start gap-2 text-muted-foreground">
                 <MapPin size={20} className="mt-0.5 flex-shrink-0" />
                 <span>Perth, Western Australia</span>
+              </div>
+              <div className="flex items-start gap-2 text-muted-foreground">
+                <Phone size={20} className="mt-0.5 flex-shrink-0" />
+                <div className="flex flex-col">
+                  <a href="tel:+61403982811" className="hover:text-primary transition-colors">
+                    0403 982 811
+                  </a>
+                  <a href="tel:+61860104462" className="hover:text-primary transition-colors text-sm">
+                    Demo line: +61 8 6010 4462
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Mail size={20} className="flex-shrink-0" />

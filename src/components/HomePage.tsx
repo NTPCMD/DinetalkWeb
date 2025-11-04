@@ -74,7 +74,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
         ],
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+61 400 000 000',
+          telephone: '+61 403 982 811',
           contactType: 'Customer Support',
           areaServed: 'AU',
           availableLanguage: 'English',
@@ -189,10 +189,10 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
+                  variant="secondary"
                   onClick={() => onNavigate('contact')}
                   aria-label="Contact the DineTalk team"
-                  className="bg-white/10 hover:bg-white/20"
+                  className="bg-muted text-foreground border border-transparent hover:bg-muted/90"
                 >
                   Contact Us
                 </Button>
