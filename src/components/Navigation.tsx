@@ -17,6 +17,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     htmlOverflow: '',
     bodyPaddingRight: '',
   });
+  const touchStartY = useRef<number | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   // scroll handler to toggle nav background
   useEffect(() => {
@@ -50,7 +52,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
       return;
     }
 
-    if (mobileMenuOpen) {
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+    if (mobileMenuOpen && isDesktop) {
       previousOverflow.current = {
         bodyOverflow: body.style.overflow,
         htmlOverflow: html.style.overflow,
@@ -73,6 +77,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
       html.style.overflow = previousOverflow.current.htmlOverflow;
       body.style.paddingRight = previousOverflow.current.bodyPaddingRight;
     };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      touchStartY.current = null;
+    }
   }, [mobileMenuOpen]);
 
   useEffect(() => {
@@ -165,11 +175,30 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             />
             <div
               id="mobile-menu"
-              className="md:hidden fixed inset-x-0 top-20 bottom-0 z-40 border-t border-border bg-secondary text-secondary-foreground shadow-xl overflow-y-auto"
+              ref={menuRef}
+              className="md:hidden fixed inset-x-0 top-20 bottom-0 z-40 border-t border-border bg-secondary text-secondary-foreground shadow-xl overflow-y-auto touch-pan-y"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)' }}
+              style={{
+                paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)',
+                WebkitOverflowScrolling: 'touch',
+              }}
+              onTouchStart={(event) => {
+                touchStartY.current = event.touches[0]?.clientY ?? null;
+              }}
+              onTouchMove={(event) => {
+                if (touchStartY.current === null) {
+                  return;
+                }
+                const currentY = event.touches[0]?.clientY ?? 0;
+                const deltaY = currentY - touchStartY.current;
+                const menu = menuRef.current;
+                if (deltaY > 60 && (menu?.scrollTop ?? 0) <= 0) {
+                  setMobileMenuOpen(false);
+                  touchStartY.current = null;
+                }
+              }}
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <div className="flex flex-col gap-4">
