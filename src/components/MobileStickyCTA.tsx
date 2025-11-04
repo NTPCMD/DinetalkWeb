@@ -6,7 +6,9 @@ interface MobileStickyCTAProps {
 }
 
 export function MobileStickyCTA({ onNavigate, currentPage }: MobileStickyCTAProps) {
-  if (currentPage === 'demo') {
+  const hideOnPages = new Set(['demo', 'contact']);
+
+  if (hideOnPages.has(currentPage)) {
     return null;
   }
 
