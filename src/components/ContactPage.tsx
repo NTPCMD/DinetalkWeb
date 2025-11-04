@@ -116,10 +116,10 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-20 pb-32">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-24 sm:pt-28 lg:pt-32 pb-24 sm:pb-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl mb-6">Get in Touch</h1>
+        <div className="text-center mb-10 sm:mb-12">
+          <h1 className="text-4xl md:text-5xl mb-5 sm:mb-6">Get in Touch</h1>
           <p className="text-xl text-muted-foreground">
             Have questions about AI restaurant receptionists or booking automation? We’d love to hear from you.
           </p>
@@ -128,7 +128,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
         <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 lg:gap-12 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
-            <CardContent className="p-6 md:p-8 flex flex-col gap-6">
+            <CardContent className="p-6 md:p-8 flex flex-col gap-6 sm:gap-7">
               <h2 className="text-2xl">Send us a Message</h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
                 {status === 'success' && (
@@ -156,7 +156,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-5"
+                className="flex flex-col gap-6"
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
@@ -222,10 +222,10 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </Card>
 
           {/* Contact Information */}
-          <div className="space-y-6">
+          <div className="space-y-8 sm:space-y-10">
             <Card data-reveal className="h-full">
-              <CardContent className="p-6">
-                <h2 className="text-2xl mb-6">Contact Information</h2>
+              <CardContent className="p-6 md:p-7 space-y-6">
+                <h2 className="text-2xl">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -281,52 +281,54 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               </CardContent>
             </Card>
 
-            <Card className="bg-secondary border-0">
-                <CardContent className="p-6">
-                  <h3 className="text-xl mb-4">Weekly Hours</h3>
-                  <div className="space-y-2 text-muted-foreground">
+            <Card data-reveal className="bg-secondary border-0">
+              <CardContent className="p-6 space-y-4">
+                <div>
+                  <h3 className="text-xl">Weekly Hours</h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Australia/Perth time zone
+                  </p>
+                </div>
+                <div className="space-y-2 text-muted-foreground">
+                  <div className="flex justify-between">
+                    <span>Sunday</span>
+                    <span>12:00 PM - 6:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Monday</span>
+                    <span>5:00 PM - 10:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Tuesday</span>
+                    <span>5:00 PM - 10:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Wednesday</span>
+                    <span>5:00 PM - 10:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Thursday</span>
+                    <span>5:00 PM - 10:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Friday</span>
+                    <span>5:00 PM - 11:45 PM</span>
+                  </div>
+                  <div className="space-y-2 pt-2 border-t border-border/60">
                     <div className="flex justify-between">
-                      <span>Sunday</span>
-                      <span>12:00 PM - 6:00 PM</span>
+                      <span>Saturday (early)</span>
+                      <span>12:00 AM - 1:00 AM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Monday</span>
-                      <span>5:00 PM - 10:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Tuesday</span>
-                      <span>5:00 PM - 10:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Wednesday</span>
-                      <span>5:00 PM - 10:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Thursday</span>
-                      <span>5:00 PM - 10:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Friday</span>
-                      <span>5:00 PM - 11:45 PM</span>
-                    </div>
-                    <div className="space-y-2 mt-2">
-                      <div className="flex justify-between">
-                        <span>Saturday (early)</span>
-                        <span>12:00 AM - 1:00 AM</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Saturday (day)</span>
-                        <span>12:00 PM - 11:45 PM</span>
-                      </div>
+                      <span>Saturday (day)</span>
+                      <span>12:00 PM - 11:45 PM</span>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground/80 mt-4">
-                    Australia/Perth
-                  </p>
-                  <p className="text-sm text-muted-foreground/80 mt-2">
-                    * Our AI receptionist is available 24/7 for demos
-                  </p>
-                </CardContent>
+                </div>
+                <p className="text-sm text-muted-foreground/80">
+                  * Our AI receptionist is available 24/7 for demos
+                </p>
+              </CardContent>
             </Card>
 
             <Card data-reveal className="overflow-hidden border-0 shadow-none">
@@ -343,10 +345,10 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               </CardContent>
             </Card>
 
-            <Card className="bg-primary text-primary-foreground border-0">
-              <CardContent className="p-6">
-                <h3 className="text-xl mb-3">Prefer to talk?</h3>
-                <p className="mb-4 text-primary-foreground/90">
+            <Card data-reveal className="bg-primary text-primary-foreground border-0">
+              <CardContent className="p-6 space-y-4">
+                <h3 className="text-xl">Prefer to talk?</h3>
+                <p className="text-primary-foreground/90">
                   Book a free demo call and speak directly with our team.
                 </p>
                 <Button
