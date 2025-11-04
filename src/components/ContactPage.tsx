@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -7,6 +7,7 @@ import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 
 interface ContactPageProps {
   onNavigate?: (page: string) => void;
@@ -70,6 +71,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     ],
   });
 
+  const perthSkylineImageBase =
+    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80';
+
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -126,6 +130,26 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           <Card data-reveal className="self-start">
             <CardContent className="p-6 md:p-8 flex flex-col gap-6">
               <h2 className="text-2xl">Send us a Message</h2>
+              <div aria-live="polite" aria-atomic="true" className="space-y-3">
+                {status === 'success' && (
+                  <Alert variant="success" className="border border-emerald-400/40">
+                    <CheckCircle2 className="h-5 w-5" aria-hidden />
+                    <AlertTitle>Message sent</AlertTitle>
+                    <AlertDescription>
+                      Thanks for reaching out! Our team will reply to your email shortly.
+                    </AlertDescription>
+                  </Alert>
+                )}
+                {status === 'error' && (
+                  <Alert className="border border-destructive/40 bg-destructive/10 text-destructive">
+                    <AlertCircle className="h-5 w-5" aria-hidden />
+                    <AlertTitle>Something went wrong</AlertTitle>
+                    <AlertDescription>
+                      Sorry, your message didn’t go through. Please try again in a moment.
+                    </AlertDescription>
+                  </Alert>
+                )}
+              </div>
               <form
                 name="contact"
                 method="POST"
@@ -192,16 +216,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     <Send className="w-4 h-4 mr-2" />
                     {status === 'submitting' ? 'Sending...' : 'Send Message'}
                   </Button>
-                  {status === 'success' && (
-                    <p className="text-sm text-emerald-500" role="status" aria-live="polite">
-                      Thanks! We’ll be in touch by email.
-                    </p>
-                  )}
-                  {status === 'error' && (
-                    <p className="text-sm text-destructive" role="status" aria-live="assertive">
-                      Sorry, something went wrong. Please try again.
-                    </p>
-                  )}
                 </div>
               </form>
             </CardContent>
@@ -304,18 +318,21 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             <Card data-reveal className="overflow-hidden border-0 shadow-none">
               <CardContent className="p-0">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80&w=1200"
+                  src={`${perthSkylineImageBase}&w=1200`}
+                  srcSet={`${perthSkylineImageBase}&w=640 640w, ${perthSkylineImageBase}&w=960 960w, ${perthSkylineImageBase}&w=1200 1200w`}
+                  sizes="(min-width: 1024px) 33vw, 100vw"
                   alt="Perth, Western Australia skyline at sunset"
                   className="w-full h-48 object-cover"
-                  loading="lazy"
+                  width={1200}
+                  height={600}
                 />
               </CardContent>
             </Card>
 
-            <Card className="bg-primary text-white border-0">
+            <Card className="bg-primary text-primary-foreground border-0">
               <CardContent className="p-6">
                 <h3 className="text-xl mb-3">Prefer to talk?</h3>
-                <p className="mb-4 opacity-90">
+                <p className="mb-4 text-primary-foreground/90">
                   Book a free demo call and speak directly with our team.
                 </p>
                 <Button

@@ -7,6 +7,7 @@ import { AboutPage } from './components/AboutPage';
 import { FAQPage } from './components/FAQPage';
 import { ContactPage } from './components/ContactPage';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
+import { ScrollToTopButton } from './components/ScrollToTopButton';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -42,6 +43,7 @@ export default function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       <main className="flex-grow">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
+      <ScrollToTopButton />
       <MobileStickyCTA currentPage={currentPage} onNavigate={handleNavigate} />
     </div>
   );

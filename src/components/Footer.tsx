@@ -18,7 +18,13 @@ export function Footer({ onNavigate }: FooterProps) {
               onClick={() => onNavigate('home')}
               className="mb-4 inline-block"
             >
-              <img src={logo} alt="DineTalk" className="h-16 w-auto" />
+              <img
+                src={logo}
+                alt="DineTalk"
+                className="h-16 w-auto"
+                loading="lazy"
+                decoding="async"
+              />
             </button>
             <p className="text-muted-foreground">
               AI receptionist for restaurants that handles calls, bookings, and orders — 24/7.

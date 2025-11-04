@@ -4,6 +4,12 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 
+const CHEF_IMAGE_BASE =
+  'https://images.unsplash.com/photo-1698653223689-24b0bfd5150b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMHJlc3RhdXJhbnR8ZW58MXx8fHwxNzYxMTgyNzM1fDA&ixlib=rb-4.1.0&q=80&utm_source=figma&utm_medium=referral';
+
+const INTERIOR_IMAGE_BASE =
+  'https://images.unsplash.com/photo-1667388968964-4aa652df0a9b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBkaW5pbmd8ZW58MXx8fHwxNzYxMTE1NzQ3fDA&ixlib=rb-4.1.0&q=80&utm_source=figma&utm_medium=referral';
+
 interface AboutPageProps {
   onNavigate?: (page: string) => void;
 }
@@ -109,10 +115,13 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1698653223689-24b0bfd5150b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMHJlc3RhdXJhbnR8ZW58MXx8fHwxNzYxMTgyNzM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src={`${CHEF_IMAGE_BASE}&w=1280`}
+                srcSet={`${CHEF_IMAGE_BASE}&w=640 640w, ${CHEF_IMAGE_BASE}&w=960 960w, ${CHEF_IMAGE_BASE}&w=1280 1280w`}
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 alt="Chef preparing food in a busy restaurant kitchen"
                 className="w-full h-auto object-cover"
-                loading="lazy"
+                width={1280}
+                height={853}
               />
             </div>
           </div>
@@ -146,10 +155,13 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-2xl overflow-hidden shadow-xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1667388968964-4aa652df0a9b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBkaW5pbmd8ZW58MXx8fHwxNzYxMTE1NzQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src={`${INTERIOR_IMAGE_BASE}&w=1280`}
+                srcSet={`${INTERIOR_IMAGE_BASE}&w=640 640w, ${INTERIOR_IMAGE_BASE}&w=960 960w, ${INTERIOR_IMAGE_BASE}&w=1280 1280w`}
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 alt="Warm restaurant interior with diners"
                 className="w-full h-auto object-cover"
-                loading="lazy"
+                width={1280}
+                height={853}
               />
             </div>
             <div className="order-1 md:order-2">
@@ -179,10 +191,10 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
   {/* CTA Section */}
-  <section className="py-20 bg-primary text-white" data-reveal>
+  <section className="py-20 bg-primary text-primary-foreground" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl mb-6">Join Us on Our Mission</h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 text-primary-foreground/80">
             Discover how DineTalk can transform your restaurant's operations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -193,7 +205,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               size="lg"
               variant="outline"
               onClick={() => onNavigate?.('contact')}
-              className="text-primary bg-white hover:bg-white/90"
+              className="bg-primary-foreground text-primary border-primary/40 hover:bg-primary-foreground/90"
               aria-label="Contact the DineTalk team"
             >
               Contact Us
