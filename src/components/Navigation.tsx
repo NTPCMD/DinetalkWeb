@@ -147,10 +147,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             />
             <div
               id="mobile-menu"
-              className="md:hidden fixed inset-x-0 top-20 z-40 border-t border-border bg-secondary text-secondary-foreground shadow-xl"
+              className="md:hidden fixed inset-x-0 top-20 bottom-0 z-40 border-t border-border bg-secondary text-secondary-foreground shadow-xl overflow-y-auto"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
+              style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)' }}
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <div className="flex flex-col gap-4">

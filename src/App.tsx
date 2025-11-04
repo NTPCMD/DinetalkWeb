@@ -8,6 +8,8 @@ import { FAQPage } from './components/FAQPage';
 import { ContactPage } from './components/ContactPage';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { ScrollToTopButton } from './components/ScrollToTopButton';
+import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { TermsOfServicePage } from './components/TermsOfServicePage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -33,6 +35,10 @@ export default function App() {
         return <FAQPage onNavigate={handleNavigate} />;
       case 'contact':
         return <ContactPage onNavigate={handleNavigate} />;
+      case 'privacy':
+        return <PrivacyPolicyPage />;
+      case 'terms':
+        return <TermsOfServicePage />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }
