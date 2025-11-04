@@ -2,12 +2,56 @@ import { Target, Users, Heart, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
+import { usePageMetadata } from '../hooks/usePageMetadata';
 
 interface AboutPageProps {
   onNavigate?: (page: string) => void;
 }
 
 export function AboutPage({ onNavigate }: AboutPageProps) {
+  usePageMetadata({
+    title: 'About DineTalk | AI Restaurant Receptionist Australia',
+    description:
+      'Discover the DineTalk story and meet the hospitality experts behind Australia’s leading AI restaurant receptionist and booking automation platform.',
+    keywords: [
+      'AI Restaurant Receptionist Australia',
+      'Hospitality AI team',
+      'Restaurant technology Australia',
+    ],
+    robots: 'index, follow',
+    canonicalUrl: 'https://dinetalk.com.au/about',
+    author: 'DineTalk Australia',
+    openGraph: {
+      title: 'About DineTalk – Hospitality-first AI Receptionist',
+      description:
+        'Learn how the DineTalk team combines hospitality and AI expertise to power 24/7 restaurant booking automation.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+      url: 'https://dinetalk.com.au/about',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'About DineTalk | Restaurant Booking Automation',
+      description:
+        'Meet the Perth-based team helping Australian venues answer calls, take bookings, and integrate with POS using AI.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+    },
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        name: 'About DineTalk',
+        description:
+          'DineTalk is an Australian-built AI receptionist helping restaurants automate bookings, customer enquiries, and POS integrations.',
+        url: 'https://dinetalk.com.au/about',
+        publisher: {
+          '@type': 'Organization',
+          name: 'DineTalk',
+          url: 'https://dinetalk.com.au',
+          logo: 'https://dinetalk.com.au/assets/logo.png',
+        },
+      },
+    ],
+  });
   const values = [
     {
       icon: <Heart className="w-8 h-8 text-primary" />,
@@ -33,8 +77,8 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl mb-6">About DineTalk</h1>
           <p className="text-xl text-foreground/90">
-            We're on a mission to help restaurants focus on what matters most — incredible food and
-            unforgettable experiences.
+            We are hospitality specialists building Australia’s most trusted AI restaurant receptionist and
+            booking automation platform.
           </p>
         </div>
       </section>
@@ -65,9 +109,10 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1698653223689-24b0bfd5150b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMHJlc3RhdXJhbnR8ZW58MXx8fHwxNzYxMTgyNzM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Chef cooking"
+                src="https://images.unsplash.com/photo-1698653223689-24b0bfd5150b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMHJlc3RhdXJhbnR8ZW58MXx8fHwxNzYxMTgyNzM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                alt="Chef preparing food in a busy restaurant kitchen"
                 className="w-full h-auto object-cover"
+                loading="lazy"
               />
             </div>
           </div>
@@ -101,9 +146,10 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-2xl overflow-hidden shadow-xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1667388968964-4aa652df0a9b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBkaW5pbmd8ZW58MXx8fHwxNzYxMTE1NzQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Restaurant interior"
+                src="https://images.unsplash.com/photo-1667388968964-4aa652df0a9b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBkaW5pbmd8ZW58MXx8fHwxNzYxMTE1NzQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                alt="Warm restaurant interior with diners"
                 className="w-full h-auto object-cover"
+                loading="lazy"
               />
             </div>
             <div className="order-1 md:order-2">
@@ -140,10 +186,16 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             Discover how DineTalk can transform your restaurant's operations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" onClick={() => onNavigate?.('demo')}>
+            <Button size="lg" variant="secondary" onClick={() => onNavigate?.('demo')} aria-label="Book a demo with DineTalk">
               Book a Demo
             </Button>
-            <Button size="lg" variant="outline" onClick={() => onNavigate?.('contact')} className="text-primary bg-white hover:bg-white/90">
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => onNavigate?.('contact')}
+              className="text-primary bg-white hover:bg-white/90"
+              aria-label="Contact the DineTalk team"
+            >
               Contact Us
             </Button>
           </div>

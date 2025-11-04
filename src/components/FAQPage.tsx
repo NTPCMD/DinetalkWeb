@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from './ui/accordion';
 import { Button } from './ui/button';
+import { usePageMetadata } from '../hooks/usePageMetadata';
 
 interface FAQPageProps {
   onNavigate?: (page: string) => void;
@@ -44,17 +45,59 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
     },
   ];
 
+  usePageMetadata({
+    title: 'DineTalk FAQ | AI Restaurant Receptionist Questions',
+    description:
+      'Find answers to common questions about DineTalk’s AI restaurant receptionist, booking automation, POS integrations, and 24/7 call handling.',
+    keywords: [
+      'AI restaurant FAQ',
+      'Restaurant booking automation support',
+      'AI receptionist questions',
+    ],
+    robots: 'index, follow',
+    canonicalUrl: 'https://dinetalk.com.au/faq',
+    author: 'DineTalk Australia',
+    openGraph: {
+      title: 'Frequently Asked Questions | DineTalk AI Receptionist',
+      description:
+        'Learn how DineTalk automates bookings, integrates with POS systems, and supports Australian restaurants 24/7.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+      url: 'https://dinetalk.com.au/faq',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'DineTalk FAQ | Restaurant Booking Automation',
+      description:
+        'Explore answers about AI call handling, integrations, and onboarding for Australian restaurants.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+    },
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl mb-6">Frequently Asked Questions</h1>
           <p className="text-xl text-muted-foreground">
-            Everything you need to know about DineTalk
+            Everything you need to know about DineTalk’s AI restaurant receptionist and booking automation
           </p>
         </div>
 
-  <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8" data-reveal>
+        <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8" data-reveal>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
@@ -69,7 +112,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
-  <div className="mt-12 bg-primary text-white rounded-2xl p-8 text-center" data-reveal>
+        <div className="mt-12 bg-primary text-white rounded-2xl p-8 text-center" data-reveal>
           <h2 className="text-2xl mb-4">Still have questions?</h2>
           <p className="mb-6 opacity-90">
             Our team is here to help. Get in touch and we'll answer any questions you have.
@@ -79,6 +122,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
               onClick={() => onNavigate?.('demo')}
               size="lg"
               className="bg-white text-primary hover:bg-white/95"
+              aria-label="Book a meeting with DineTalk"
             >
               Book a Meeting
             </Button>
@@ -87,6 +131,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
               size="lg"
               variant="outline"
               className="border-white text-white hover:bg-white/10"
+              aria-label="Contact the DineTalk team"
             >
               Contact Us
             </Button>
