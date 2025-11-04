@@ -2,12 +2,58 @@ import { useEffect, useRef } from 'react';
 import { Clock, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { usePageMetadata } from '../hooks/usePageMetadata';
 
 const CALENDLY_URL = 'https://calendly.com/newtownpunjabi/new-meeting?primaryColor=f97316&textColor=000000';
 let calendlyIframe: HTMLIFrameElement | null = null;
 
 export function BookDemoPage() {
   const embedRef = useRef<HTMLDivElement | null>(null);
+
+  usePageMetadata({
+    title: 'Book a Demo | DineTalk AI Restaurant Receptionist',
+    description:
+      'Schedule a live walkthrough of DineTalk’s AI restaurant receptionist. See how automated bookings, call handling, and POS integrations work for Australian venues.',
+    keywords: [
+      'Book DineTalk demo',
+      'Schedule AI restaurant receptionist',
+      'Restaurant booking automation demo',
+    ],
+    robots: 'index, follow',
+    canonicalUrl: 'https://dinetalk.com.au/book-demo',
+    author: 'DineTalk Australia',
+    openGraph: {
+      title: 'Book a DineTalk Demo – Restaurant AI Receptionist',
+      description:
+        'Reserve your DineTalk demo to experience AI-powered bookings, menu support, and call handling tailored for Australian restaurants.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+      url: 'https://dinetalk.com.au/book-demo',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Book a Demo | DineTalk AI Receptionist',
+      description:
+        'Pick a time that suits you and see DineTalk automate restaurant bookings and customer calls.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+    },
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ReserveAction',
+        name: 'Book a DineTalk Demo',
+        target: 'https://dinetalk.com.au/book-demo',
+        provider: {
+          '@type': 'Organization',
+          name: 'DineTalk',
+          url: 'https://dinetalk.com.au',
+        },
+        result: {
+          '@type': 'EventReservation',
+          name: 'DineTalk Demo Session',
+        },
+      },
+    ],
+  });
 
   useEffect(() => {
     if (!embedRef.current) return;
@@ -39,9 +85,9 @@ export function BookDemoPage() {
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl mb-6">Book a Free Demo</h1>
+          <h1 className="text-4xl md:text-5xl mb-6">Schedule Your DineTalk Demo</h1>
           <p className="text-xl text-muted-foreground">
-            See DineTalk in action and discover how we can transform your restaurant's call handling.
+            Takes under 30 seconds to book — choose a time that suits you and see the AI restaurant receptionist in action.
           </p>
         </div>
 
@@ -138,7 +184,7 @@ export function BookDemoPage() {
                   Want to experience DineTalk immediately? Call our demo line and interact with our
                   AI receptionist: <strong>+61 8 6010 4462</strong>
                 </p>
-                <Button asChild variant="outline" className="w-full">
+                <Button asChild variant="outline" className="w-full" aria-label="Call the DineTalk demo line">
                   <a href="tel:+61860104462">Call +61 8 6010 4462</a>
                 </Button>
               </CardContent>

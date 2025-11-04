@@ -53,6 +53,18 @@ export function Footer({ onNavigate }: FooterProps) {
               >
                 Contact
               </button>
+              <a
+                href="https://dinetalk.com.au/privacy"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="https://dinetalk.com.au/terms"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                Terms of Service
+              </a>
             </div>
           </div>
 

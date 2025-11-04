@@ -41,6 +41,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <button
             onClick={() => onNavigate('home')}
             className="flex items-center"
+            aria-label="Navigate to DineTalk home page"
           >
             <img src={logo} alt="DineTalk" className="h-14 w-auto" />
           </button>
@@ -70,6 +71,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   : 'hover:text-accent-foreground'
               }
               aria-current={currentPage === 'demo' ? 'page' : undefined}
+              aria-label="Book a DineTalk demo"
             >
               Book a Demo
             </Button>
@@ -79,6 +81,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <button
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -86,7 +91,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div id="mobile-menu" className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <button
@@ -111,6 +116,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   setMobileMenuOpen(false);
                 }}
                 className="w-full"
+                aria-label="Book a DineTalk demo"
               >
                 Book a Demo
               </Button>

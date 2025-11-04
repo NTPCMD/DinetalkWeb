@@ -5,6 +5,8 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
+import { usePageMetadata } from '../hooks/usePageMetadata';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface ContactPageProps {
   onNavigate?: (page: string) => void;
@@ -18,6 +20,55 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'submitting'>('idle');
+
+  usePageMetadata({
+    title: 'Contact DineTalk | Speak to Our AI Receptionist Team',
+    description:
+      'Get in touch with DineTalk to discuss AI restaurant receptionists, booking automation, and POS integrations. Based in Perth, supporting restaurants across Australia.',
+    keywords: [
+      'Contact DineTalk',
+      'AI restaurant receptionist support',
+      'Restaurant booking automation contact',
+    ],
+    robots: 'index, follow',
+    canonicalUrl: 'https://dinetalk.com.au/contact',
+    author: 'DineTalk Australia',
+    openGraph: {
+      title: 'Contact DineTalk – AI Restaurant Receptionist Australia',
+      description:
+        'Chat with the DineTalk team about automating restaurant bookings, answering services, and POS integrations.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+      url: 'https://dinetalk.com.au/contact',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Contact DineTalk | AI Receptionist for Restaurants',
+      description:
+        'Reach out to our Perth-based team to learn how DineTalk automates restaurant calls and bookings.',
+      image: 'https://dinetalk.com.au/assets/og-image.jpg',
+    },
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: 'Contact DineTalk',
+        description: 'Contact DineTalk to book an AI receptionist demo or request support.',
+        url: 'https://dinetalk.com.au/contact',
+        publisher: {
+          '@type': 'Organization',
+          name: 'DineTalk',
+          url: 'https://dinetalk.com.au',
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+61 8 6010 4462',
+          contactType: 'Sales',
+          areaServed: 'AU',
+          availableLanguage: 'English',
+        },
+      },
+    ],
+  });
 
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
@@ -66,11 +117,11 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl mb-6">Get in Touch</h1>
           <p className="text-xl text-muted-foreground">
-            Have questions? We'd love to hear from you.
+            Have questions about AI restaurant receptionists or booking automation? We’d love to hear from you.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start">
             <CardContent className="p-6 md:p-8 flex flex-col gap-6">
@@ -137,17 +188,17 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
+                  <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'} aria-label="Submit your contact request">
                     <Send className="w-4 h-4 mr-2" />
                     {status === 'submitting' ? 'Sending...' : 'Send Message'}
                   </Button>
                   {status === 'success' && (
-                    <p className="text-sm text-emerald-500" role="status">
+                    <p className="text-sm text-emerald-500" role="status" aria-live="polite">
                       Thanks! We’ll be in touch by email.
                     </p>
                   )}
                   {status === 'error' && (
-                    <p className="text-sm text-destructive" role="status">
+                    <p className="text-sm text-destructive" role="status" aria-live="assertive">
                       Sorry, something went wrong. Please try again.
                     </p>
                   )}
@@ -169,6 +220,18 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     <div>
                       <h3 className="font-medium mb-1">Location</h3>
                       <p className="text-muted-foreground">Perth, Western Australia</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">Call Us</h3>
+                      <a href="tel:+61860104462" className="text-primary hover:underline">
+                        +61 8 6010 4462
+                      </a>
                     </div>
                   </div>
 
@@ -238,6 +301,17 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 </CardContent>
             </Card>
 
+            <Card data-reveal className="overflow-hidden border-0 shadow-none">
+              <CardContent className="p-0">
+                <ImageWithFallback
+                  src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80&w=1200"
+                  alt="Perth, Western Australia skyline at sunset"
+                  className="w-full h-48 object-cover"
+                  loading="lazy"
+                />
+              </CardContent>
+            </Card>
+
             <Card className="bg-primary text-white border-0">
               <CardContent className="p-6">
                 <h3 className="text-xl mb-3">Prefer to talk?</h3>
@@ -248,6 +322,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   variant="secondary"
                   className="w-full"
                   onClick={() => onNavigate?.('demo')}
+                  aria-label="Schedule a DineTalk demo call"
                 >
                   Schedule a Call
                 </Button>

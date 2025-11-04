@@ -6,6 +6,7 @@ import { BookDemoPage } from './components/BookDemoPage';
 import { AboutPage } from './components/AboutPage';
 import { FAQPage } from './components/FAQPage';
 import { ContactPage } from './components/ContactPage';
+import { MobileStickyCTA } from './components/MobileStickyCTA';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -41,6 +42,7 @@ export default function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       <main className="flex-grow">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
+      <MobileStickyCTA currentPage={currentPage} onNavigate={handleNavigate} />
     </div>
   );
 }
