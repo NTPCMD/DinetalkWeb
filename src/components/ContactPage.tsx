@@ -111,7 +111,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-32 sm:pt-36 md:pt-44 lg:pt-48 pb-20 sm:pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-36 sm:pt-44 md:pt-52 lg:pt-60 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
           <h1 className="text-4xl md:text-5xl tracking-tight">Get in Touch</h1>
@@ -156,20 +156,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
-                <div>
-                  <Label htmlFor="name" className="mb-3 leading-relaxed">Name *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="name" className="leading-relaxed">Name *</Label>
                   <Input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required placeholder="Your name" />
                 </div>
-                <div>
-                  <Label htmlFor="email" className="mb-3 leading-relaxed">Email *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="email" className="leading-relaxed">Email *</Label>
                   <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
                 </div>
-                <div>
-                  <Label htmlFor="phone" className="mb-3 leading-relaxed">Phone</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="phone" className="leading-relaxed">Phone</Label>
                   <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(optional)" />
                 </div>
-                <div>
-                  <Label htmlFor="message" className="mb-3 leading-relaxed">Message *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="message" className="leading-relaxed">Message *</Label>
                   <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required className="min-h-[150px]" placeholder="Tell us about your restaurant and how we can help..." />
                 </div>
 

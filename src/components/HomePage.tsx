@@ -203,13 +203,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="dot" />
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media md:max-w-[520px] md:mx-auto" data-reveal>
+            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media md:max-w-[460px] md:mx-auto" data-reveal>
               <ImageWithFallback
                 src={`${HERO_IMAGE_BASE}&w=1280`}
                 srcSet={`${HERO_IMAGE_BASE}&w=640 640w, ${HERO_IMAGE_BASE}&w=960 960w, ${HERO_IMAGE_BASE}&w=1400 1400w`}
                 sizes="(min-width: 1280px) 520px, (min-width: 768px) 45vw, 100vw"
                 alt="AI receptionist answering restaurant phone call"
-                className="w-full h-auto max-h-[320px] sm:max-h-[360px] md:max-h-[420px] lg:max-h-[460px] object-cover"
+                className="w-full h-auto max-h-[280px] sm:max-h-[320px] md:max-h-[360px] lg:max-h-[400px] object-cover"
                 loading="eager"
                 width={1280}
                 height={853}
