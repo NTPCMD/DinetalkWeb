@@ -6,7 +6,6 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
-import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 
 interface ContactPageProps {
@@ -71,9 +70,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     ],
   });
 
-  const perthSkylineImageBase =
-    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80';
-
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -111,7 +107,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-32 sm:pt-36 md:pt-44 lg:pt-48 pb-20 sm:pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-40 sm:pt-48 md:pt-56 lg:pt-64 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
           <h1 className="text-4xl md:text-5xl tracking-tight">Get in Touch</h1>
@@ -156,20 +152,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
-                <div>
-                  <Label htmlFor="name" className="mb-3 leading-relaxed">Name *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="name" className="leading-relaxed">Name *</Label>
                   <Input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required placeholder="Your name" />
                 </div>
-                <div>
-                  <Label htmlFor="email" className="mb-3 leading-relaxed">Email *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="email" className="leading-relaxed">Email *</Label>
                   <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
                 </div>
-                <div>
-                  <Label htmlFor="phone" className="mb-3 leading-relaxed">Phone</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="phone" className="leading-relaxed">Phone</Label>
                   <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(optional)" />
                 </div>
-                <div>
-                  <Label htmlFor="message" className="mb-3 leading-relaxed">Message *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="message" className="leading-relaxed">Message *</Label>
                   <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required className="min-h-[150px]" placeholder="Tell us about your restaurant and how we can help..." />
                 </div>
 
@@ -252,19 +248,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               </CardContent>
             </Card>
 
-            <Card data-reveal className="overflow-hidden border-0 shadow-none">
-              <CardContent className="p-0">
-                <ImageWithFallback
-                  src={`${perthSkylineImageBase}&w=1200`}
-                  srcSet={`${perthSkylineImageBase}&w=640 640w, ${perthSkylineImageBase}&w=960 960w, ${perthSkylineImageBase}&w=1200 1200w`}
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  alt="Perth, Western Australia skyline at sunset"
-                  className="w-full h-48 object-cover"
-                  width={1200}
-                  height={600}
-                />
-              </CardContent>
-            </Card>
 
             <Card data-reveal className="bg-primary text-primary-foreground border-0">
               <CardContent className="p-6 md:p-8 space-y-4">

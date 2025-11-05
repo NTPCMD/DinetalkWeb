@@ -159,7 +159,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* Hero Section */}
       <section
         id="hero"
-        className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
+        className="relative bg-gradient-to-br from-background to-secondary pt-10 pb-16 md:pt-14 md:pb-20 parallax"
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
@@ -203,13 +203,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="dot" />
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media md:max-w-[520px] md:mx-auto" data-reveal>
+            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media md:max-w-[420px] md:mx-auto" data-reveal>
               <ImageWithFallback
                 src={`${HERO_IMAGE_BASE}&w=1280`}
                 srcSet={`${HERO_IMAGE_BASE}&w=640 640w, ${HERO_IMAGE_BASE}&w=960 960w, ${HERO_IMAGE_BASE}&w=1400 1400w`}
                 sizes="(min-width: 1280px) 520px, (min-width: 768px) 45vw, 100vw"
                 alt="AI receptionist answering restaurant phone call"
-                className="w-full h-auto max-h-[320px] sm:max-h-[360px] md:max-h-[420px] lg:max-h-[460px] object-cover"
+                className="w-full h-auto max-h-[240px] sm:max-h-[300px] md:max-h-[320px] lg:max-h-[340px] object-cover"
                 loading="eager"
                 width={1280}
                 height={853}
