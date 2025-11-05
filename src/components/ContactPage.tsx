@@ -107,7 +107,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-40 sm:pt-48 md:pt-56 lg:pt-64 pb-20 sm:pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-48 sm:pt-56 md:pt-64 lg:pt-72 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
           <h1 className="text-4xl md:text-5xl tracking-tight">Get in Touch</h1>

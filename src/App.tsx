@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/HomePage';
@@ -13,10 +13,58 @@ import { TermsOfServicePage } from './components/TermsOfServicePage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Scroll to top when page changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
+  // Set up reveal-on-scroll observer once on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            el.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    observerRef.current = io;
+
+    const initialTimer = window.setTimeout(() => {
+      document
+        .querySelectorAll('[data-reveal], [data-reveal-icon]')
+        .forEach((el) => io.observe(el));
+    }, 200);
+
+    return () => {
+      window.clearTimeout(initialTimer);
+      io.disconnect();
+      observerRef.current = null;
+    };
+  }, []);
+
+  // Re-bind reveal observer after navigation so newly rendered sections animate
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const timer = window.setTimeout(() => {
+      const observer = observerRef.current;
+      if (!observer) return;
+
+      document
+        .querySelectorAll('[data-reveal], [data-reveal-icon]')
+        .forEach((el) => observer.observe(el));
+    }, 200);
+
+    return () => window.clearTimeout(timer);
   }, [currentPage]);
 
   const handleNavigate = (page: string) => {
@@ -55,26 +103,3 @@ export default function App() {
   );
 }
 
-// Reveal-on-scroll: observe elements with [data-reveal] and add 'in-view' when visible
-// This runs once when the app mounts.
-// Note: we attach to window since pages are client-rendered inside the single-page app.
-if (typeof window !== 'undefined') {
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const el = entry.target as HTMLElement;
-        if (entry.isIntersecting) {
-          el.classList.add('in-view');
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  // Observe existing elements with data-reveal
-  setTimeout(() => {
-    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
-    // also observe icon draw elements by observing their parent containers
-    document.querySelectorAll('[data-reveal-icon]').forEach((el) => io.observe(el));
-  }, 500);
-}

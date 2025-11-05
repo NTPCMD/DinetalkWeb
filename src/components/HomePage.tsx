@@ -159,7 +159,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* Hero Section */}
       <section
         id="hero"
-        className="relative bg-gradient-to-br from-background to-secondary pt-10 pb-16 md:pt-14 md:pb-20 parallax"
+        className="relative bg-gradient-to-br from-background to-secondary pt-8 pb-16 md:pt-12 md:pb-20 parallax"
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
