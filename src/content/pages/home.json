@@ -1,0 +1,82 @@
+{
+  "title": "Home",
+  "hero": {
+    "heading": "AI Restaurant Receptionist Australia trusts",
+    "description": "Automate bookings, upsells, and customer updates with a conversational AI that knows your menu and integrates with your POS.",
+    "supporting": "Learn how our AI handles real customer calls —",
+    "ctaPrimary": {
+      "label": "Book a Demo",
+      "target": "demo"
+    },
+    "ctaSecondary": {
+      "label": "Contact Us",
+      "target": "contact"
+    },
+    "contextLinkText": "book a demo in under 30 seconds"
+  },
+  "trustStatement": "Trusted by restaurants across Australia",
+  "features": {
+    "heading": "Why restaurants choose DineTalk",
+    "description": "Built for hospitality venues that need smarter call handling and reservation support",
+    "items": [
+      {
+        "icon": "phone",
+        "title": "24/7 AI Answering Service",
+        "description": "Capture every booking with an AI receptionist that answers and routes calls instantly for your hospitality venue."
+      },
+      {
+        "icon": "calendar",
+        "title": "Restaurant Booking Automation",
+        "description": "Synchronise reservations automatically and send confirmations without manual effort."
+      },
+      {
+        "icon": "zap",
+        "title": "POS System Integration",
+        "description": "Connect DineTalk with Square, Lightspeed, and other POS platforms for seamless service updates."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "How It Works",
+    "description": "Get started in three simple steps",
+    "items": [
+      {
+        "number": "1",
+        "title": "Set Up",
+        "description": "Connect DineTalk to your restaurant in minutes."
+      },
+      {
+        "number": "2",
+        "title": "Customize",
+        "description": "Train the AI with your menu, hours, and policies."
+      },
+      {
+        "number": "3",
+        "title": "Go Live",
+        "description": "Start taking calls automatically — around the clock."
+      }
+    ]
+  },
+  "testimonial": {
+    "heading": "Trusted by restaurants across Australia",
+    "description": "Hospitality leaders rely on DineTalk to deliver a consistent guest experience whether customers call, text, or book online.",
+    "quote": "\"DineTalk has been a game-changer for our restaurant. We never miss a booking anymore, and our staff can focus on what they do best — serving great food.\"",
+    "author": {
+      "name": "Jashan",
+      "role": "Owner, Jashan da Dhaba"
+    },
+    "badges": [
+      "Square partner",
+      "Lightspeed ready",
+      "Australian-based support"
+    ]
+  },
+  "cta": {
+    "heading": "Ready to Transform Your Restaurant?",
+    "description": "Join hundreds of restaurants using DineTalk to handle their calls.",
+    "button": {
+      "label": "Book Your Free Demo",
+      "target": "demo"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AlertCircle, CheckCircle2, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { visualEditing } from '@stackbit/sdk';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -8,6 +9,7 @@ import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import contactContent from '../content/pages/contact.json';
 
 interface ContactPageProps {
   onNavigate?: (page: string) => void;
@@ -21,6 +23,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'submitting'>('idle');
+  const page = contactContent;
+  const ve = visualEditing({ objectId: 'src/content/pages/contact.json' });
 
   usePageMetadata({
     title: 'Contact DineTalk | Speak to Our AI Receptionist Team',
@@ -114,9 +118,11 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-36 sm:pt-44 md:pt-52 lg:pt-60 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
-          <h1 className="text-4xl md:text-5xl tracking-tight">Get in Touch</h1>
-          <p className="text-xl text-muted-foreground">
-            Have questions about AI restaurant receptionists or booking automation? We’d love to hear from you.
+          <h1 className="text-4xl md:text-5xl tracking-tight" {...ve.field('hero.heading')}>
+            {page.hero.heading}
+          </h1>
+          <p className="text-xl text-muted-foreground" {...ve.field('hero.description')}>
+            {page.hero.description}
           </p>
         </div>
 
@@ -124,23 +130,25 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
             <CardContent className="p-6 md:p-8 flex flex-col gap-5">
-              <h2 className="text-2xl tracking-tight">Send us a Message</h2>
+              <h2 className="text-2xl tracking-tight" {...ve.field('hero.formTitle')}>
+                {page.hero.formTitle}
+              </h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
                 {status === 'success' && (
                   <Alert variant="success" className="border border-emerald-400/40">
                     <CheckCircle2 className="h-5 w-5" aria-hidden />
-                    <AlertTitle>Message sent</AlertTitle>
-                    <AlertDescription>
-                      Thanks for reaching out! Our team will reply to your email shortly.
+                    <AlertTitle {...ve.field('hero.successTitle')}>{page.hero.successTitle}</AlertTitle>
+                    <AlertDescription {...ve.field('hero.successBody')}>
+                      {page.hero.successBody}
                     </AlertDescription>
                   </Alert>
                 )}
                 {status === 'error' && (
                   <Alert className="border border-destructive/40 bg-destructive/10 text-destructive">
                     <AlertCircle className="h-5 w-5" aria-hidden />
-                    <AlertTitle>Something went wrong</AlertTitle>
-                    <AlertDescription>
-                      Sorry, your message didn’t go through. Please try again in a moment.
+                    <AlertTitle {...ve.field('hero.errorTitle')}>{page.hero.errorTitle}</AlertTitle>
+                    <AlertDescription {...ve.field('hero.errorBody')}>
+                      {page.hero.errorBody}
                     </AlertDescription>
                   </Alert>
                 )}
@@ -175,7 +183,11 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
                 <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
                   <Send className="w-4 h-4 mr-2" />
-                  {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                  {status === 'submitting' ? (
+                    <span {...ve.field('hero.submitPending')}>{page.hero.submitPending}</span>
+                  ) : (
+                    <span {...ve.field('hero.submitDefault')}>{page.hero.submitDefault}</span>
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -185,15 +197,21 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           <div className="space-y-10">
             <Card data-reveal className="h-full">
               <CardContent className="p-6 md:p-8 space-y-6">
-                <h2 className="text-2xl tracking-tight">Contact Information</h2>
+                <h2 className="text-2xl tracking-tight" {...ve.field('contactInfo.title')}>
+                  {page.contactInfo.title}
+                </h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium mb-1">Location</h3>
-                      <p className="text-muted-foreground">Perth, Western Australia</p>
+                      <h3 className="font-medium mb-1" {...ve.field('contactInfo.location.heading')}>
+                        {page.contactInfo.location.heading}
+                      </h3>
+                      <p className="text-muted-foreground" {...ve.field('contactInfo.location.body')}>
+                        {page.contactInfo.location.body}
+                      </p>
                     </div>
                   </div>
 
@@ -202,9 +220,15 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                       <Phone className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium mb-1">Call Us</h3>
-                      <a href="tel:+61403982811" className="text-primary hover:underline">0403 982 811</a>
-                      <p className="text-sm text-muted-foreground mt-1">Customer support & sales</p>
+                      <h3 className="font-medium mb-1" {...ve.field('contactInfo.phone.heading')}>
+                        {page.contactInfo.phone.heading}
+                      </h3>
+                      <a href={page.contactInfo.phone.href} className="text-primary hover:underline" {...ve.field('contactInfo.phone.number')}>
+                        {page.contactInfo.phone.number}
+                      </a>
+                      <p className="text-sm text-muted-foreground mt-1" {...ve.field('contactInfo.phone.note')}>
+                        {page.contactInfo.phone.note}
+                      </p>
                     </div>
                   </div>
 
@@ -213,9 +237,15 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                       <Phone className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium mb-1">Demo Line</h3>
-                      <a href="tel:+61860104462" className="text-primary hover:underline">+61 8 6010 4462</a>
-                      <p className="text-sm text-muted-foreground mt-1">Listen to the AI receptionist in action</p>
+                      <h3 className="font-medium mb-1" {...ve.field('contactInfo.demo.heading')}>
+                        {page.contactInfo.demo.heading}
+                      </h3>
+                      <a href={page.contactInfo.demo.href} className="text-primary hover:underline" {...ve.field('contactInfo.demo.number')}>
+                        {page.contactInfo.demo.number}
+                      </a>
+                      <p className="text-sm text-muted-foreground mt-1" {...ve.field('contactInfo.demo.note')}>
+                        {page.contactInfo.demo.note}
+                      </p>
                     </div>
                   </div>
 
@@ -224,8 +254,12 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                       <Mail className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium mb-1">Email</h3>
-                      <a href="mailto:hello@dinetalk.com.au" className="text-primary hover:underline">hello@dinetalk.com.au</a>
+                      <h3 className="font-medium mb-1" {...ve.field('contactInfo.email.heading')}>
+                        {page.contactInfo.email.heading}
+                      </h3>
+                      <a href={page.contactInfo.email.href} className="text-primary hover:underline" {...ve.field('contactInfo.email.address')}>
+                        {page.contactInfo.email.address}
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -235,20 +269,28 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             <Card data-reveal className="bg-secondary border-0">
               <CardContent className="p-6 md:p-8 space-y-4">
                 <div>
-                  <h3 className="text-xl tracking-tight">Weekly Hours</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Australia/Perth time zone</p>
+                  <h3 className="text-xl tracking-tight" {...ve.field('hours.title')}>
+                    {page.hours.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1" {...ve.field('hours.subtitle')}>
+                    {page.hours.subtitle}
+                  </p>
                 </div>
                 <div className="space-y-2 text-muted-foreground">
-                  <div className="flex justify-between"><span>Sunday</span><span>12:00 PM - 6:00 PM</span></div>
-                  <div className="flex justify-between"><span>Monday</span><span>5:00 PM - 10:00 PM</span></div>
-                  <div className="flex justify-between"><span>Tuesday</span><span>5:00 PM - 10:00 PM</span></div>
-                  <div className="flex justify-between"><span>Wednesday</span><span>5:00 PM - 10:00 PM</span></div>
-                  <div className="flex justify-between"><span>Thursday</span><span>5:00 PM - 10:00 PM</span></div>
-                  <div className="flex justify-between"><span>Friday</span><span>5:00 PM - 11:45 PM</span></div>
-                  <div className="flex justify-between"><span>Saturday (early)</span><span>12:00 AM - 1:00 AM</span></div>
-                  <div className="flex justify-between"><span>Saturday (day)</span><span>12:00 PM - 11:45 PM</span></div>
+                  {page.hours.entries.map((entry, index) => (
+                    <div
+                      key={entry.label}
+                      className="flex justify-between"
+                      {...ve.repeaterItem('hours.entries', index)}
+                    >
+                      <span {...ve.field(`hours.entries[${index}].label`)}>{entry.label}</span>
+                      <span {...ve.field(`hours.entries[${index}].value`)}>{entry.value}</span>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-sm text-muted-foreground/80">* Our AI receptionist is available 24/7 for demos</p>
+                <p className="text-sm text-muted-foreground/80" {...ve.field('hours.note')}>
+                  {page.hours.note}
+                </p>
               </CardContent>
             </Card>
 
@@ -268,17 +310,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
             <Card data-reveal className="bg-primary text-primary-foreground border-0">
               <CardContent className="p-6 md:p-8 space-y-4">
-                <h3 className="text-xl tracking-tight">Prefer to talk?</h3>
-                <p className="text-primary-foreground/90">
-                  Book a free demo call and speak directly with our team.
+                <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
+                  {page.cta.title}
+                </h3>
+                <p className="text-primary-foreground/90" {...ve.field('cta.description')}>
+                  {page.cta.description}
                 </p>
                 <Button
                   variant="secondary"
                   className="w-full"
-                  onClick={() => onNavigate?.('demo')}
+                  onClick={() => onNavigate?.(page.cta.button.target)}
                   aria-label="Schedule a DineTalk demo call"
+                  {...ve.field('cta.button.label')}
                 >
-                  Schedule a Call
+                  {page.cta.button.label}
                 </Button>
               </CardContent>
             </Card>

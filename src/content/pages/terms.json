@@ -1,0 +1,84 @@
+{
+  "title": "Terms of Service",
+  "updated": "Updated 1 September 2024",
+  "hero": {
+    "heading": "Terms of Service",
+    "description": "Please read these terms carefully to understand your obligations when using the DineTalk platform."
+  },
+  "sections": [
+    {
+      "title": "1. Agreement Overview",
+      "items": [
+        "These terms apply to demos, trials, and services supplied by DineTalk to hospitality venues in Australia.",
+        "By requesting a demo, engaging with our AI receptionist, or signing a subscription agreement you accept these terms."
+      ]
+    },
+    {
+      "title": "2. Demo & Trial Use",
+      "items": [
+        "Demo access is provided solely for evaluation purposes and may be withdrawn or modified at any time.",
+        "You must not share access credentials or use the demo to process real customer data without written approval."
+      ]
+    },
+    {
+      "title": "3. Subscriptions & Billing",
+      "items": [
+        "Subscription plans, pricing, and included features are outlined in your proposal or order form.",
+        "Invoices are payable within 14 days unless otherwise agreed. Late payments may incur suspension of access.",
+        "All fees are quoted in Australian dollars and exclude GST unless stated."
+      ]
+    },
+    {
+      "title": "4. Customer Responsibilities",
+      "items": [
+        "Provide accurate business information and notify us of changes to your menu, opening hours, or policies.",
+        "Ensure your staff understand how the AI receptionist integrates with your booking and POS systems.",
+        "Maintain the security of login credentials and contact us immediately if you suspect unauthorised use."
+      ]
+    },
+    {
+      "title": "5. Data & Privacy",
+      "items": [
+        "Personal information is handled in accordance with the DineTalk Privacy Policy.",
+        "You are responsible for ensuring you have the authority to share customer information with DineTalk."
+      ]
+    },
+    {
+      "title": "6. Service Availability",
+      "items": [
+        "We aim to provide high availability but do not guarantee uninterrupted service. Planned maintenance will be communicated in advance where possible.",
+        "DineTalk is not liable for outages caused by third-party providers, telecommunications networks, or events outside our control."
+      ]
+    },
+    {
+      "title": "7. Limitation of Liability",
+      "items": [
+        "To the extent permitted by law, DineTalk is not liable for indirect, incidental, or consequential damages.",
+        "Our total aggregate liability is limited to the fees paid in the 12 months preceding the claim."
+      ]
+    },
+    {
+      "title": "8. Termination",
+      "items": [
+        "Either party may terminate a subscription for convenience with 30 days written notice after the initial term.",
+        "We may suspend or terminate access immediately if you breach these terms or misuse the service."
+      ]
+    },
+    {
+      "title": "9. Contact",
+      "items": [
+        "Phone: 0403 982 811",
+        "Email: hello@dinetalk.com.au",
+        "Address: DineTalk, Perth, Western Australia"
+      ]
+    }
+  ],
+  "footer": {
+    "text": "Questions about these terms?",
+    "phone": "0403 982 811",
+    "email": {
+      "label": "hello@dinetalk.com.au",
+      "href": "mailto:hello@dinetalk.com.au"
+    }
+  }
+}

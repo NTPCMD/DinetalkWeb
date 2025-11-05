@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { visualEditing } from '@stackbit/sdk';
 import { Button } from './ui/button';
+import navigationContent from '../content/navigation.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
 
 interface NavigationProps {
@@ -19,6 +21,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   });
   const touchStartY = useRef<number | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const navData = navigationContent;
+  const ve = visualEditing({ objectId: 'src/content/navigation.json' });
+  const navItems = navData.links;
+  const cta = navData.cta;
 
   // scroll handler to toggle nav background
   useEffect(() => {
@@ -91,13 +97,6 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     }
   }, [mobileMenuOpen]);
 
-  const navItems = [
-    { name: 'Home', path: 'home' },
-    { name: 'About', path: 'about' },
-    { name: 'FAQ', path: 'faq' },
-    { name: 'Contact', path: 'contact' },
-  ];
-
   return (
     <nav
       className={`nav-base border-b border-border sticky top-0 z-50 ${
@@ -124,7 +123,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <button
                 key={item.path}
                 onClick={() => onNavigate(item.path)}
@@ -134,22 +133,24 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     : 'text-secondary-foreground hover:text-primary/90'
                 }`}
                 aria-current={currentPage === item.path ? 'page' : undefined}
+                {...ve.field(`links[${index}].label`)}
               >
-                {item.name}
+                {item.label}
               </button>
             ))}
             <Button
-              onClick={() => onNavigate('demo')}
-              variant={currentPage === 'demo' ? 'default' : 'secondary'}
+              onClick={() => onNavigate(cta.path)}
+              variant={currentPage === cta.path ? 'default' : 'secondary'}
               className={
-                currentPage === 'demo'
+                currentPage === cta.path
                   ? 'shadow-button'
                   : 'hover:text-accent-foreground'
               }
-              aria-current={currentPage === 'demo' ? 'page' : undefined}
+              aria-current={currentPage === cta.path ? 'page' : undefined}
               aria-label="Book a DineTalk demo"
+              {...ve.field('cta.label')}
             >
-              Book a Demo
+              {cta.label}
             </Button>
           </div>
 
@@ -216,19 +217,21 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                           : 'text-secondary-foreground hover:text-primary/90'
                       }`}
                       aria-current={currentPage === item.path ? 'page' : undefined}
+                      {...ve.field(`links[${index}].label`)}
                     >
-                      {item.name}
+                      {item.label}
                     </button>
                   ))}
                   <Button
                     onClick={() => {
-                      onNavigate('demo');
+                      onNavigate(cta.path);
                       setMobileMenuOpen(false);
                     }}
                     className="w-full"
                     aria-label="Book a DineTalk demo"
+                    {...ve.field('cta.label')}
                   >
-                    Book a Demo
+                    {cta.label}
                   </Button>
                 </div>
               </div>

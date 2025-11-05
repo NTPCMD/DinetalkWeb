@@ -1,6 +1,10 @@
+import { visualEditing } from '@stackbit/sdk';
 import { usePageMetadata } from '../hooks/usePageMetadata';
+import privacyContent from '../content/pages/privacy.json';
 
 export function PrivacyPolicyPage() {
+  const page = privacyContent;
+  const ve = visualEditing({ objectId: 'src/content/pages/privacy.json' });
   usePageMetadata({
     title: 'Privacy Policy | DineTalk',
     description:
@@ -33,75 +37,40 @@ export function PrivacyPolicyPage() {
     ],
   });
 
-  const sections = [
-    {
-      title: '1. Information We Collect',
-      content: [
-        'Contact details such as your name, email address, and phone number when you request a demo or contact our team.',
-        'Business information about your venue that you provide so we can tailor the demo experience.',
-        'Call recordings and transcripts generated when you interact with our demo line, used to improve accuracy and support.',
-      ],
-    },
-    {
-      title: '2. How We Use Information',
-      content: [
-        'To respond to enquiries, provide product demos, and manage ongoing customer relationships.',
-        'To analyse usage patterns and enhance the quality, security, and reliability of the DineTalk platform.',
-        'To meet legal obligations, including record keeping and compliance with Australian privacy legislation.',
-      ],
-    },
-    {
-      title: '3. Sharing & Disclosure',
-      content: [
-        'We do not sell personal information. Data is only shared with trusted service providers who assist with hosting, communications, and analytics.',
-        'These providers are bound by contractual obligations to keep your information confidential and secure.',
-        'We may disclose information if required by law or to protect the rights, property, or safety of DineTalk and our customers.',
-      ],
-    },
-    {
-      title: '4. Data Retention & Security',
-      content: [
-        'Information is retained only for as long as needed to deliver services or meet regulatory requirements.',
-        'We employ encryption, access controls, and regular monitoring to protect against unauthorised access or misuse.',
-        'If you would like us to delete your information, contact 0403 982 811 or email privacy@dinetalk.com.au.',
-      ],
-    },
-    {
-      title: '5. Your Rights',
-      content: [
-        'Request access to the personal information we hold about you.',
-        'Ask us to correct inaccuracies or update your contact details.',
-        'Withdraw consent for marketing communications by following the unsubscribe link or contacting our team.',
-      ],
-    },
-    {
-      title: '6. Contact Us',
-      content: [
-        'Phone: 0403 982 811',
-        'Email: privacy@dinetalk.com.au',
-        'Postal: DineTalk, Perth, Western Australia',
-      ],
-    },
-  ];
+  const sections = page.sections;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <header className="space-y-4 text-center" data-reveal>
-          <p className="text-sm uppercase tracking-widest text-muted-foreground">Updated 1 September 2024</p>
-          <h1 className="text-4xl md:text-5xl">Privacy Policy</h1>
-          <p className="text-lg text-muted-foreground">
-            We are committed to protecting the privacy of restaurants and diners who interact with the DineTalk platform.
+          <p className="text-sm uppercase tracking-widest text-muted-foreground" {...ve.field('updated')}>
+            {page.updated}
+          </p>
+          <h1 className="text-4xl md:text-5xl" {...ve.field('hero.heading')}>
+            {page.hero.heading}
+          </h1>
+          <p className="text-lg text-muted-foreground" {...ve.field('hero.description')}>
+            {page.hero.description}
           </p>
         </header>
 
         <div className="space-y-8" data-reveal>
-          {sections.map((section) => (
-            <section key={section.title} className="bg-background/80 backdrop-blur rounded-xl shadow-lg border border-white/10 p-6 md:p-8 space-y-4">
-              <h2 className="text-2xl font-semibold">{section.title}</h2>
+          {sections.map((section, index) => (
+            <section
+              key={section.title}
+              className="bg-background/80 backdrop-blur rounded-xl shadow-lg border border-white/10 p-6 md:p-8 space-y-4"
+              {...ve.repeaterItem('sections', index)}
+            >
+              <h2 className="text-2xl font-semibold" {...ve.field(`sections[${index}].title`)}>
+                {section.title}
+              </h2>
               <ul className="space-y-3 text-muted-foreground">
-                {section.content.map((item) => (
-                  <li key={item} className="leading-relaxed">
+                {section.items.map((item, itemIndex) => (
+                  <li
+                    key={item}
+                    className="leading-relaxed"
+                    {...ve.field(`sections[${index}].items[${itemIndex}]`)}
+                  >
                     {item}
                   </li>
                 ))}
@@ -112,11 +81,12 @@ export function PrivacyPolicyPage() {
 
         <footer className="text-sm text-muted-foreground" data-reveal>
           <p>
-            If you have questions about this policy or how we handle information, please contact us at{' '}
-            <a className="text-primary hover:underline" href="mailto:privacy@dinetalk.com.au">
-              privacy@dinetalk.com.au
+            <span {...ve.field('footer.text')}>{page.footer.text}</span>{' '}
+            <a className="text-primary hover:underline" href={page.footer.email.href} {...ve.field('footer.email.label')}>
+              {page.footer.email.label}
             </a>{' '}
-            or call 0403 982 811.
+            or call{' '}
+            <span {...ve.field('footer.phone')}>{page.footer.phone}</span>.
           </p>
         </footer>
       </div>

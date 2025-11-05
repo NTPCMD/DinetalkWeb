@@ -1,0 +1,66 @@
+{
+  "title": "Privacy Policy",
+  "updated": "Updated 1 September 2024",
+  "hero": {
+    "heading": "Privacy Policy",
+    "description": "We are committed to protecting the privacy of restaurants and diners who interact with the DineTalk platform."
+  },
+  "sections": [
+    {
+      "title": "1. Information We Collect",
+      "items": [
+        "Contact details such as your name, email address, and phone number when you request a demo or contact our team.",
+        "Business information about your venue that you provide so we can tailor the demo experience.",
+        "Call recordings and transcripts generated when you interact with our demo line, used to improve accuracy and support."
+      ]
+    },
+    {
+      "title": "2. How We Use Information",
+      "items": [
+        "To respond to enquiries, provide product demos, and manage ongoing customer relationships.",
+        "To analyse usage patterns and enhance the quality, security, and reliability of the DineTalk platform.",
+        "To meet legal obligations, including record keeping and compliance with Australian privacy legislation."
+      ]
+    },
+    {
+      "title": "3. Sharing & Disclosure",
+      "items": [
+        "We do not sell personal information. Data is only shared with trusted service providers who assist with hosting, communications, and analytics.",
+        "These providers are bound by contractual obligations to keep your information confidential and secure.",
+        "We may disclose information if required by law or to protect the rights, property, or safety of DineTalk and our customers."
+      ]
+    },
+    {
+      "title": "4. Data Retention & Security",
+      "items": [
+        "Information is retained only for as long as needed to deliver services or meet regulatory requirements.",
+        "We employ encryption, access controls, and regular monitoring to protect against unauthorised access or misuse.",
+        "If you would like us to delete your information, contact 0403 982 811 or email privacy@dinetalk.com.au."
+      ]
+    },
+    {
+      "title": "5. Your Rights",
+      "items": [
+        "Request access to the personal information we hold about you.",
+        "Ask us to correct inaccuracies or update your contact details.",
+        "Withdraw consent for marketing communications by following the unsubscribe link or contacting our team."
+      ]
+    },
+    {
+      "title": "6. Contact Us",
+      "items": [
+        "Phone: 0403 982 811",
+        "Email: privacy@dinetalk.com.au",
+        "Postal: DineTalk, Perth, Western Australia"
+      ]
+    }
+  ],
+  "footer": {
+    "text": "If you have questions about this policy or how we handle information, please contact us at",
+    "email": {
+      "label": "privacy@dinetalk.com.au",
+      "href": "mailto:privacy@dinetalk.com.au"
+    },
+    "phone": "0403 982 811"
+  }
+}
