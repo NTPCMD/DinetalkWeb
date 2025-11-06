@@ -1,9 +1,11 @@
 import { Phone, Calendar, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { visualEditing } from '../lib/stackbit-sdk';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { usePageMetadata } from '../hooks/usePageMetadata';
+import homeContent from '../content/pages/home.json';
 
 const HERO_IMAGE_BASE =
   'https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&utm_source=figma&utm_medium=referral';
@@ -18,6 +20,13 @@ interface HomePageProps {
 export function HomePage({ onNavigate }: HomePageProps) {
   const [showCTA, setShowCTA] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
+  const page = homeContent;
+  const ve = visualEditing({ objectId: 'src/content/pages/home.json' });
+  const iconMap = {
+    phone: Phone,
+    calendar: Calendar,
+    zap: Zap,
+  } as const;
 
   usePageMetadata({
     title: 'DineTalk | AI-Powered Restaurant Receptionist & Booking System',
@@ -103,56 +112,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
     return () => clearTimeout(id);
   }, []);
 
-  const features = [
-    {
-      icon: (
-        <div className="draw-icon" data-reveal-icon aria-hidden>
-          <Phone className="w-8 h-8 text-primary" />
-        </div>
-      ),
-      title: '24/7 AI Answering Service',
-      description:
-        'Capture every booking with an AI receptionist that answers and routes calls instantly for your hospitality venue.',
-    },
-    {
-      icon: (
-        <div className="draw-icon" data-reveal-icon aria-hidden>
-          <Calendar className="w-8 h-8 text-primary" />
-        </div>
-      ),
-      title: 'Restaurant Booking Automation',
-      description:
-        'Synchronise reservations automatically and send confirmations without manual effort.',
-    },
-    {
-      icon: (
-        <div className="draw-icon" data-reveal-icon aria-hidden>
-          <Zap className="w-8 h-8 text-primary" />
-        </div>
-      ),
-      title: 'POS System Integration',
-      description:
-        'Connect DineTalk with Square, Lightspeed, and other POS platforms for seamless service updates.',
-    },
-  ];
+  const features = page.features.items.map((feature) => {
+    const Icon = iconMap[feature.icon as keyof typeof iconMap] ?? Phone;
+    return { ...feature, Icon };
+  });
 
-  const steps = [
-    {
-      number: '1',
-      title: 'Set Up',
-      description: 'Connect DineTalk to your restaurant in minutes.',
-    },
-    {
-      number: '2',
-      title: 'Customize',
-      description: 'Train the AI with your menu, hours, and policies.',
-    },
-    {
-      number: '3',
-      title: 'Go Live',
-      description: 'Start taking calls automatically — around the clock.',
-    },
-  ];
+  const steps = page.steps.items;
 
   return (
     <div className="min-h-screen">
@@ -166,35 +131,45 @@ export function HomePage({ onNavigate }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="hero-intro">
-              <h1 className="text-4xl md:text-5xl mb-6 leading-relaxed md:leading-tight hero-heading">
-                AI Restaurant Receptionist Australia trusts
+              <h1
+                className="text-4xl md:text-5xl mb-6 leading-relaxed md:leading-tight hero-heading"
+                {...ve.field('hero.heading')}
+              >
+                {page.hero.heading}
               </h1>
-              <p className="text-xl mb-6 text-foreground/90">
-                Automate bookings, upsells, and customer updates with a conversational AI that knows your menu and integrates with your POS.
+              <p className="text-xl mb-6 text-foreground/90" {...ve.field('hero.description')}>
+                {page.hero.description}
               </p>
               <p className="text-base md:text-lg text-muted-foreground mb-8">
-                Learn how our AI handles real customer calls —{' '}
+                <span {...ve.field('hero.supporting')}>{page.hero.supporting}</span>{' '}
                 <button
                   type="button"
-                  onClick={() => onNavigate('demo')}
+                  onClick={() => onNavigate(page.hero.ctaPrimary.target)}
                   className="underline underline-offset-4 decoration-primary hover:text-primary transition-colors"
+                  {...ve.field('hero.contextLinkText')}
                 >
-                  book a demo in under 30 seconds
+                  {page.hero.contextLinkText}
                 </button>
                 .
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
-                <Button size="lg" onClick={() => onNavigate('demo')} aria-label="Book a demo with DineTalk">
-                  Book a Demo
+                <Button
+                  size="lg"
+                  onClick={() => onNavigate(page.hero.ctaPrimary.target)}
+                  aria-label="Book a demo with DineTalk"
+                  {...ve.field('hero.ctaPrimary.label')}
+                >
+                  {page.hero.ctaPrimary.label}
                 </Button>
                 <Button
                   size="lg"
                   variant="secondary"
-                  onClick={() => onNavigate('contact')}
+                  onClick={() => onNavigate(page.hero.ctaSecondary.target)}
                   aria-label="Contact the DineTalk team"
                   className="bg-muted text-foreground border border-transparent hover:bg-muted/90"
+                  {...ve.field('hero.ctaSecondary.label')}
                 >
-                  Contact Us
+                  {page.hero.ctaSecondary.label}
                 </Button>
               </div>
 
@@ -216,8 +191,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
               />
             </div>
           </div>
-          <p className="mt-10 text-sm uppercase tracking-[0.3em] text-foreground/70 hero-trust" data-reveal>
-            Trusted by restaurants across Australia
+          <p
+            className="mt-10 text-sm uppercase tracking-[0.3em] text-foreground/70 hero-trust"
+            data-reveal
+            {...ve.field('trustStatement')}
+          >
+            {page.trustStatement}
           </p>
         </div>
       </section>
@@ -226,9 +205,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
   <section className="py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl mb-4">Why restaurants choose DineTalk</h2>
-            <p className="text-xl text-muted-foreground">
-              Built for hospitality venues that need smarter call handling and reservation support
+            <h2 className="text-3xl md:text-4xl mb-4" {...ve.field('features.heading')}>
+              {page.features.heading}
+            </h2>
+            <p className="text-xl text-muted-foreground" {...ve.field('features.description')}>
+              {page.features.description}
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -238,12 +219,19 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 className="feature-card"
                 data-reveal
                 style={{ transitionDelay: `${index * 150}ms` }}
+                {...ve.repeaterItem('features.items', index)}
               >
                 <Card className="border-2 hover:border-primary transition-colors transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl min-h-[250px]">
                   <CardContent className="p-6 flex flex-col gap-4">
-                    <div className="mb-4">{feature.icon}</div>
-                    <h3 className="text-xl">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <div className="mb-4 draw-icon" data-reveal-icon aria-hidden>
+                      <feature.Icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl" {...ve.field(`features.items[${index}].title`)}>
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground" {...ve.field(`features.items[${index}].description`)}>
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -256,17 +244,25 @@ export function HomePage({ onNavigate }: HomePageProps) {
   <section className="py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl mb-4">How It Works</h2>
-            <p className="text-xl text-muted-foreground">Get started in three simple steps</p>
+            <h2 className="text-3xl md:text-4xl mb-4" {...ve.field('steps.heading')}>
+              {page.steps.heading}
+            </h2>
+            <p className="text-xl text-muted-foreground" {...ve.field('steps.description')}>
+              {page.steps.description}
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+              <div key={index} className="text-center" {...ve.repeaterItem('steps.items', index)}>
+                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold" {...ve.field(`steps.items[${index}].number`)}>
                   {step.number}
                 </div>
-                <h3 className="text-xl mb-3">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                <h3 className="text-xl mb-3" {...ve.field(`steps.items[${index}].title`)}>
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground" {...ve.field(`steps.items[${index}].description`)}>
+                  {step.description}
+                </p>
               </div>
             ))}
           </div>
@@ -276,16 +272,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
   {/* Testimonial Section */}
   <section className="py-20 bg-background" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl mb-4">Trusted by restaurants across Australia</h2>
-          <p className="text-muted-foreground mb-8">
-            Hospitality leaders rely on DineTalk to deliver a consistent guest experience whether customers call, text, or book online.
-          </p>
+          <h2 className="text-3xl md:text-4xl mb-4" {...ve.field('testimonial.heading')}>{page.testimonial.heading}</h2>
+          <p className="text-muted-foreground mb-8" {...ve.field('testimonial.description')}>{page.testimonial.description}</p>
           <Card className="bg-card border-0">
             <CardContent className="p-8">
-              <p className="text-xl mb-6 italic">
-                "DineTalk has been a game-changer for our restaurant. We never miss a booking
-                anymore, and our staff can focus on what they do best — serving great food."
-              </p>
+              <p className="text-xl mb-6 italic" {...ve.field('testimonial.quote')}>{page.testimonial.quote}</p>
               <div className="flex items-center justify-center gap-4">
                 <ImageWithFallback
                   src={`${OWNER_IMAGE_BASE}&w=240`}
@@ -297,16 +288,22 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   height={240}
                 />
                 <div className="text-left">
-                  <p>Jashan</p>
-                  <p className="text-muted-foreground">Owner, Jashan da Dhaba</p>
+                  <p {...ve.field('testimonial.author.name')}>{page.testimonial.author.name}</p>
+                  <p className="text-muted-foreground" {...ve.field('testimonial.author.role')}>{page.testimonial.author.role}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <span className="px-4 py-2 bg-secondary/60 rounded-full">Square partner</span>
-            <span className="px-4 py-2 bg-secondary/60 rounded-full">Lightspeed ready</span>
-            <span className="px-4 py-2 bg-secondary/60 rounded-full">Australian-based support</span>
+            {page.testimonial.badges.map((badge, index) => (
+              <span
+                key={badge}
+                className="px-4 py-2 bg-secondary/60 rounded-full"
+                {...ve.field(`testimonial.badges[${index}]`)}
+              >
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -314,16 +311,19 @@ export function HomePage({ onNavigate }: HomePageProps) {
   {/* CTA Section */}
   <section className="py-20 bg-primary text-primary-foreground" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl mb-6">Ready to Transform Your Restaurant?</h2>
-          <p className="text-xl mb-8 text-primary-foreground/80">
-            Join hundreds of restaurants using DineTalk to handle their calls.
+          <h2 className="text-3xl md:text-4xl mb-6" {...ve.field('cta.heading')}>
+            {page.cta.heading}
+          </h2>
+          <p className="text-xl mb-8 text-primary-foreground/80" {...ve.field('cta.description')}>
+            {page.cta.description}
           </p>
           <Button
             size="lg"
             variant="secondary"
-            onClick={() => onNavigate('demo')}
+            onClick={() => onNavigate(page.cta.button.target)}
+            {...ve.field('cta.button.label')}
           >
-            Book Your Free Demo
+            {page.cta.button.label}
           </Button>
         </div>
       </section>

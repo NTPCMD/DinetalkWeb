@@ -1,0 +1,28 @@
+{
+  "brand": {
+    "description": "AI receptionist for restaurants that handles calls, bookings, and orders — 24/7."
+  },
+  "quickLinks": [
+    { "label": "Home", "path": "home" },
+    { "label": "About", "path": "about" },
+    { "label": "FAQ", "path": "faq" },
+    { "label": "Contact", "path": "contact" },
+    { "label": "Privacy Policy", "path": "privacy" },
+    { "label": "Terms of Service", "path": "terms" }
+  ],
+  "contact": {
+    "location": "Perth, Western Australia",
+    "phone": {
+      "label": "0403 982 811",
+      "href": "tel:+61403982811"
+    },
+    "demo": {
+      "label": "Demo line: +61 8 6010 4462",
+      "href": "tel:+61860104462"
+    },
+    "email": {
+      "label": "hello@dinetalk.com.au",
+      "href": "mailto:hello@dinetalk.com.au"
+    }
+  }
+}

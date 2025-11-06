@@ -1,4 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
+import { visualEditing } from '../lib/stackbit-sdk';
+import footerContent from '../content/footer.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
 
 interface FooterProps {
@@ -7,6 +9,8 @@ interface FooterProps {
 
 export function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const content = footerContent;
+  const ve = visualEditing({ objectId: 'src/content/footer.json' });
 
   return (
   <footer className="bg-secondary text-secondary-foreground mt-auto">
@@ -26,8 +30,8 @@ export function Footer({ onNavigate }: FooterProps) {
                 decoding="async"
               />
             </button>
-            <p className="text-muted-foreground">
-              AI receptionist for restaurants that handles calls, bookings, and orders — 24/7.
+            <p className="text-muted-foreground" {...ve.field('brand.description')}>
+              {content.brand.description}
             </p>
           </div>
 
@@ -35,42 +39,16 @@ export function Footer({ onNavigate }: FooterProps) {
           <div>
             <h3 className="mb-4">Quick Links</h3>
             <div className="flex flex-col gap-2">
-              <button
-                onClick={() => onNavigate('home')}
-                className="text-muted-foreground hover:text-primary transition-colors text-left"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => onNavigate('about')}
-                className="text-muted-foreground hover:text-primary transition-colors text-left"
-              >
-                About
-              </button>
-              <button
-                onClick={() => onNavigate('faq')}
-                className="text-muted-foreground hover:text-primary transition-colors text-left"
-              >
-                FAQ
-              </button>
-              <button
-                onClick={() => onNavigate('contact')}
-                className="text-muted-foreground hover:text-primary transition-colors text-left"
-              >
-                Contact
-              </button>
-              <button
-                onClick={() => onNavigate('privacy')}
-                className="text-muted-foreground hover:text-primary transition-colors text-left"
-              >
-                Privacy Policy
-              </button>
-              <button
-                onClick={() => onNavigate('terms')}
-                className="text-muted-foreground hover:text-primary transition-colors text-left"
-              >
-                Terms of Service
-              </button>
+              {content.quickLinks.map((link, index) => (
+                <button
+                  key={link.path}
+                  onClick={() => onNavigate(link.path)}
+                  className="text-muted-foreground hover:text-primary transition-colors text-left"
+                  {...ve.field(`quickLinks[${index}].label`)}
+                >
+                  {link.label}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -80,26 +58,27 @@ export function Footer({ onNavigate }: FooterProps) {
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2 text-muted-foreground">
                 <MapPin size={20} className="mt-0.5 flex-shrink-0" />
-                <span>Perth, Western Australia</span>
+                <span {...ve.field('contact.location')}>{content.contact.location}</span>
               </div>
               <div className="flex items-start gap-2 text-muted-foreground">
                 <Phone size={20} className="mt-0.5 flex-shrink-0" />
                 <div className="flex flex-col">
-                  <a href="tel:+61403982811" className="hover:text-primary transition-colors">
-                    0403 982 811
+                  <a href={content.contact.phone.href} className="hover:text-primary transition-colors" {...ve.field('contact.phone.label')}>
+                    {content.contact.phone.label}
                   </a>
-                  <a href="tel:+61860104462" className="hover:text-primary transition-colors text-sm">
-                    Demo line: +61 8 6010 4462
+                  <a href={content.contact.demo.href} className="hover:text-primary transition-colors text-sm" {...ve.field('contact.demo.label')}>
+                    {content.contact.demo.label}
                   </a>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Mail size={20} className="flex-shrink-0" />
                 <a
-                  href="mailto:hello@dinetalk.com.au"
+                  href={content.contact.email.href}
                   className="hover:text-primary transition-colors"
+                  {...ve.field('contact.email.label')}
                 >
-                  hello@dinetalk.com.au
+                  {content.contact.email.label}
                 </a>
               </div>
             </div>

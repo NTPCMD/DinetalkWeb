@@ -1,0 +1,57 @@
+{
+  "title": "About",
+  "hero": {
+    "heading": "About DineTalk",
+    "description": "We are hospitality specialists building Australia’s most trusted AI restaurant receptionist and booking automation platform."
+  },
+  "mission": {
+    "heading": "Our Mission",
+    "lead": "To help restaurants focus on food and customers while our AI handles every call.",
+    "body": [
+      "Running a restaurant is demanding. Between managing staff, perfecting dishes, and creating memorable dining experiences, answering phones can be overwhelming. That's where DineTalk comes in.",
+      "We believe restaurant owners and staff should spend their time doing what they love — not being tied to a ringing phone. Our AI receptionist ensures every call is answered professionally, every booking is captured, and every customer receives exceptional service."
+    ]
+  },
+  "values": {
+    "heading": "Our Values",
+    "description": "What drives us every day",
+    "items": [
+      {
+        "icon": "heart",
+        "title": "Hospitality First",
+        "description": "We understand restaurants because we love the industry."
+      },
+      {
+        "icon": "users",
+        "title": "Customer-Centric",
+        "description": "Every feature is built with restaurant owners and diners in mind."
+      },
+      {
+        "icon": "trending-up",
+        "title": "Innovation",
+        "description": "Using cutting-edge AI to solve real-world restaurant challenges."
+      }
+    ]
+  },
+  "story": {
+    "heading": "Our Story",
+    "paragraphs": [
+      "DineTalk was born from a simple observation: restaurant owners were stretched too thin. During peak hours, phones would ring off the hook while staff juggled customers, orders, and bookings.",
+      "Our founder, after years of working in hospitality and technology, recognized that AI could solve this problem. Not by replacing the human touch that makes restaurants special, but by handling the routine tasks that take time away from customers.",
+      "Today, DineTalk serves restaurants across Australia, from bustling city cafés to coastal fine dining establishments. We're proud to be part of the hospitality community, helping businesses thrive in an increasingly competitive landscape.",
+      "Based in Perth, Western Australia, we're passionate about supporting local restaurants and contributing to the vibrant food scene that makes Australia special."
+    ]
+  },
+  "cta": {
+    "heading": "Join Us on Our Mission",
+    "description": "Discover how DineTalk can transform your restaurant's operations.",
+    "primary": {
+      "label": "Book a Demo",
+      "target": "demo"
+    },
+    "secondary": {
+      "label": "Contact Us",
+      "target": "contact"
+    }
+  }
+}

@@ -1,3 +1,6 @@
 [build]
   publish = "build"
   command = "vite build && cp sitemap.xml robots.txt build/"
+
+[[plugins]]
+  package = "@netlify/visual-editor"

@@ -1,0 +1,12 @@
+{
+  "links": [
+    { "label": "Home", "path": "home" },
+    { "label": "About", "path": "about" },
+    { "label": "FAQ", "path": "faq" },
+    { "label": "Contact", "path": "contact" }
+  ],
+  "cta": {
+    "label": "Book a Demo",
+    "path": "demo"
+  }
+}

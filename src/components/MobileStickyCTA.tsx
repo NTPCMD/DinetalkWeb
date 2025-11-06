@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { visualEditing } from '../lib/stackbit-sdk';
+import mobileCtaContent from '../content/mobile-cta.json';
 import { Button } from './ui/button';
 
 const HIDE_ON_PAGES = new Set(['demo', 'contact']);
@@ -10,6 +12,8 @@ interface MobileStickyCTAProps {
 
 export function MobileStickyCTA({ onNavigate, currentPage }: MobileStickyCTAProps) {
   const [footerVisible, setFooterVisible] = useState(false);
+  const cta = mobileCtaContent;
+  const ve = visualEditing({ objectId: 'src/content/mobile-cta.json' });
 
   useEffect(() => {
     if (HIDE_ON_PAGES.has(currentPage)) {
@@ -56,10 +60,11 @@ export function MobileStickyCTA({ onNavigate, currentPage }: MobileStickyCTAProp
         <Button
           size="lg"
           className="w-full"
-          onClick={() => onNavigate('demo')}
+          onClick={() => onNavigate(cta.target)}
           aria-label="Quickly book a DineTalk demo"
+          {...ve.field('label')}
         >
-          Book a Demo
+          {cta.label}
         </Button>
       </div>
     </div>
