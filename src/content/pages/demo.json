@@ -1,0 +1,40 @@
+{
+  "title": "Book Demo",
+  "hero": {
+    "heading": "Schedule Your DineTalk Demo",
+    "description": "Takes under 30 seconds to book — choose a time that suits you and see the AI restaurant receptionist in action.",
+    "cardTitle": "Schedule Your Demo",
+    "sessionTitle": "30-minute session",
+    "sessionDescription": "Our team will walk you through DineTalk's features and answer all your questions."
+  },
+  "expectations": {
+    "title": "What to Expect",
+    "items": [
+      {
+        "title": "Live AI Demo",
+        "description": "See how DineTalk handles real restaurant calls"
+      },
+      {
+        "title": "Custom Setup Discussion",
+        "description": "We'll discuss your specific needs and restaurant type"
+      },
+      {
+        "title": "Integration Overview",
+        "description": "Learn how DineTalk works with your existing systems"
+      },
+      {
+        "title": "Pricing & Plans",
+        "description": "Get transparent pricing tailored to your restaurant"
+      },
+      {
+        "title": "Q&A Session",
+        "description": "Ask anything about features, setup, or support"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Try the AI Now",
+    "description": "Want to experience DineTalk immediately? Call our demo line and interact with our AI receptionist:",
+    "phone": "+61 8 6010 4462"
+  }
+}

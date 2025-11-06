@@ -7,6 +7,10 @@ import { BookDemoPage } from './components/BookDemoPage';
 import { AboutPage } from './components/AboutPage';
 import { FAQPage } from './components/FAQPage';
 import { ContactPage } from './components/ContactPage';
+import { MobileStickyCTA } from './components/MobileStickyCTA';
+import { ScrollToTopButton } from './components/ScrollToTopButton';
+import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { TermsOfServicePage } from './components/TermsOfServicePage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -27,11 +31,15 @@ export default function App() {
       case 'demo':
         return <BookDemoPage />;
       case 'about':
-        return <AboutPage />;
+        return <AboutPage onNavigate={handleNavigate} />;
       case 'faq':
-        return <FAQPage />;
+        return <FAQPage onNavigate={handleNavigate} />;
       case 'contact':
         return <ContactPage onNavigate={handleNavigate} />;
+      case 'privacy':
+        return <PrivacyPolicyPage />;
+      case 'terms':
+        return <TermsOfServicePage />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }
@@ -45,6 +53,8 @@ export default function App() {
       {/* add top padding so fixed header doesn't cover page content */}
       <main className="flex-grow pt-16">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
+      <ScrollToTopButton />
+      <MobileStickyCTA currentPage={currentPage} onNavigate={handleNavigate} />
     </div>
   );
 }

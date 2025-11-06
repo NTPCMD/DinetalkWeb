@@ -1,0 +1,61 @@
+{
+  "title": "Contact",
+  "hero": {
+    "heading": "Get in Touch",
+    "description": "Have questions about AI restaurant receptionists or booking automation? We’d love to hear from you.",
+    "formTitle": "Send us a Message",
+    "successTitle": "Message sent",
+    "successBody": "Thanks for reaching out! Our team will reply to your email shortly.",
+    "errorTitle": "Something went wrong",
+    "errorBody": "Sorry, your message didn’t go through. Please try again in a moment.",
+    "submitDefault": "Send Message",
+    "submitPending": "Sending..."
+  },
+  "contactInfo": {
+    "title": "Contact Information",
+    "location": {
+      "heading": "Location",
+      "body": "Perth, Western Australia"
+    },
+    "phone": {
+      "heading": "Call Us",
+      "number": "0403 982 811",
+      "href": "tel:+61403982811",
+      "note": "Customer support & sales"
+    },
+    "demo": {
+      "heading": "Demo Line",
+      "number": "+61 8 6010 4462",
+      "href": "tel:+61860104462",
+      "note": "Listen to the AI receptionist in action"
+    },
+    "email": {
+      "heading": "Email",
+      "address": "hello@dinetalk.com.au",
+      "href": "mailto:hello@dinetalk.com.au"
+    }
+  },
+  "hours": {
+    "title": "Weekly Hours",
+    "subtitle": "Australia/Perth time zone",
+    "note": "* Our AI receptionist is available 24/7 for demos",
+    "entries": [
+      { "label": "Sunday", "value": "12:00 PM - 6:00 PM" },
+      { "label": "Monday", "value": "5:00 PM - 10:00 PM" },
+      { "label": "Tuesday", "value": "5:00 PM - 10:00 PM" },
+      { "label": "Wednesday", "value": "5:00 PM - 10:00 PM" },
+      { "label": "Thursday", "value": "5:00 PM - 10:00 PM" },
+      { "label": "Friday", "value": "5:00 PM - 11:45 PM" },
+      { "label": "Saturday (early)", "value": "12:00 AM - 1:00 AM" },
+      { "label": "Saturday (day)", "value": "12:00 PM - 11:45 PM" }
+    ]
+  },
+  "cta": {
+    "title": "Prefer to talk?",
+    "description": "Book a free demo call and speak directly with our team.",
+    "button": {
+      "label": "Schedule a Call",
+      "target": "demo"
+    }
+  }
+}
