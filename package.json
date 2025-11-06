@@ -47,6 +47,12 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+<<<<<<< HEAD
+=======
+    "@stackbit/cli": "^0.3.133",
+    "@stackbit/cms-git": "^1.0.35",
+    "@stackbit/types": "^2.1.14",
+>>>>>>> 3bb9d50 (fix: resolve package.json merge conflict and keep Stackbit dependencies)
     "@types/node": "^20.10.0",
     "@vitejs/plugin-react-swc": "^3.10.2",
     "vite": "6.3.5"
