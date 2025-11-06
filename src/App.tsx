@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
+import { Toaster } from './components/ui/sonner';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/HomePage';
 import { BookDemoPage } from './components/BookDemoPage';
@@ -39,7 +40,10 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-      <main className="flex-grow">{renderPage()}</main>
+  {/* global toast container */}
+  <Toaster position="bottom-center" />
+      {/* add top padding so fixed header doesn't cover page content */}
+      <main className="flex-grow pt-16">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
     </div>
   );

@@ -11,7 +11,11 @@
       <meta name="robots" content="index, follow">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <script type="application/ld+json">
+  <!-- Preload hero image and main font for faster first paint -->
+  <link rel="preload" as="image" href="/assets/hero.webp" fetchpriority="high">
+  <link rel="preload" as="font" href="/assets/fonts/Poppins-Bold.woff2" type="font/woff2" crossorigin>
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -24,7 +28,6 @@
       }
       </script>
 
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </head>
 
     <body>
@@ -39,6 +42,8 @@
         <textarea name="message"></textarea>
       </form>
 
+      <!-- move non-critical third-party scripts to bottom and defer -->
+      <script defer src="https://assets.calendly.com/assets/external/widget.js"></script>
       <script type="module" src="/src/main.tsx"></script>
     </body>
   </html>

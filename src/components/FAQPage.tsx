@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
+import { Mail } from 'lucide-react';
 
 interface FAQPageProps {
   onNavigate?: (page: string) => void;
@@ -68,17 +69,19 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
-  <div className="mt-12 bg-primary text-white rounded-2xl p-8 text-center" data-reveal>
+        <div className="mt-10 text-center" data-reveal>
           <h2 className="text-2xl mb-4">Still have questions?</h2>
           <p className="mb-6 opacity-90">
             Our team is here to help. Get in touch and we'll answer any questions you have.
           </p>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center mt-10">
+            {/* Contact button: orange background, white text, rounded, centered */}
             <button
-              className="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-md font-medium hover:opacity-95"
-              onClick={() => onNavigate?.('demo')}
+              className="inline-flex items-center gap-3 bg-[#e58e23] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f29b3a]"
+              onClick={() => onNavigate?.('contact')}
             >
-              Book a Meeting
+              <Mail size={18} />
+              <span>Still have questions? Contact Us</span>
             </button>
           </div>
         </div>

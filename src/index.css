@@ -1632,10 +1632,35 @@ html { scroll-behavior: smooth; }
   color: var(--foreground);
 }
 .nav-solid {
-  background: var(--secondary);
+  /* transition to a dark backdrop with a subtle orange accent */
+  background: rgba(17,17,17,0.92); /* near-black */
   box-shadow: 0 6px 30px rgba(0,0,0,0.12);
-  color: var(--secondary-foreground);
+  color: #fff;
+  border-bottom: 2px solid rgba(229,142,35,0.12);
   z-index: 9999; /* ensure header stays on top */
+  backdrop-filter: blur(6px);
+}
+
+/* Nav link styles and hover underline/fade */
+.nav-link {
+  position: relative;
+  transition: color 200ms ease, opacity 200ms ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #e58e23, #ff8c00);
+  transition: width 220ms ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+.nav-link:hover {
+  color: #fff;
 }
 
 /* Ensure buttons are touch-friendly */
@@ -1658,6 +1683,18 @@ html { scroll-behavior: smooth; }
   letter-spacing: -0.01em;
   line-height: 1.05;
   text-shadow: 0 6px 22px rgba(0,0,0,0.6);
+}
+
+/* Ensure hero text is visible immediately (avoid being hidden by reveal JS) */
+.hero-text {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Overlay placed over hero image to improve readability */
+.hero-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.28), rgba(0,0,0,0.48));
+  mix-blend-mode: normal;
 }
 
 /* Section divider (subtle orange gradient) */
@@ -1975,6 +2012,23 @@ html { scroll-behavior: smooth; }
   .parallax {
     background-attachment: scroll;
     background-position: center center !important;
+  }
+}
+
+/* Hero entrance animation (non-blocking): text remains visible but slides up slightly */
+@keyframes heroFadeUp {
+  from { transform: translateY(15px); opacity: 1; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.hero-entrance {
+  transform: translateY(15px);
+  will-change: transform;
+  animation: heroFadeUp 0.6s cubic-bezier(.22,.9,.36,1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-entrance {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

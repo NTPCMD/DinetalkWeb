@@ -98,17 +98,17 @@ export function HomePage({ onNavigate }: HomePageProps) {
       <section
         id="hero"
         className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
-        data-reveal
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose reveal hero-heading`} data-reveal>
+              {/* Ensure hero text is visible immediately and not hidden by reveal animation */}
+              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose hero-heading hero-text`}>
                 AI Restaurant Receptionist &amp; Ordering System
               </h1>
-              <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'}`} data-reveal>
+              <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
@@ -125,13 +125,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="dot" />
               </div>
             </div>
-              <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
+            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                 alt="AI receptionist taking restaurant booking over phone"
-                className="w-full h-auto object-cover"
+                className="w-full max-h-[80vh] h-auto object-cover"
                 loading="lazy"
               />
+              {/* subtle overlay to ensure text legibility */}
+              <div className="absolute inset-0 pointer-events-none hero-overlay" />
             </div>
           </div>
         </div>

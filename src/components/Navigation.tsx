@@ -13,11 +13,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // scroll handler to toggle nav background
+  // scroll handler to toggle nav background after 100px
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 100);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -31,15 +29,21 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   ];
 
   return (
-    <nav className={`border-b border-border sticky top-0 z-50 ${scrolled ? 'nav-solid' : 'nav-transparent'}`}>
+    <nav
+      className={`border-b border-border fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+        scrolled ? 'nav-solid' : 'nav-transparent'
+      }`}
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <button
             onClick={() => onNavigate('home')}
             className="flex items-center"
           >
-            <img src={logo} alt="DineTalk" className="h-14 w-auto" />
+            <img src={logo} alt="DineTalk" className="h-10 md:h-14 w-auto" />
           </button>
 
           {/* Desktop Navigation */}
@@ -48,10 +52,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <button
                 key={item.path}
                 onClick={() => onNavigate(item.path)}
-                className={`transition-colors ${
+                className={`transition-colors nav-link px-2 py-1 ${
                   currentPage === item.path
-                    ? 'text-primary'
-                    : 'text-foreground hover:text-primary'
+                    ? 'text-primary' // active
+                    : 'text-foreground'
                 }`}
               >
                 {item.name}
@@ -62,8 +66,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden z-50"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -71,7 +76,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="md:hidden py-4 border-t border-border bg-background z-40">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <button
@@ -80,10 +85,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     onNavigate(item.path);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left transition-colors ${
+                  className={`text-left transition-colors nav-link px-2 py-2 ${
                     currentPage === item.path
                       ? 'text-primary'
-                      : 'text-foreground hover:text-primary'
+                      : 'text-foreground'
                   }`}
                 >
                   {item.name}

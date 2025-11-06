@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, CheckCircle } from 'lucide-react';
+import { toast } from 'sonner@2.0.3';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -17,6 +18,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     phone: '',
     message: '',
   });
+  const [success, setSuccess] = useState(false);
 
   const encode = (data: Record<string, string>) =>
   Object.keys(data)
@@ -39,10 +41,15 @@ const handleSubmit = (e: React.FormEvent) => {
     body: encode(data),
   })
     .then(() => {
-      alert("Thanks! We’ll be in touch by email.");
+      // show sonner toast for success
+      toast.success("✅ Message sent! We'll be in touch soon.", { duration: 3000 });
       setFormData({ name: "", email: "", phone: "", message: "" });
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
     })
-    .catch(() => alert("Sorry, something went wrong. Please try again."));
+    .catch(() => {
+      alert("Sorry, something went wrong. Please try again.");
+    });
 };
 
   const handleChange = (
@@ -64,10 +71,10 @@ const handleSubmit = (e: React.FormEvent) => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+  <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Contact Form */}
           <Card data-reveal>
-            <CardContent className="p-6 md:p-8">
+            <CardContent className="p-6 md:p-10">
               <h2 className="text-2xl mb-8">Send us a Message</h2>
               <form
                 name="contact"
@@ -132,9 +139,16 @@ const handleSubmit = (e: React.FormEvent) => {
 
                 <div className="mt-6">
                   <Button type="submit" className="w-full" size="lg">
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Message
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Message
                   </Button>
+                </div>
+                {/* success message area */}
+                <div id="contact-success" className="mt-4 hidden">
+                  <div className="inline-flex items-center gap-2 text-green-500 font-medium">
+                    <CheckCircle className="w-5 h-5" />
+                    <span>✅ Message sent successfully! We’ll be in touch soon.</span>
+                  </div>
                 </div>
               </form>
             </CardContent>
