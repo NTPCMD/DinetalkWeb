@@ -1,5 +1,5 @@
 import { Target, Users, Heart, TrendingUp } from 'lucide-react';
-import { visualEditing } from '@stackbit/sdk';
+import { visualEditing } from '../lib/stackbit-sdk';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';

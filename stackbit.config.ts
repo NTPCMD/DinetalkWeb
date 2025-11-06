@@ -1,4 +1,4 @@
-import { defineDocumentModel, defineStackbitConfig } from '@stackbit/sdk';
+import { defineDocumentModel, defineStackbitConfig } from './src/lib/stackbit-sdk';
 
 export default defineStackbitConfig({
   stackbitVersion: '^1.0.0',

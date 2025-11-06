@@ -1,6 +1,6 @@
 import { Phone, Calendar, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { visualEditing } from '@stackbit/sdk';
+import { visualEditing } from '../lib/stackbit-sdk';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';

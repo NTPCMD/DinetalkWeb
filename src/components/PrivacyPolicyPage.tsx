@@ -1,4 +1,4 @@
-import { visualEditing } from '@stackbit/sdk';
+import { visualEditing } from '../lib/stackbit-sdk';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import privacyContent from '../content/pages/privacy.json';
 

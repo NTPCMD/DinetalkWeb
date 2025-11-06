@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Clock, CheckCircle } from 'lucide-react';
-import { visualEditing } from '@stackbit/sdk';
+import { visualEditing } from '../lib/stackbit-sdk';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';

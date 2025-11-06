@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { visualEditing } from '@stackbit/sdk';
+import { visualEditing } from '../lib/stackbit-sdk';
 import mobileCtaContent from '../content/mobile-cta.json';
 import { Button } from './ui/button';
 

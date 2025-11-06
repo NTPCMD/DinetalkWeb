@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
-import { visualEditing } from '@stackbit/sdk';
+import { visualEditing } from '../lib/stackbit-sdk';
 import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import faqContent from '../content/pages/faq.json';
