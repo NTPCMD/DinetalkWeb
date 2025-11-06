@@ -1,57 +1,35 @@
-import { defineDocumentModel, defineStackbitConfig } from './src/lib/stackbit-sdk';
+// stackbit.config.ts
+import { defineStackbitConfig } from "@stackbit/types";
+import { GitContentSource } from "@stackbit/cms-git";
 
 export default defineStackbitConfig({
-  stackbitVersion: '^1.0.0',
   contentSources: [
-    {
-      name: 'site-content',
-      type: 'filesystem',
-      path: 'src/content',
+    new GitContentSource({
+      rootPath: __dirname,
+      contentDirs: ["content"], // folder that will store your editable content
       models: [
-        defineDocumentModel({
-          name: 'page',
-          type: 'page',
-          label: 'Page',
-          match: 'pages/*.json',
+        {
+          name: "Page",
+          type: "page",
+          urlPath: "/{slug}",
+          filePath: "content/pages/{slug}.json",
           fields: [
-            { name: 'title', type: 'string', label: 'Title' },
-            { name: 'hero', type: 'object', label: 'Hero', fields: [] },
-            { name: 'sections', type: 'list', label: 'Sections', items: { type: 'object', fields: [] } },
-            { name: 'cta', type: 'object', label: 'Call to Action', fields: [] },
+            { name: "title", type: "string", required: true },
+            { name: "body", type: "markdown", required: false },
           ],
-        }),
-        defineDocumentModel({
-          name: 'navigation',
-          type: 'data',
-          label: 'Navigation',
-          match: 'navigation.json',
-          fields: [
-            { name: 'links', type: 'list', label: 'Links', items: { type: 'object', fields: [] } },
-            { name: 'cta', type: 'object', label: 'Primary CTA', fields: [] },
-          ],
-        }),
-        defineDocumentModel({
-          name: 'footer',
-          type: 'data',
-          label: 'Footer',
-          match: 'footer.json',
-          fields: [
-            { name: 'brand', type: 'object', label: 'Brand', fields: [] },
-            { name: 'quickLinks', type: 'list', label: 'Quick Links', items: { type: 'object', fields: [] } },
-            { name: 'contact', type: 'object', label: 'Contact', fields: [] },
-          ],
-        }),
-        defineDocumentModel({
-          name: 'mobileCta',
-          type: 'data',
-          label: 'Mobile CTA',
-          match: 'mobile-cta.json',
-          fields: [
-            { name: 'label', type: 'string', label: 'Label' },
-            { name: 'target', type: 'string', label: 'Target' },
-          ],
-        }),
+        },
       ],
-    },
+    }),
   ],
+  siteMap: ({ documents, models }) => {
+    const pageModels = models.filter((m) => m.type === "page");
+    return documents
+      .filter((d) => pageModels.some((m) => m.name === d.modelName))
+      .map((doc) => ({
+        stableId: doc.id,
+        urlPath: `/${doc.id}`,
+        document: doc,
+        isHomePage: doc.id === "index",
+      }));
+  },
 });
