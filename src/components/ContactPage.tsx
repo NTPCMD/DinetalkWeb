@@ -1,18 +1,12 @@
 import { useState } from 'react';
-<<<<<<< HEAD
-import { Mail, MapPin, Phone, Send, CheckCircle } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
-=======
 import { AlertCircle, CheckCircle2, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { visualEditing } from '../lib/stackbit-sdk';
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
-import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import contactContent from '../content/pages/contact.json';
 
@@ -27,9 +21,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     phone: '',
     message: '',
   });
-<<<<<<< HEAD
-  const [success, setSuccess] = useState(false);
-=======
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'submitting'>('idle');
   const page = contactContent;
   const ve = visualEditing({ objectId: 'src/content/pages/contact.json' });
@@ -83,43 +74,11 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     ],
   });
 
-  const perthSkylineImageBase =
-    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80';
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
-
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
       .join('&');
 
-<<<<<<< HEAD
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  const form = e.target as HTMLFormElement;
-  const data = {
-    "form-name": "contact",
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-  };
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: encode(data),
-  })
-    .then(() => {
-      // show sonner toast for success
-      toast.success("✅ Message sent! We'll be in touch soon.", { duration: 3000 });
-      setFormData({ name: "", email: "", phone: "", message: "" });
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
-    })
-    .catch(() => {
-      alert("Sorry, something went wrong. Please try again.");
-    });
-};
-=======
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -143,7 +102,6 @@ const handleSubmit = (e: React.FormEvent) => {
       })
       .catch(() => setStatus('error'));
   };
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -155,7 +113,7 @@ const handleSubmit = (e: React.FormEvent) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-36 sm:pt-44 md:pt-52 lg:pt-60 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-6 md:space-y-8">
           <h1 className="text-4xl md:text-5xl tracking-tight" {...ve.field('hero.heading')}>
             {page.hero.heading}
           </h1>
@@ -164,13 +122,6 @@ const handleSubmit = (e: React.FormEvent) => {
           </p>
         </div>
 
-<<<<<<< HEAD
-  <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Contact Form */}
-          <Card data-reveal>
-            <CardContent className="p-6 md:p-10">
-              <h2 className="text-2xl mb-8">Send us a Message</h2>
-=======
         <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 md:gap-12 lg:gap-16 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
@@ -199,7 +150,6 @@ const handleSubmit = (e: React.FormEvent) => {
                 )}
               </div>
 
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
               <form
                 name="contact"
                 method="POST"
@@ -212,24 +162,18 @@ const handleSubmit = (e: React.FormEvent) => {
                 <input type="hidden" name="bot-field" />
                 <div className="space-y-3">
                   <Label htmlFor="name" className="leading-relaxed">Name *</Label>
-                  <Input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required placeholder="Your name" />
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your name"
+                  />
                 </div>
                 <div className="space-y-3">
                   <Label htmlFor="email" className="leading-relaxed">Email *</Label>
-                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
-                </div>
-                <div className="space-y-3">
-                  <Label htmlFor="phone" className="leading-relaxed">Phone</Label>
-                  <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(optional)" />
-                </div>
-                <div className="space-y-3">
-                  <Label htmlFor="message" className="leading-relaxed">Message *</Label>
-                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required className="min-h-[150px]" placeholder="Tell us about your restaurant and how we can help..." />
-                </div>
-
-<<<<<<< HEAD
-                <div>
-                  <Label htmlFor="email" className="mb-2">Email *</Label>
                   <Input
                     id="email"
                     name="email"
@@ -240,9 +184,8 @@ const handleSubmit = (e: React.FormEvent) => {
                     placeholder="your@email.com"
                   />
                 </div>
-
-                <div>
-                  <Label htmlFor="phone" className="mb-2">Phone</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="phone" className="leading-relaxed">Phone</Label>
                   <Input
                     id="phone"
                     name="phone"
@@ -252,9 +195,8 @@ const handleSubmit = (e: React.FormEvent) => {
                     placeholder="(optional)"
                   />
                 </div>
-
-                <div>
-                  <Label htmlFor="message" className="mb-2">Message *</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="message" className="leading-relaxed">Message *</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -266,20 +208,6 @@ const handleSubmit = (e: React.FormEvent) => {
                   />
                 </div>
 
-                <div className="mt-6">
-                  <Button type="submit" className="w-full" size="lg">
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
-                  </Button>
-                </div>
-                {/* success message area */}
-                <div id="contact-success" className="mt-4 hidden">
-                  <div className="inline-flex items-center gap-2 text-green-500 font-medium">
-                    <CheckCircle className="w-5 h-5" />
-                    <span>✅ Message sent successfully! We’ll be in touch soon.</span>
-                  </div>
-                </div>
-=======
                 <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
                   <Send className="w-4 h-4 mr-2" />
                   {status === 'submitting' ? (
@@ -288,7 +216,6 @@ const handleSubmit = (e: React.FormEvent) => {
                     <span {...ve.field('hero.submitDefault')}>{page.hero.submitDefault}</span>
                   )}
                 </Button>
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
               </form>
             </CardContent>
           </Card>
@@ -391,20 +318,6 @@ const handleSubmit = (e: React.FormEvent) => {
                 <p className="text-sm text-muted-foreground/80" {...ve.field('hours.note')}>
                   {page.hours.note}
                 </p>
-              </CardContent>
-            </Card>
-
-            <Card data-reveal className="overflow-hidden border-0 shadow-none">
-              <CardContent className="p-0">
-                <ImageWithFallback
-                  src={`${perthSkylineImageBase}&w=1200`}
-                  srcSet={`${perthSkylineImageBase}&w=640 640w, ${perthSkylineImageBase}&w=960 960w, ${perthSkylineImageBase}&w=1200 1200w`}
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  alt="Perth, Western Australia skyline at sunset"
-                  className="w-full h-48 object-cover"
-                  width={1200}
-                  height={600}
-                />
               </CardContent>
             </Card>
 
