@@ -47,14 +47,8 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-<<<<<<< Updated upstream
     "@stackbit/types": "^1.0.0",
     "@stackbit/cms-git": "^1.0.0",
-=======
-    "@stackbit/cli": "^0.3.133",
-    "@stackbit/cms-git": "^1.0.35",
-    "@stackbit/types": "^2.1.14",
->>>>>>> Stashed changes
     "@types/node": "^20.10.0",
     "@vitejs/plugin-react-swc": "^3.10.2",
     "vite": "6.3.5"
