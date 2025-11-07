@@ -1652,18 +1652,11 @@ html { scroll-behavior: smooth; }
   transform: scaleX(1);
 }
 .nav-solid {
-<<<<<<< HEAD
   /* transition to a dark backdrop with a subtle orange accent */
   background: rgba(17,17,17,0.92); /* near-black */
   box-shadow: 0 6px 30px rgba(0,0,0,0.12);
   color: #fff;
   border-bottom: 2px solid rgba(229,142,35,0.12);
-=======
-  background: color-mix(in srgb, var(--sidebar) 94%, rgba(0, 0, 0, 0.35));
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  color: var(--sidebar-foreground);
-  border-color: color-mix(in srgb, var(--sidebar) 68%, rgba(255, 255, 255, 0.16));
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
   z-index: 9999; /* ensure header stays on top */
   backdrop-filter: blur(6px);
 }
