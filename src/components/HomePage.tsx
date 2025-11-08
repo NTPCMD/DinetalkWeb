@@ -130,15 +130,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-<<<<<<< HEAD
-            <div>
-              {/* Ensure hero text is visible immediately and not hidden by reveal animation */}
-              <h1 className={`text-4xl md:text-5xl mb-6 leading-relaxed md:leading-loose hero-heading hero-text`}>
-                AI Restaurant Receptionist &amp; Ordering System
-              </h1>
-              <p className={`text-xl mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
-                DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
-=======
             <div className="hero-intro">
               <h1
                 className="text-4xl md:text-5xl mb-6 leading-relaxed md:leading-tight hero-heading"
@@ -160,7 +151,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   {page.hero.contextLinkText}
                 </button>
                 .
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
                 <Button
@@ -188,14 +178,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="dot" />
               </div>
             </div>
-<<<<<<< HEAD
-            <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="AI receptionist taking restaurant booking over phone"
-                className="w-full max-h-[80vh] h-auto object-cover"
-                loading="lazy"
-=======
             <div className="rounded-2xl overflow-hidden shadow-xl md:bg-transparent hero-media md:max-w-[460px] md:mx-auto" data-reveal>
               <ImageWithFallback
                 src={`${HERO_IMAGE_BASE}&w=1280`}
@@ -206,7 +188,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 loading="eager"
                 width={1280}
                 height={853}
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
               />
               {/* subtle overlay to ensure text legibility */}
               <div className="absolute inset-0 pointer-events-none hero-overlay" />
