@@ -1,11 +1,6 @@
 import { useState } from 'react';
-<<<<<<< HEAD
-import { Mail, MapPin, Phone, Send, CheckCircle } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
-=======
 import { AlertCircle, CheckCircle2, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { visualEditing } from '../lib/stackbit-sdk';
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -27,9 +22,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     phone: '',
     message: '',
   });
-<<<<<<< HEAD
-  const [success, setSuccess] = useState(false);
-=======
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'submitting'>('idle');
   const page = contactContent;
   const ve = visualEditing({ objectId: 'src/content/pages/contact.json' });
@@ -85,41 +77,12 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
   const perthSkylineImageBase =
     'https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80';
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
 
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
       .join('&');
 
-<<<<<<< HEAD
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  const form = e.target as HTMLFormElement;
-  const data = {
-    "form-name": "contact",
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-  };
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: encode(data),
-  })
-    .then(() => {
-      // show sonner toast for success
-      toast.success("✅ Message sent! We'll be in touch soon.", { duration: 3000 });
-      setFormData({ name: "", email: "", phone: "", message: "" });
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
-    })
-    .catch(() => {
-      alert("Sorry, something went wrong. Please try again.");
-    });
-};
-=======
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -143,7 +106,6 @@ const handleSubmit = (e: React.FormEvent) => {
       })
       .catch(() => setStatus('error'));
   };
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -164,13 +126,6 @@ const handleSubmit = (e: React.FormEvent) => {
           </p>
         </div>
 
-<<<<<<< HEAD
-  <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Contact Form */}
-          <Card data-reveal>
-            <CardContent className="p-6 md:p-10">
-              <h2 className="text-2xl mb-8">Send us a Message</h2>
-=======
         <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 md:gap-12 lg:gap-16 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
@@ -198,8 +153,6 @@ const handleSubmit = (e: React.FormEvent) => {
                   </Alert>
                 )}
               </div>
-
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
               <form
                 name="contact"
                 method="POST"
@@ -227,59 +180,6 @@ const handleSubmit = (e: React.FormEvent) => {
                   <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required className="min-h-[150px]" placeholder="Tell us about your restaurant and how we can help..." />
                 </div>
 
-<<<<<<< HEAD
-                <div>
-                  <Label htmlFor="email" className="mb-2">Email *</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="phone" className="mb-2">Phone</Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="(optional)"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="message" className="mb-2">Message *</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="min-h-[150px]"
-                    placeholder="Tell us about your restaurant and how we can help..."
-                  />
-                </div>
-
-                <div className="mt-6">
-                  <Button type="submit" className="w-full" size="lg">
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
-                  </Button>
-                </div>
-                {/* success message area */}
-                <div id="contact-success" className="mt-4 hidden">
-                  <div className="inline-flex items-center gap-2 text-green-500 font-medium">
-                    <CheckCircle className="w-5 h-5" />
-                    <span>✅ Message sent successfully! We’ll be in touch soon.</span>
-                  </div>
-                </div>
-=======
                 <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
                   <Send className="w-4 h-4 mr-2" />
                   {status === 'submitting' ? (
@@ -288,7 +188,6 @@ const handleSubmit = (e: React.FormEvent) => {
                     <span {...ve.field('hero.submitDefault')}>{page.hero.submitDefault}</span>
                   )}
                 </Button>
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
               </form>
             </CardContent>
           </Card>
