@@ -4,14 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
-<<<<<<< HEAD
 import { Mail } from 'lucide-react';
-=======
-import { visualEditing } from '../lib/stackbit-sdk';
-import { Button } from './ui/button';
-import { usePageMetadata } from '../hooks/usePageMetadata';
-import faqContent from '../content/pages/faq.json';
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
 
 interface FAQPageProps {
   onNavigate?: (page: string) => void;
@@ -98,7 +91,6 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
-<<<<<<< HEAD
         <div className="mt-10 text-center" data-reveal>
           <h2 className="text-2xl mb-4">Still have questions?</h2>
           <p className="mb-6 opacity-90">
@@ -113,35 +105,6 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
               <Mail size={18} />
               <span>Still have questions? Contact Us</span>
             </button>
-=======
-        <div className="mt-12 bg-primary text-primary-foreground rounded-2xl p-8 text-center" data-reveal>
-          <h2 className="text-2xl mb-4" {...ve.field('cta.heading')}>
-            {page.cta.heading}
-          </h2>
-          <p className="mb-6 text-primary-foreground/80" {...ve.field('cta.description')}>
-            {page.cta.description}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              onClick={() => onNavigate?.(page.cta.primary.target)}
-              size="lg"
-              variant="secondary"
-              aria-label="Book a meeting with DineTalk"
-              {...ve.field('cta.primary.label')}
-            >
-              {page.cta.primary.label}
-            </Button>
-            <Button
-              onClick={() => onNavigate?.(page.cta.secondary.target)}
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/20"
-              aria-label="Contact the DineTalk team"
-              {...ve.field('cta.secondary.label')}
-            >
-              {page.cta.secondary.label}
-            </Button>
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
           </div>
         </div>
       </div>
