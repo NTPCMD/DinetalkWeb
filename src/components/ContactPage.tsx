@@ -128,8 +128,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
             <CardContent className="p-6 md:p-8 flex flex-col gap-5">
-              <h2 className="text-2xl tracking-tight" {...ve.field('hero.formTitle')}>
-                {page.hero.formTitle}
+              <h2 className="text-2xl tracking-tight mt-4" {...ve.field('hero.formTitle')}>
+                Get in Touch
               </h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
                 {status === 'success' && (
@@ -190,8 +190,29 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </CardContent>
           </Card>
 
+            {/* CTA: Prefer to talk block moved here */}
+            <Card data-reveal className="bg-primary text-primary-foreground border-0 mt-12">
+              <CardContent className="p-6 md:p-8 space-y-4">
+                <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
+                  {page.cta.title}
+                </h3>
+                <p className="text-primary-foreground/90" {...ve.field('cta.description')}>
+                  {page.cta.description}
+                </p>
+                <Button
+                  variant="secondary"
+                  className="w-full"
+                  onClick={() => onNavigate?.(page.cta.button.target)}
+                  aria-label="Schedule a DineTalk demo call"
+                  {...ve.field('cta.button.label')}
+                >
+                  {page.cta.button.label}
+                </Button>
+              </CardContent>
+            </Card>
+
           {/* Contact Information */}
-          <div className="space-y-10">
+          <div className="space-y-14">
             <Card data-reveal className="h-full">
               <CardContent className="p-6 md:p-8 space-y-6">
                 <h2 className="text-2xl tracking-tight" {...ve.field('contactInfo.title')}>
@@ -288,27 +309,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <p className="text-sm text-muted-foreground/80" {...ve.field('hours.note')}>
                   {page.hours.note}
                 </p>
-              </CardContent>
-            </Card>
-
-          
-            <Card data-reveal className="bg-primary text-primary-foreground border-0">
-              <CardContent className="p-6 md:p-8 space-y-4">
-                <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
-                  {page.cta.title}
-                </h3>
-                <p className="text-primary-foreground/90" {...ve.field('cta.description')}>
-                  {page.cta.description}
-                </p>
-                <Button
-                  variant="secondary"
-                  className="w-full"
-                  onClick={() => onNavigate?.(page.cta.button.target)}
-                  aria-label="Schedule a DineTalk demo call"
-                  {...ve.field('cta.button.label')}
-                >
-                  {page.cta.button.label}
-                </Button>
               </CardContent>
             </Card>
           </div>
