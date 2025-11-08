@@ -97,17 +97,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   return (
     <nav
-<<<<<<< HEAD
       className={`border-b border-border fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
         scrolled ? 'nav-solid' : 'nav-transparent'
       }`}
       role="navigation"
       aria-label="Main navigation"
-=======
-      className={`nav-base border-b border-border sticky top-0 z-50 ${
-        scrolled ? 'nav-solid' : ''
-      }`}
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -117,18 +111,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             className="flex items-center"
             aria-label="Navigate to DineTalk home page"
           >
-<<<<<<< HEAD
             <img src={logo} alt="DineTalk" className="h-10 md:h-14 w-auto" />
-=======
-            <img
-              src={logo}
-              alt="DineTalk"
-              className="h-14 w-auto"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
           </button>
 
           {/* Desktop Navigation */}
@@ -137,17 +120,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <button
                 key={item.path}
                 onClick={() => onNavigate(item.path)}
-<<<<<<< HEAD
                 className={`transition-colors nav-link px-2 py-1 ${
                   currentPage === item.path
                     ? 'text-primary' // active
                     : 'text-foreground'
-=======
-                className={`nav-link relative font-medium transition-colors duration-200 ${
-                  currentPage === item.path
-                    ? 'text-primary'
-                    : 'text-secondary-foreground hover:text-primary/90'
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
                 }`}
                 aria-current={currentPage === item.path ? 'page' : undefined}
                 {...ve.field(`links[${index}].label`)}
@@ -175,13 +151,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <button
             className="md:hidden z-50"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-<<<<<<< HEAD
             aria-label="Toggle menu"
-=======
-            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu"
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
           >
             {mobileMenuOpen ? <X size={24} aria-hidden /> : <Menu size={24} aria-hidden />}
           </button>
@@ -189,7 +159,6 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-<<<<<<< HEAD
           <div className="md:hidden py-4 border-t border-border bg-background z-40">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
@@ -205,83 +174,21 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                       : 'text-foreground'
                   }`}
                 >
-                  {item.name}
+                  {item.label}
                 </button>
               ))}
               <Button
                 onClick={() => {
                   onNavigate('demo');
-=======
-          <>
-            <div
-              className="fixed inset-0 z-30 bg-background/80 backdrop-blur-sm md:hidden"
-              aria-hidden="true"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <div
-              id="mobile-menu"
-              ref={menuRef}
-              className="md:hidden fixed inset-x-0 top-20 bottom-0 z-40 border-t border-border bg-secondary text-secondary-foreground shadow-xl overflow-y-auto touch-pan-y"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
-              style={{
-                paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)',
-                WebkitOverflowScrolling: 'touch',
-              }}
-              onTouchStart={(event) => {
-                touchStartY.current = event.touches[0]?.clientY ?? null;
-              }}
-              onTouchMove={(event) => {
-                if (touchStartY.current === null) {
-                  return;
-                }
-                const currentY = event.touches[0]?.clientY ?? 0;
-                const deltaY = currentY - touchStartY.current;
-                const menu = menuRef.current;
-                if (deltaY > 60 && (menu?.scrollTop ?? 0) <= 0) {
->>>>>>> c51369b09f471c582ae56759b7df62d080221c89
                   setMobileMenuOpen(false);
-                  touchStartY.current = null;
-                }
-              }}
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                <div className="flex flex-col gap-4">
-                  {navItems.map((item, index) => (
-                    <button
-                      key={item.path}
-                      ref={index === 0 ? firstMobileLinkRef : undefined}
-                      onClick={() => {
-                        onNavigate(item.path);
-                        setMobileMenuOpen(false);
-                      }}
-                      className={`nav-link text-left font-medium transition-colors duration-200 ${
-                        currentPage === item.path
-                          ? 'text-primary'
-                          : 'text-secondary-foreground hover:text-primary/90'
-                      }`}
-                      aria-current={currentPage === item.path ? 'page' : undefined}
-                      {...ve.field(`links[${index}].label`)}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                  <Button
-                    onClick={() => {
-                      onNavigate(cta.path);
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full"
-                    aria-label="Book a DineTalk demo"
-                    {...ve.field('cta.label')}
-                  >
-                    {cta.label}
-                  </Button>
-                </div>
-              </div>
+                }}
+                variant="default"
+                className="shadow-button"
+              >
+                {cta.label}
+              </Button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </nav>
