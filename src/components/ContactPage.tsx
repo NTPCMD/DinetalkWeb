@@ -7,7 +7,6 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
-import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import contactContent from '../content/pages/contact.json';
 
@@ -75,8 +74,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     ],
   });
 
-  const perthSkylineImageBase =
-    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxwZXJ0aCUyMGF1c3RyYWxpYXxlbnwxfHx8fDE3NjExOTAyMDR8MA&ixlib=rb-4.1.0&q=80';
+  // removed skyline image card and base URL as part of layout refactor
 
   const encode = (data: Record<string, string>) =>
     Object.keys(data)
@@ -126,7 +124,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 md:gap-12 lg:gap-16 items-start">
+  <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Contact Form */}
           <Card data-reveal className="self-start h-full">
             <CardContent className="p-6 md:p-8 flex flex-col gap-5">
@@ -293,20 +291,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               </CardContent>
             </Card>
 
-            <Card data-reveal className="overflow-hidden border-0 shadow-none">
-              <CardContent className="p-0">
-                <ImageWithFallback
-                  src={`${perthSkylineImageBase}&w=1200`}
-                  srcSet={`${perthSkylineImageBase}&w=640 640w, ${perthSkylineImageBase}&w=960 960w, ${perthSkylineImageBase}&w=1200 1200w`}
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  alt="Perth, Western Australia skyline at sunset"
-                  className="w-full h-48 object-cover"
-                  width={1200}
-                  height={600}
-                />
-              </CardContent>
-            </Card>
-
+          
             <Card data-reveal className="bg-primary text-primary-foreground border-0">
               <CardContent className="p-6 md:p-8 space-y-4">
                 <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
