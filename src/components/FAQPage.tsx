@@ -5,6 +5,9 @@ import {
   AccordionTrigger,
 } from './ui/accordion';
 import { Mail } from 'lucide-react';
+import faqContent from '../content/pages/faq.json';
+import { usePageMetadata } from '../hooks/usePageMetadata';
+import { visualEditing } from '../lib/stackbit-sdk';
 
 interface FAQPageProps {
   onNavigate?: (page: string) => void;
