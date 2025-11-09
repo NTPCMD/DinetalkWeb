@@ -59,7 +59,7 @@ export function MobileStickyCTA({ onNavigate, currentPage }: MobileStickyCTAProp
       >
         <Button
           size="lg"
-          className="w-full"
+          className="w-full bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
           onClick={() => onNavigate(cta.target)}
           aria-label="Quickly book a DineTalk demo"
           {...ve.field('label')}

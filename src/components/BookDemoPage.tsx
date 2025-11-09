@@ -172,8 +172,7 @@ export function BookDemoPage() {
                 </p>
                 <Button
                   asChild
-                  variant="outline"
-                  className="w-full bg-white/90 text-primary border border-primary/40 hover:bg-white hover:text-primary-foreground transition-colors"
+                  className="w-full bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md"
                   aria-label="Call the DineTalk demo line"
                   {...ve.field('cta.phone')}
                 >

@@ -189,6 +189,7 @@ function CarouselPrevious({
         orientation === "horizontal"
           ? "top-1/2 -left-12 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+        "bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md",
         className,
       )}
       disabled={!canScrollPrev}
@@ -219,6 +220,7 @@ function CarouselNext({
         orientation === "horizontal"
           ? "top-1/2 -right-12 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+        "bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md",
         className,
       )}
       disabled={!canScrollNext}

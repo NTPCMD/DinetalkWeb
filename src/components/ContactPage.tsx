@@ -178,7 +178,12 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required className="min-h-[150px]" placeholder="Tell us about your restaurant and how we can help..." />
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
+                <Button
+                  type="submit"
+                  className="w-full bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+                  size="lg"
+                  disabled={status === 'submitting'}
+                >
                   <Send className="w-4 h-4 mr-2" />
                   {status === 'submitting' ? (
                     <span {...ve.field('hero.submitPending')}>{page.hero.submitPending}</span>
@@ -200,8 +205,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   {page.cta.description}
                 </p>
                 <Button
-                  variant="secondary"
-                  className="w-full"
+                  className="w-full bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md"
                   onClick={() => onNavigate?.(page.cta.button.target)}
                   aria-label="Schedule a DineTalk demo call"
                   {...ve.field('cta.button.label')}
