@@ -133,12 +133,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             ))}
             <Button
               onClick={() => onNavigate(cta.path)}
-              variant={currentPage === cta.path ? 'default' : 'secondary'}
-              className={
-                currentPage === cta.path
-                  ? 'shadow-button'
-                  : 'hover:text-accent-foreground'
-              }
+              className={`bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md ${
+                currentPage === cta.path ? 'shadow-button' : ''
+              }`}
               aria-current={currentPage === cta.path ? 'page' : undefined}
               aria-label="Book a DineTalk demo"
               {...ve.field('cta.label')}
@@ -182,8 +179,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   onNavigate('demo');
                   setMobileMenuOpen(false);
                 }}
-                variant="default"
-                className="shadow-button"
+                className="shadow-button bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
               >
                 {cta.label}
               </Button>

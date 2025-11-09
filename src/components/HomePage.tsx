@@ -112,16 +112,20 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
-                <Button size="lg" onClick={() => onNavigate('demo')}>
+                <Button
+                  size="lg"
+                  className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+                  onClick={() => onNavigate('demo')}
+                >
                   Book a Demo
                 </Button>
                 <Button
-  size="lg"
-  className="bg-[#4b5563] text-white font-medium border border-[#4b5563] hover:bg-[#374151] hover:border-[#374151] transition-colors shadow-md"
-  onClick={() => onNavigate('demo')}
->
-  Try Live AI Demo
-</Button>
+                  size="lg"
+                  className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium"
+                  onClick={() => onNavigate('demo')}
+                >
+                  Try Live AI Demo
+                </Button>
 
 
               </div>
@@ -231,8 +235,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </p>
           <Button
             size="lg"
-            variant="default"
-            className="bg-white text-primary hover:bg-white/95"
+            className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
             onClick={() => onNavigate('demo')}
           >
             Book Your Free Demo

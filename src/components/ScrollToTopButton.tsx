@@ -29,7 +29,10 @@ export function ScrollToTopButton() {
       <Button
         type="button"
         size="icon"
-        className={cn('rounded-full shadow-lg shadow-primary/35')}
+        className={cn(
+          'rounded-full shadow-primary/35',
+          'bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md'
+        )}
         onClick={() => {
           window.scrollTo({
             top: 0,
