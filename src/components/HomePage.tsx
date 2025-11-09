@@ -117,11 +117,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </Button>
                 <Button
   size="lg"
-  className="bg-[#e58e23] text-white font-medium border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] transition-colors shadow-md"
+  className="bg-[#4b5563] text-white font-medium border border-[#4b5563] hover:bg-[#374151] hover:border-[#374151] transition-colors shadow-md"
   onClick={() => onNavigate('demo')}
 >
   Try Live AI Demo
 </Button>
+
 
               </div>
 
