@@ -1,6 +1,7 @@
 import { Phone, Calendar, Zap, CheckCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
+import { PRIMARY_BUTTON_CLASSES, SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -112,16 +113,20 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
-                <Button size="lg" onClick={() => onNavigate('demo')}>
+                <Button
+                  size="lg"
+                  className={PRIMARY_BUTTON_CLASSES}
+                  onClick={() => onNavigate('demo')}
+                >
                   Book a Demo
                 </Button>
                 <Button
-  size="lg"
-  className="bg-[#4b5563] text-white font-medium border border-[#4b5563] hover:bg-[#374151] hover:border-[#374151] transition-colors shadow-md"
-  onClick={() => onNavigate('demo')}
->
-  Try Live AI Demo
-</Button>
+                  size="lg"
+                  className={`${SECONDARY_BUTTON_CLASSES} font-medium`}
+                  onClick={() => onNavigate('demo')}
+                >
+                  Try Live AI Demo
+                </Button>
 
 
               </div>
@@ -231,8 +236,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </p>
           <Button
             size="lg"
-            variant="default"
-            className="bg-white text-primary hover:bg-white/95"
+            className={PRIMARY_BUTTON_CLASSES}
             onClick={() => onNavigate('demo')}
           >
             Book Your Free Demo
