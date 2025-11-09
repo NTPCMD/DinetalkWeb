@@ -116,13 +116,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   Book a Demo
                 </Button>
                 <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white/90 text-primary border border-primary/40 hover:bg-white hover:text-primary-foreground transition-colors"
-                  onClick={() => onNavigate('demo')}
-                >
-                  Try Live AI Demo
-                </Button>
+  size="lg"
+  className="bg-[#e58e23] text-white font-medium border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] transition-colors shadow-md"
+  onClick={() => onNavigate('demo')}
+>
+  Try Live AI Demo
+</Button>
+
               </div>
 
               {/* small bounce scroll indicator */}
