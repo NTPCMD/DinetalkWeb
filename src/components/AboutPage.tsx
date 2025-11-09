@@ -214,15 +214,15 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               {page.cta.primary.label}
             </Button>
             <Button
-              size="lg"
-              variant="outline"
-              onClick={() => onNavigate?.(page.cta.secondary.target)}
-              className="bg-primary-foreground text-primary border-primary/40 hover:bg-primary-foreground/90"
-              aria-label="Contact the DineTalk team"
-              {...ve.field('cta.secondary.label')}
-            >
-              {page.cta.secondary.label}
-            </Button>
+  size="lg"
+  onClick={() => onNavigate?.(page.cta.secondary.target)}
+  className="bg-white/90 text-primary border border-primary/30 hover:bg-white hover:text-primary-foreground transition-colors"
+  aria-label="Contact the DineTalk team"
+  {...ve.field('cta.secondary.label')}
+>
+  {page.cta.secondary.label}
+</Button>
+
           </div>
         </div>
       </section>

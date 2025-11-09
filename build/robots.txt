@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://dinetalk.com.au/sitemap.xml
