@@ -9,6 +9,7 @@ import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import contactContent from '../content/pages/contact.json';
+import { PRIMARY_BUTTON_CLASSES, SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 interface ContactPageProps {
   onNavigate?: (page: string) => void;
@@ -178,7 +179,12 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required className="min-h-[150px]" placeholder="Tell us about your restaurant and how we can help..." />
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={status === 'submitting'}>
+                <Button
+                  type="submit"
+                  className={`w-full ${PRIMARY_BUTTON_CLASSES}`}
+                  size="lg"
+                  disabled={status === 'submitting'}
+                >
                   <Send className="w-4 h-4 mr-2" />
                   {status === 'submitting' ? (
                     <span {...ve.field('hero.submitPending')}>{page.hero.submitPending}</span>
@@ -200,8 +206,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   {page.cta.description}
                 </p>
                 <Button
-                  variant="secondary"
-                  className="w-full"
+                  className={`w-full ${SECONDARY_BUTTON_CLASSES}`}
                   onClick={() => onNavigate?.(page.cta.button.target)}
                   aria-label="Schedule a DineTalk demo call"
                   {...ve.field('cta.button.label')}

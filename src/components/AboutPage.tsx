@@ -3,6 +3,7 @@ import { visualEditing } from '../lib/stackbit-sdk';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
+import { PRIMARY_BUTTON_CLASSES, SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import aboutContent from '../content/pages/about.json';
 
@@ -206,7 +207,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              variant="secondary"
+              className={SECONDARY_BUTTON_CLASSES}
               onClick={() => onNavigate?.(page.cta.primary.target)}
               aria-label="Book a demo with DineTalk"
               {...ve.field('cta.primary.label')}
@@ -214,14 +215,14 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               {page.cta.primary.label}
             </Button>
             <Button
-  size="lg"
-  onClick={() => onNavigate?.(page.cta.secondary.target)}
-  className="bg-[#e58e23] text-white font-medium border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] transition-colors shadow-md"
-  aria-label="Contact the DineTalk team"
-  {...ve.field('cta.secondary.label')}
->
-  {page.cta.secondary.label}
-</Button>
+              size="lg"
+              onClick={() => onNavigate?.(page.cta.secondary.target)}
+              className={PRIMARY_BUTTON_CLASSES}
+              aria-label="Contact the DineTalk team"
+              {...ve.field('cta.secondary.label')}
+            >
+              {page.cta.secondary.label}
+            </Button>
 
 
           </div>

@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { visualEditing } from '../lib/stackbit-sdk';
 import { Button } from './ui/button';
+import { cn } from './ui/utils';
 import navigationContent from '../content/navigation.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
+import { PRIMARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 interface NavigationProps {
   currentPage: string;
@@ -133,12 +135,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             ))}
             <Button
               onClick={() => onNavigate(cta.path)}
-              variant={currentPage === cta.path ? 'default' : 'secondary'}
-              className={
-                currentPage === cta.path
-                  ? 'shadow-button'
-                  : 'hover:text-accent-foreground'
-              }
+              className={cn(PRIMARY_BUTTON_CLASSES, currentPage === cta.path && 'shadow-button')}
               aria-current={currentPage === cta.path ? 'page' : undefined}
               aria-label="Book a DineTalk demo"
               {...ve.field('cta.label')}
@@ -182,8 +179,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   onNavigate('demo');
                   setMobileMenuOpen(false);
                 }}
-                variant="default"
-                className="shadow-button"
+                className={cn('shadow-button', PRIMARY_BUTTON_CLASSES)}
               >
                 {cta.label}
               </Button>

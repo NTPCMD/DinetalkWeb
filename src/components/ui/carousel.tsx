@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react@0.487.0";
 
 import { cn } from "./utils";
 import { Button } from "./button";
+import { SECONDARY_BUTTON_CLASSES } from "../lib/buttonStyles";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -189,6 +190,7 @@ function CarouselPrevious({
         orientation === "horizontal"
           ? "top-1/2 -left-12 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+        SECONDARY_BUTTON_CLASSES,
         className,
       )}
       disabled={!canScrollPrev}
@@ -219,6 +221,7 @@ function CarouselNext({
         orientation === "horizontal"
           ? "top-1/2 -right-12 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+        SECONDARY_BUTTON_CLASSES,
         className,
       )}
       disabled={!canScrollNext}

@@ -24,6 +24,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./tooltip";
+import { SECONDARY_BUTTON_CLASSES } from "../lib/buttonStyles";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -266,7 +267,7 @@ function SidebarTrigger({
       data-slot="sidebar-trigger"
       variant="ghost"
       size="icon"
-      className={cn("size-7", className)}
+      className={cn("size-7", SECONDARY_BUTTON_CLASSES, className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();

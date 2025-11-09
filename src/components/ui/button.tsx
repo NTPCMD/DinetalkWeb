@@ -4,22 +4,22 @@ import { Slot } from "@radix-ui/react-slot@1.1.2";
 import { cva, type VariantProps } from "class-variance-authority@0.7.1";
 
 import { cn } from "./utils";
+import {
+  PRIMARY_BUTTON_CLASSES,
+  SECONDARY_BUTTON_CLASSES,
+} from "../../lib/buttonStyles";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/35 hover:bg-primary/90",
+        default: cn(PRIMARY_BUTTON_CLASSES, "font-semibold"),
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80 shadow-md shadow-destructive/30",
-        outline:
-          "border border-primary/70 bg-transparent text-primary hover:bg-primary/10 hover:text-primary",
-        secondary:
-          "bg-secondary text-secondary-foreground border border-primary/30 hover:border-primary/60 hover:bg-secondary/90",
-        ghost:
-          "text-foreground hover:bg-primary/10 hover:text-primary",
+        outline: cn(SECONDARY_BUTTON_CLASSES),
+        secondary: cn(SECONDARY_BUTTON_CLASSES),
+        ghost: cn(SECONDARY_BUTTON_CLASSES, "shadow-sm"),
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
