@@ -170,7 +170,13 @@ export function BookDemoPage() {
                 <p className="text-muted-foreground mb-4" {...ve.field('cta.description')}>
                   {page.cta.description} <strong {...ve.field('cta.phone')}>{page.cta.phone}</strong>
                 </p>
-                <Button asChild variant="outline" className="w-full" aria-label="Call the DineTalk demo line" {...ve.field('cta.phone')}>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full bg-white/90 text-primary border border-primary/40 hover:bg-white hover:text-primary-foreground transition-colors"
+                  aria-label="Call the DineTalk demo line"
+                  {...ve.field('cta.phone')}
+                >
                   <a href={`tel:${sanitizedPhone}`}>Call {page.cta.phone}</a>
                 </Button>
               </CardContent>

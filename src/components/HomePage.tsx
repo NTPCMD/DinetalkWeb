@@ -115,7 +115,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <Button size="lg" onClick={() => onNavigate('demo')}>
                   Book a Demo
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => onNavigate('demo')}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/90 text-primary border border-primary/40 hover:bg-white hover:text-primary-foreground transition-colors"
+                  onClick={() => onNavigate('demo')}
+                >
                   Try Live AI Demo
                 </Button>
               </div>
