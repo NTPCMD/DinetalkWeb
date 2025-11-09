@@ -9,6 +9,7 @@ import { Card, CardContent } from './ui/card';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import contactContent from '../content/pages/contact.json';
+import { PRIMARY_BUTTON_CLASSES, SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 interface ContactPageProps {
   onNavigate?: (page: string) => void;
@@ -180,7 +181,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
                 <Button
                   type="submit"
-                  className="w-full bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+                  className={`w-full ${PRIMARY_BUTTON_CLASSES}`}
                   size="lg"
                   disabled={status === 'submitting'}
                 >
@@ -205,7 +206,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   {page.cta.description}
                 </p>
                 <Button
-                  className="w-full bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md"
+                  className={`w-full ${SECONDARY_BUTTON_CLASSES}`}
                   onClick={() => onNavigate?.(page.cta.button.target)}
                   aria-label="Schedule a DineTalk demo call"
                   {...ve.field('cta.button.label')}

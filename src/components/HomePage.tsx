@@ -1,6 +1,7 @@
 import { Phone, Calendar, Zap, CheckCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
+import { PRIMARY_BUTTON_CLASSES, SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 import { Card, CardContent } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -114,14 +115,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
               <div className={`flex flex-col sm:flex-row gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
                 <Button
                   size="lg"
-                  className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+                  className={PRIMARY_BUTTON_CLASSES}
                   onClick={() => onNavigate('demo')}
                 >
                   Book a Demo
                 </Button>
                 <Button
                   size="lg"
-                  className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium"
+                  className={`${SECONDARY_BUTTON_CLASSES} font-medium`}
                   onClick={() => onNavigate('demo')}
                 >
                   Try Live AI Demo
@@ -235,7 +236,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </p>
           <Button
             size="lg"
-            className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+            className={PRIMARY_BUTTON_CLASSES}
             onClick={() => onNavigate('demo')}
           >
             Book Your Free Demo

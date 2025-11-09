@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { visualEditing } from '../lib/stackbit-sdk';
 import mobileCtaContent from '../content/mobile-cta.json';
 import { Button } from './ui/button';
+import { PRIMARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 const HIDE_ON_PAGES = new Set(['demo', 'contact']);
 
@@ -59,7 +60,7 @@ export function MobileStickyCTA({ onNavigate, currentPage }: MobileStickyCTAProp
       >
         <Button
           size="lg"
-          className="w-full bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+          className={`w-full ${PRIMARY_BUTTON_CLASSES}`}
           onClick={() => onNavigate(cta.target)}
           aria-label="Quickly book a DineTalk demo"
           {...ve.field('label')}

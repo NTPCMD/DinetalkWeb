@@ -8,6 +8,7 @@ import { Mail } from 'lucide-react';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { visualEditing } from '../lib/stackbit-sdk';
 import faqContent from '../content/pages/faq.json';
+import { PRIMARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 
 interface FAQPageProps {
@@ -103,7 +104,7 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           <div className="flex items-center justify-center mt-10">
             {/* Contact button: orange background, white text, rounded, centered */}
             <button
-              className="inline-flex items-center gap-3 bg-[#e58e23] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f29b3a]"
+              className={`inline-flex items-center gap-3 px-6 py-3 rounded-md font-medium ${PRIMARY_BUTTON_CLASSES}`}
               onClick={() => onNavigate?.('contact')}
             >
               <Mail size={18} />

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from './ui/utils';
+import { SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 export function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,10 +30,7 @@ export function ScrollToTopButton() {
       <Button
         type="button"
         size="icon"
-        className={cn(
-          'rounded-full shadow-primary/35',
-          'bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md'
-        )}
+        className={cn('rounded-full shadow-primary/35', SECONDARY_BUTTON_CLASSES)}
         onClick={() => {
           window.scrollTo({
             top: 0,

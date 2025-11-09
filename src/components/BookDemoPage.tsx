@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import demoContent from '../content/pages/demo.json';
+import { SECONDARY_BUTTON_CLASSES } from '../lib/buttonStyles';
 
 const CALENDLY_URL = 'https://calendly.com/newtownpunjabi/new-meeting?primaryColor=f97316&textColor=000000';
 let calendlyIframe: HTMLIFrameElement | null = null;
@@ -172,7 +173,7 @@ export function BookDemoPage() {
                 </p>
                 <Button
                   asChild
-                  className="w-full bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md"
+                  className={`w-full ${SECONDARY_BUTTON_CLASSES}`}
                   aria-label="Call the DineTalk demo line"
                   {...ve.field('cta.phone')}
                 >
