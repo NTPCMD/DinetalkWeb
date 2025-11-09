@@ -216,12 +216,13 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <Button
   size="lg"
   onClick={() => onNavigate?.(page.cta.secondary.target)}
-  className="bg-white/90 text-primary border border-primary/30 hover:bg-white hover:text-primary-foreground transition-colors"
+  className="bg-[#e58e23] text-white font-medium border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] transition-colors shadow-md"
   aria-label="Contact the DineTalk team"
   {...ve.field('cta.secondary.label')}
 >
   {page.cta.secondary.label}
 </Button>
+
 
           </div>
         </div>
