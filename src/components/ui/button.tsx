@@ -19,7 +19,6 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground hover:bg-destructive/80 shadow-md shadow-destructive/30",
         outline: cn(SECONDARY_BUTTON_CLASSES),
         secondary: cn(SECONDARY_BUTTON_CLASSES),
-        ghost: cn(SECONDARY_BUTTON_CLASSES, "shadow-sm"),
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
