@@ -98,7 +98,6 @@ export default function App() {
       <main className="flex-grow pt-16">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
       <ScrollToTopButton />
-      <MobileStickyCTA currentPage={currentPage} onNavigate={handleNavigate} />
     </div>
   );
 }
