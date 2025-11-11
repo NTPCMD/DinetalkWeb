@@ -195,7 +195,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </CardContent>
           </Card>
 
-            {/* CTA: Prefer to talk block moved here */}
+            {/* CTA: Prefer to talk block */}
             <Card data-reveal className="bg-primary text-primary-foreground border-0 mt-12">
               <CardContent className="p-6 md:p-8 space-y-4">
                 <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
@@ -215,8 +215,38 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               </CardContent>
             </Card>
 
-          {/* Contact Information */}
+          {/* Right Column */}
           <div className="space-y-14">
+            {/* Weekly Hours - moved to top of right column */}
+            <Card data-reveal className="bg-secondary border-0">
+              <CardContent className="p-6 md:p-8 space-y-4">
+                <div>
+                  <h3 className="text-xl tracking-tight" {...ve.field('hours.title')}>
+                    {page.hours.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1" {...ve.field('hours.subtitle')}>
+                    {page.hours.subtitle}
+                  </p>
+                </div>
+                <div className="space-y-2 text-muted-foreground">
+                  {page.hours.entries.map((entry, index) => (
+                    <div
+                      key={entry.label}
+                      className="flex justify-between"
+                      {...ve.repeaterItem('hours.entries', index)}
+                    >
+                      <span {...ve.field(`hours.entries[${index}].label`)}>{entry.label}</span>
+                      <span {...ve.field(`hours.entries[${index}].value`)}>{entry.value}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground/80" {...ve.field('hours.note')}>
+                  {page.hours.note}
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Contact Information */}
             <Card data-reveal className="h-full">
               <CardContent className="p-6 md:p-8 space-y-6">
                 <h2 className="text-2xl tracking-tight" {...ve.field('contactInfo.title')}>
@@ -285,34 +315,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card data-reveal className="bg-secondary border-0">
-              <CardContent className="p-6 md:p-8 space-y-4">
-                <div>
-                  <h3 className="text-xl tracking-tight" {...ve.field('hours.title')}>
-                    {page.hours.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1" {...ve.field('hours.subtitle')}>
-                    {page.hours.subtitle}
-                  </p>
-                </div>
-                <div className="space-y-2 text-muted-foreground">
-                  {page.hours.entries.map((entry, index) => (
-                    <div
-                      key={entry.label}
-                      className="flex justify-between"
-                      {...ve.repeaterItem('hours.entries', index)}
-                    >
-                      <span {...ve.field(`hours.entries[${index}].label`)}>{entry.label}</span>
-                      <span {...ve.field(`hours.entries[${index}].value`)}>{entry.value}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground/80" {...ve.field('hours.note')}>
-                  {page.hours.note}
-                </p>
               </CardContent>
             </Card>
           </div>
