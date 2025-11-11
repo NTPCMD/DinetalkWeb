@@ -2002,7 +2002,7 @@ html { scroll-behavior: smooth; }
   transform: translateY(0);
 }
 
-/* Primary button hover effect (scale + accent background) */
+/* Primary button hover effect (scale) */
 [data-slot="button"] {
   position: relative;
   overflow: hidden;
@@ -2012,8 +2012,6 @@ html { scroll-behavior: smooth; }
   [data-slot="button"]:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 24px rgba(229,142,35,0.16);
-    background-color: var(--accent) !important;
-    color: var(--accent-foreground) !important;
   }
 }
 
@@ -2162,5 +2160,40 @@ html { scroll-behavior: smooth; }
 .feature-card.in-view {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Custom button color utilities for solid backgrounds */
+.bg-\[\#e58e23\] {
+  background-color: #e58e23 !important;
+}
+.hover\:bg-\[\#f29b3a\]:hover {
+  background-color: #f29b3a !important;
+}
+.bg-gray-600 {
+  background-color: #4b5563 !important;
+}
+.hover\:bg-gray-700:hover {
+  background-color: #374151 !important;
+}
+.bg-white {
+  background-color: #ffffff !important;
+}
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6 !important;
+}
+.border-\[\#e58e23\] {
+  border-color: #e58e23 !important;
+}
+.hover\:border-\[\#f29b3a\]:hover {
+  border-color: #f29b3a !important;
+}
+.border-gray-600 {
+  border-color: #4b5563 !important;
+}
+.hover\:border-gray-700:hover {
+  border-color: #374151 !important;
+}
+.border-white {
+  border-color: #ffffff !important;
 }
 

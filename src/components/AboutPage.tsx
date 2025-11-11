@@ -206,7 +206,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md"
+              className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary transition-colors shadow-md font-semibold"
               onClick={() => onNavigate?.(page.cta.primary.target)}
               aria-label="Book a demo with DineTalk"
               {...ve.field('cta.primary.label')}
@@ -216,7 +216,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <Button
               size="lg"
               onClick={() => onNavigate?.(page.cta.secondary.target)}
-              className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+              className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary shadow-md font-semibold"
               aria-label="Contact the DineTalk team"
               {...ve.field('cta.secondary.label')}
             >
