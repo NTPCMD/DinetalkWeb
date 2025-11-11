@@ -115,7 +115,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-36 sm:pt-44 md:pt-52 lg:pt-60 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-6">
           <h1 className="text-4xl md:text-5xl tracking-tight" {...ve.field('hero.heading')}>
             {page.hero.heading}
           </h1>
@@ -124,13 +124,15 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </p>
         </div>
 
-  <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Contact Form */}
-          <Card data-reveal className="self-start h-full">
-            <CardContent className="p-6 md:p-8 flex flex-col gap-5">
-              <h2 className="text-2xl tracking-tight mt-4" {...ve.field('hero.formTitle')}>
-                Get in Touch
-              </h2>
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left Column */}
+          <div className="space-y-8">
+            {/* Contact Form */}
+            <Card data-reveal className="self-start">
+              <CardContent className="p-6 md:p-8 flex flex-col gap-5">
+                <h2 className="text-2xl tracking-tight mt-2" {...ve.field('hero.formTitle')}>
+                  Get in Touch
+                </h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
                 {status === 'success' && (
                   <Alert variant="success" className="border border-emerald-400/40">
@@ -195,29 +197,30 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </CardContent>
           </Card>
 
-            {/* CTA: Prefer to talk block */}
-            <Card data-reveal className="bg-primary text-primary-foreground border-0 mt-12">
-              <CardContent className="p-6 md:p-8 space-y-4">
-                <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
-                  {page.cta.title}
-                </h3>
-                <p className="text-primary-foreground/90" {...ve.field('cta.description')}>
-                  {page.cta.description}
-                </p>
-                <Button
-                  className="w-full bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary transition-colors shadow-md font-semibold"
-                  onClick={() => onNavigate?.(page.cta.button.target)}
-                  aria-label="Schedule a DineTalk demo call"
-                  {...ve.field('cta.button.label')}
-                >
-                  {page.cta.button.label}
-                </Button>
-              </CardContent>
-            </Card>
+          {/* CTA: Prefer to talk block */}
+          <Card data-reveal className="bg-primary text-primary-foreground border-0">
+            <CardContent className="p-6 md:p-8 space-y-4">
+              <h3 className="text-xl tracking-tight" {...ve.field('cta.title')}>
+                {page.cta.title}
+              </h3>
+              <p className="text-primary-foreground/90" {...ve.field('cta.description')}>
+                {page.cta.description}
+              </p>
+              <Button
+                className="w-full bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary transition-colors shadow-md font-semibold"
+                onClick={() => onNavigate?.(page.cta.button.target)}
+                aria-label="Schedule a DineTalk demo call"
+                {...ve.field('cta.button.label')}
+              >
+                {page.cta.button.label}
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
 
           {/* Right Column */}
-          <div className="space-y-14">
-            {/* Weekly Hours - moved to top of right column */}
+          <div className="space-y-12">
+            {/* Weekly Hours */}
             <Card data-reveal className="bg-secondary border-0">
               <CardContent className="p-6 md:p-8 space-y-4">
                 <div>
