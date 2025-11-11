@@ -115,7 +115,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary pt-36 sm:pt-44 md:pt-52 lg:pt-60 pb-20 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-4">
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-6">
           <h1 className="text-4xl md:text-5xl tracking-tight" {...ve.field('hero.heading')}>
             {page.hero.heading}
           </h1>
@@ -125,12 +125,14 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Contact Form */}
-          <Card data-reveal className="self-start h-full">
-            <CardContent className="p-6 md:p-8 flex flex-col gap-5">
-              <h2 className="text-2xl tracking-tight" {...ve.field('hero.formTitle')}>
-                Get in Touch
-              </h2>
+          {/* Left Column */}
+          <div className="space-y-8">
+            {/* Contact Form */}
+            <Card data-reveal className="self-start">
+              <CardContent className="p-6 md:p-8 flex flex-col gap-5">
+                <h2 className="text-2xl tracking-tight mt-2" {...ve.field('hero.formTitle')}>
+                  Get in Touch
+                </h2>
               <div aria-live="polite" aria-atomic="true" className="space-y-3">
                 {status === 'success' && (
                   <Alert variant="success" className="border border-emerald-400/40">
@@ -195,8 +197,38 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
             </CardContent>
           </Card>
 
+          {/* Weekly Hours */}
+          <Card data-reveal className="bg-secondary border-0">
+            <CardContent className="p-6 md:p-8 space-y-4">
+              <div>
+                <h3 className="text-xl tracking-tight" {...ve.field('hours.title')}>
+                  {page.hours.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1" {...ve.field('hours.subtitle')}>
+                  {page.hours.subtitle}
+                </p>
+              </div>
+              <div className="space-y-2 text-muted-foreground">
+                {page.hours.entries.map((entry, index) => (
+                  <div
+                    key={entry.label}
+                    className="flex justify-between"
+                    {...ve.repeaterItem('hours.entries', index)}
+                  >
+                    <span {...ve.field(`hours.entries[${index}].label`)}>{entry.label}</span>
+                    <span {...ve.field(`hours.entries[${index}].value`)}>{entry.value}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground/80" {...ve.field('hours.note')}>
+                {page.hours.note}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
           {/* Right Column */}
-          <div className="space-y-8">
+          <div className="space-y-12">
             {/* CTA: Prefer to talk block */}
             <Card data-reveal className="bg-primary text-primary-foreground border-0">
               <CardContent className="p-6 md:p-8 space-y-4">
