@@ -2076,7 +2076,7 @@ html { scroll-behavior: smooth; }
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   transition: stroke-dashoffset 0.6s ease-out, fill 0.3s ease-in 0.4s;
-  fill: transparent;
+  fill: var(--primary); /* Icons visible by default */
 }
 .in-view .draw-icon path {
   stroke-dashoffset: 0;
