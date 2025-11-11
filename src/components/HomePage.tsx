@@ -235,7 +235,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </p>
           <Button
             size="lg"
-            className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+            className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary shadow-md font-semibold"
             onClick={() => onNavigate('demo')}
           >
             Book Your Free Demo

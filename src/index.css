@@ -2175,6 +2175,12 @@ html { scroll-behavior: smooth; }
 .hover\:bg-gray-700:hover {
   background-color: #374151 !important;
 }
+.bg-white {
+  background-color: #ffffff !important;
+}
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6 !important;
+}
 .border-\[\#e58e23\] {
   border-color: #e58e23 !important;
 }
@@ -2186,5 +2192,8 @@ html { scroll-behavior: smooth; }
 }
 .hover\:border-gray-700:hover {
   border-color: #374151 !important;
+}
+.border-white {
+  border-color: #ffffff !important;
 }
 

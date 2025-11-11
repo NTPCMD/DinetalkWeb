@@ -205,7 +205,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   {page.cta.description}
                 </p>
                 <Button
-                  className="w-full bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md"
+                  className="w-full bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary transition-colors shadow-md font-semibold"
                   onClick={() => onNavigate?.(page.cta.button.target)}
                   aria-label="Schedule a DineTalk demo call"
                   {...ve.field('cta.button.label')}
