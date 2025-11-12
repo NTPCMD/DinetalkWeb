@@ -2,6 +2,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import { visualEditing } from '../lib/stackbit-sdk';
 import footerContent from '../content/footer.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
+import { pageToPath } from '../lib/routing';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -18,8 +19,12 @@ export function Footer({ onNavigate }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <button
-              onClick={() => onNavigate('home')}
+            <a
+              href={pageToPath('home')}
+              onClick={(event) => {
+                event.preventDefault();
+                onNavigate('home');
+              }}
               className="mb-4 inline-block"
             >
               <img
@@ -29,7 +34,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 loading="lazy"
                 decoding="async"
               />
-            </button>
+            </a>
             <p className="text-muted-foreground" {...ve.field('brand.description')}>
               {content.brand.description}
             </p>
@@ -40,14 +45,18 @@ export function Footer({ onNavigate }: FooterProps) {
             <h3 className="mb-4">Quick Links</h3>
             <div className="flex flex-col gap-2">
               {content.quickLinks.map((link, index) => (
-                <button
+                <a
                   key={link.path}
-                  onClick={() => onNavigate(link.path)}
+                  href={pageToPath(link.path)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onNavigate(link.path);
+                  }}
                   className="text-muted-foreground hover:text-primary transition-colors text-left"
                   {...ve.field(`quickLinks[${index}].label`)}
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
             </div>
           </div>
