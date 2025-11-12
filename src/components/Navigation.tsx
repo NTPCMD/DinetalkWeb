@@ -4,6 +4,7 @@ import { visualEditing } from '../lib/stackbit-sdk';
 import { Button } from './ui/button';
 import navigationContent from '../content/navigation.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
+import { pageToPath } from '../lib/routing';
 
 interface NavigationProps {
   currentPage: string;
@@ -106,20 +107,28 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <button
-            onClick={() => onNavigate('home')}
+          <a
+            href={pageToPath('home')}
+            onClick={(event) => {
+              event.preventDefault();
+              onNavigate('home');
+            }}
             className="flex items-center"
             aria-label="Navigate to DineTalk home page"
           >
             <img src={logo} alt="DineTalk" className="h-10 md:h-14 w-auto" />
-          </button>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
-              <button
+              <a
                 key={item.path}
-                onClick={() => onNavigate(item.path)}
+                href={pageToPath(item.path)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate(item.path);
+                }}
                 className={`transition-colors nav-link px-2 py-1 ${
                   currentPage === item.path
                     ? 'text-white font-semibold'
@@ -129,10 +138,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 {...ve.field(`links[${index}].label`)}
               >
                 {item.label}
-              </button>
+              </a>
             ))}
             <Button
-              onClick={() => onNavigate(cta.path)}
+              asChild
               className={`bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md ${
                 currentPage === cta.path ? 'shadow-button' : ''
               }`}
@@ -140,7 +149,15 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               aria-label="Book a DineTalk demo"
               {...ve.field('cta.label')}
             >
-              {cta.label}
+              <a
+                href={pageToPath(cta.path)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate(cta.path);
+                }}
+              >
+                {cta.label}
+              </a>
             </Button>
           </div>
 
@@ -159,9 +176,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <div className="md:hidden py-4 border-t border-white/10 bg-[#363640] text-white z-40">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <button
+                <a
                   key={item.path}
-                  onClick={() => {
+                  href={pageToPath(item.path)}
+                  onClick={(event) => {
+                    event.preventDefault();
                     onNavigate(item.path);
                     setMobileMenuOpen(false);
                   }}
@@ -172,16 +191,22 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   }`}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
               <Button
-                onClick={() => {
-                  onNavigate('demo');
-                  setMobileMenuOpen(false);
-                }}
+                asChild
                 className="shadow-button bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
               >
-                {cta.label}
+                <a
+                  href={pageToPath(cta.path)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onNavigate(cta.path);
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  {cta.label}
+                </a>
               </Button>
             </div>
           </div>

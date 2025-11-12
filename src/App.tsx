@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { Toaster } from './components/ui/sonner';
 import { Footer } from './components/Footer';
@@ -7,13 +7,37 @@ import { BookDemoPage } from './components/BookDemoPage';
 import { AboutPage } from './components/AboutPage';
 import { FAQPage } from './components/FAQPage';
 import { ContactPage } from './components/ContactPage';
-import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { TermsOfServicePage } from './components/TermsOfServicePage';
+import { ensureValidPath, pageToPath, pathToPage } from './lib/routing';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState(() => {
+    if (typeof window === 'undefined') return 'home';
+    return pathToPage(window.location.pathname);
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const normalized = ensureValidPath(window.location.pathname);
+    if (normalized !== window.location.pathname) {
+      window.history.replaceState({}, '', normalized);
+    }
+    setCurrentPage(pathToPage(normalized));
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handlePopState = () => {
+      setCurrentPage(pathToPage(window.location.pathname));
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Scroll to top when page changes
   useEffect(() => {
@@ -65,7 +89,19 @@ export default function App() {
   }, [currentPage]); // Re-run when page changes
 
   const handleNavigate = (page: string) => {
-    setCurrentPage(page);
+    if (typeof window === 'undefined') {
+      setCurrentPage(pathToPage(pageToPath(page)));
+      return;
+    }
+
+    const targetPath = pageToPath(page);
+    const nextPage = pathToPage(targetPath);
+
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
+
+    setCurrentPage(nextPage);
   };
 
   const renderPage = () => {
