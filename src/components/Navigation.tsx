@@ -12,7 +12,6 @@ interface NavigationProps {
 
 export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const firstMobileLinkRef = useRef<HTMLButtonElement | null>(null);
   const previousOverflow = useRef({
     bodyOverflow: '',
@@ -25,14 +24,6 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const ve = visualEditing({ objectId: 'src/content/navigation.json' });
   const navItems = navData.links;
   const cta = navData.cta;
-
-  // scroll handler to toggle nav background after 100px
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -97,9 +88,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   return (
     <nav
-      className={`border-b border-border fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-        scrolled ? 'nav-solid' : 'nav-transparent'
-      }`}
+      className="bg-secondary border-b border-border fixed top-0 left-0 w-full z-50"
       role="navigation"
       aria-label="Main navigation"
     >
