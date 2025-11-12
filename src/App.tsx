@@ -130,8 +130,8 @@ export default function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
   {/* global toast container */}
   <Toaster position="bottom-center" />
-      {/* add top padding so fixed header doesn't cover page content */}
-      <main className="flex-grow pt-16">{renderPage()}</main>
+      {/* add top padding so fixed header doesn't cover page content, and bottom padding on mobile for sticky CTA */}
+      <main className="flex-grow pt-16 pb-0 md:pb-0">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
       <ScrollToTopButton />
     </div>

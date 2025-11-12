@@ -1700,6 +1700,53 @@ html { scroll-behavior: smooth; }
   padding-block: 8px;
 }
 
+/* Mobile: Add padding to body for sticky bottom bar */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 80px; /* Space for sticky bottom CTA bar */
+  }
+}
+
+/* Sticky bottom CTA bar styling */
+.sticky-bottom-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: var(--sidebar);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile optimization for tap targets */
+@media (max-width: 767px) {
+  button, a[role="button"], [data-slot="button"] {
+    min-height: 48px;
+    font-size: 16px; /* Prevent iOS zoom on input focus */
+  }
+  
+  /* Larger font sizes for better mobile readability */
+  h1 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  h3 {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  p {
+    font-size: 1rem; /* 16px */
+    line-height: 1.6;
+  }
+}
+
 /* Hero text shadow for readability */
 .hero-text-shadow {
   text-shadow: 0 4px 18px rgba(0,0,0,0.6);
@@ -2201,5 +2248,16 @@ html { scroll-behavior: smooth; }
 }
 .border-white {
   border-color: #ffffff !important;
+}
+
+/* Green button for call to action */
+.bg-green-600 {
+  background-color: #16a34a !important;
+}
+.hover\:bg-green-700:hover {
+  background-color: #15803d !important;
+}
+.border-green-600 {
+  border-color: #16a34a !important;
 }
 
