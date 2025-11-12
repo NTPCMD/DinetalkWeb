@@ -234,16 +234,16 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-  {/* CTA Section */}
-  <section className="py-12 md:py-20 bg-primary text-white" data-reveal>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-4xl mb-4 md:mb-6">Ready to Transform Your Restaurant?</h2>
-          <p className="text-base md:text-xl mb-6 md:mb-8 opacity-90">
+  {/* CTA Section - Hidden on mobile since we have sticky bottom bar */}
+  <section className="hidden md:flex py-20 bg-primary text-white justify-center items-center" data-reveal>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+          <h2 className="text-4xl mb-6">Ready to Transform Your Restaurant?</h2>
+          <p className="text-xl mb-8 opacity-90">
             Join hundreds of restaurants using DineTalk to handle their calls.
           </p>
           <Button
             size="lg"
-            className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary shadow-md font-semibold text-base md:text-lg py-6 md:py-4"
+            className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary shadow-md font-semibold"
             onClick={() => onNavigate('demo')}
           >
             Book Your Free Demo
