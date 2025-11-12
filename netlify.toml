@@ -1,3 +1,9 @@
 [build]
   publish = "build"
-  command = "vite build && cp sitemap.xml robots.txt build/"
+  command = "vite build && cp sitemap.xml robots.txt build/ && cp public/_redirects build/"
+
+# SPA fallback redirect rule
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
