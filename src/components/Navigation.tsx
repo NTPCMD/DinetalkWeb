@@ -97,7 +97,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   return (
     <nav
-      className={`border-b border-border fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+      className={`border-b border-transparent fixed top-0 left-0 w-full z-50 text-white transition-colors duration-300 ${
         scrolled ? 'nav-solid' : 'nav-transparent'
       }`}
       role="navigation"
@@ -122,8 +122,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 onClick={() => onNavigate(item.path)}
                 className={`transition-colors nav-link px-2 py-1 ${
                   currentPage === item.path
-                    ? 'text-primary' // active
-                    : 'text-foreground'
+                    ? 'text-white font-semibold'
+                    : 'text-white/80 hover:text-white'
                 }`}
                 aria-current={currentPage === item.path ? 'page' : undefined}
                 {...ve.field(`links[${index}].label`)}
@@ -156,7 +156,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border bg-background z-40">
+          <div className="md:hidden py-4 border-t border-white/10 bg-[#363640] text-white z-40">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <button
@@ -167,8 +167,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   }}
                   className={`text-left transition-colors nav-link px-2 py-2 ${
                     currentPage === item.path
-                      ? 'text-primary'
-                      : 'text-foreground'
+                      ? 'text-white'
+                      : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.label}

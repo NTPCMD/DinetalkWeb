@@ -1651,14 +1651,20 @@ html { scroll-behavior: smooth; }
   opacity: 1;
   transform: scaleX(1);
 }
-.nav-solid {
-  /* transition to a dark backdrop with a subtle orange accent */
-  background: rgba(17,17,17,0.92); /* near-black */
-  box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+.nav-transparent {
+  background: rgba(54, 54, 64, 0.88);
   color: #fff;
-  border-bottom: 2px solid rgba(229,142,35,0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.nav-solid {
+  background: #2b2d35;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
   z-index: 9999; /* ensure header stays on top */
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px);
 }
 
 /* Nav link styles and hover underline/fade */
@@ -1673,7 +1679,7 @@ html { scroll-behavior: smooth; }
   bottom: -6px;
   height: 2px;
   width: 0%;
-  background: linear-gradient(90deg, #e58e23, #ff8c00);
+  background: rgba(255, 255, 255, 0.9);
   transition: width 220ms ease;
 }
 .nav-link:hover::after {
@@ -1683,7 +1689,7 @@ html { scroll-behavior: smooth; }
   color: #fff;
 }
 .shadow-button {
-  box-shadow: 0 12px 26px rgba(229, 142, 35, 0.35);
+  box-shadow: 0 12px 26px rgba(229, 142, 35, 0.3);
 }
 
 /* Ensure buttons are touch-friendly */
