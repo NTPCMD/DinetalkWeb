@@ -1746,6 +1746,17 @@ html { scroll-behavior: smooth; }
     font-size: 16px; /* Prevent iOS zoom on input focus */
   }
   
+  /* Input fields on mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  textarea {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevent iOS zoom */
+  }
+  
   /* Larger font sizes for better mobile readability */
   h1 {
     font-size: 1.875rem; /* 30px */

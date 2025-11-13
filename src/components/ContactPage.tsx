@@ -182,7 +182,8 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
                 <Button
                   type="submit"
-                  className="w-full bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+                  variant="outline"
+                  className="w-full text-primary border-2 border-primary hover:bg-primary/10 shadow-md min-h-[48px]"
                   size="lg"
                   disabled={status === 'submitting'}
                 >

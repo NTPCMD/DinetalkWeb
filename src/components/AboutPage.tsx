@@ -129,17 +129,43 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
   {/* Values Section */}
-  <section className="py-20 bg-secondary" data-reveal>
+  <section className="py-12 md:py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl mb-4" {...ve.field('values.heading')}>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl mb-4" {...ve.field('values.heading')}>
               {page.values.heading}
             </h2>
-            <p className="text-xl text-muted-foreground" {...ve.field('values.description')}>
+            <p className="text-lg md:text-xl text-muted-foreground" {...ve.field('values.description')}>
               {page.values.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Mobile: Horizontal scrollable carousel */}
+          <div className="md:hidden overflow-x-auto snap-x snap-mandatory -mx-4 px-4 pb-4">
+            <div className="flex gap-4" style={{ width: 'max-content' }}>
+              {values.map((value, index) => (
+                <Card 
+                  key={value.title} 
+                  className="border-2 snap-start flex-shrink-0" 
+                  style={{ width: '280px' }}
+                  {...ve.repeaterItem('values.items', index)}
+                >
+                  <CardContent className="p-6 text-center h-full">
+                    <div className="flex justify-center mb-4" aria-hidden>
+                      <value.Icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl mb-3" {...ve.field(`values.items[${index}].title`)}>
+                      {value.title}
+                    </h3>
+                    <p className="text-muted-foreground" {...ve.field(`values.items[${index}].description`)}>
+                      {value.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+          {/* Desktop: Grid layout */}
+          <div className="hidden md:grid md:grid-cols-3 gap-8">
             {values.map((value, index) => (
               <Card key={value.title} className="border-2" {...ve.repeaterItem('values.items', index)}>
                 <CardContent className="p-6 text-center">
@@ -195,18 +221,18 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
   {/* CTA Section */}
-  <section className="py-20 bg-primary text-primary-foreground" data-reveal>
+  <section className="py-12 md:py-20 bg-primary text-primary-foreground" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl mb-6" {...ve.field('cta.heading')}>
+          <h2 className="text-2xl md:text-4xl mb-4 md:mb-6" {...ve.field('cta.heading')}>
             {page.cta.heading}
           </h2>
-          <p className="text-xl mb-8 text-primary-foreground/80" {...ve.field('cta.description')}>
+          <p className="text-lg md:text-xl mb-6 md:mb-8 text-primary-foreground/80" {...ve.field('cta.description')}>
             {page.cta.description}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col md:flex-row gap-4 justify-center max-w-md md:max-w-none mx-auto">
             <Button
               size="lg"
-              className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary transition-colors shadow-md font-semibold"
+              className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary transition-colors shadow-md font-semibold w-full md:w-auto min-h-[48px]"
               onClick={() => onNavigate?.(page.cta.primary.target)}
               aria-label="Book a demo with DineTalk"
               {...ve.field('cta.primary.label')}
@@ -216,7 +242,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <Button
               size="lg"
               onClick={() => onNavigate?.(page.cta.secondary.target)}
-              className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary shadow-md font-semibold"
+              className="bg-white text-primary border border-white hover:bg-gray-100 hover:text-primary shadow-md font-semibold w-full md:w-auto min-h-[48px]"
               aria-label="Contact the DineTalk team"
               {...ve.field('cta.secondary.label')}
             >
