@@ -129,33 +129,56 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
   {/* Values Section */}
-  <section className="py-20 bg-secondary" data-reveal>
+  <section className="py-12 md:py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl mb-4" {...ve.field('values.heading')}>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl mb-3 md:mb-4" {...ve.field('values.heading')}>
               {page.values.heading}
             </h2>
-            <p className="text-xl text-muted-foreground" {...ve.field('values.description')}>
+            <p className="text-lg md:text-xl text-muted-foreground" {...ve.field('values.description')}>
               {page.values.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Desktop grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <Card key={value.title} className="border-2" {...ve.repeaterItem('values.items', index)}>
-                <CardContent className="p-6 text-center">
+              <Card key={value.title} className="border-2 shadow-md" {...ve.repeaterItem('values.items', index)}>
+                <CardContent className="p-5 md:p-6 text-center">
                   <div className="flex justify-center mb-4" aria-hidden>
                     <value.Icon className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl mb-3" {...ve.field(`values.items[${index}].title`)}>
+                  <h3 className="text-lg md:text-xl mb-2 md:mb-3 font-semibold" {...ve.field(`values.items[${index}].title`)}>
                     {value.title}
                   </h3>
-                  <p className="text-muted-foreground" {...ve.field(`values.items[${index}].description`)}>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed" {...ve.field(`values.items[${index}].description`)}>
                     {value.description}
                   </p>
                 </CardContent>
               </Card>
             ))}
           </div>
+          {/* Mobile horizontal scroll */}
+          <div className="md:hidden overflow-x-auto -mx-4 px-4 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex gap-4 pb-4" style={{ width: 'max-content' }}>
+              {values.map((value, index) => (
+                <Card key={value.title} className="border-2 shadow-md snap-start flex-shrink-0" style={{ width: '280px' }} {...ve.repeaterItem('values.items', index)}>
+                  <CardContent className="p-5 text-center">
+                    <div className="flex justify-center mb-4" aria-hidden>
+                      <value.Icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-lg mb-2 font-semibold" {...ve.field(`values.items[${index}].title`)}>
+                      {value.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed" {...ve.field(`values.items[${index}].description`)}>
+                      {value.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+          {/* Mobile scroll hint */}
+          <p className="md:hidden text-center text-sm text-muted-foreground mt-4">← Swipe to see more →</p>
         </div>
       </section>
 

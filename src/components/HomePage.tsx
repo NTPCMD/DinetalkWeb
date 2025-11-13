@@ -97,32 +97,36 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* Hero Section */}
       <section
         id="hero"
-        className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
+        className="relative bg-gradient-to-br from-background to-secondary py-8 md:py-20 min-h-[85vh] md:min-h-[600px] parallax flex items-center"
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50 md:hidden" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               {/* Ensure hero text is visible immediately and not hidden by reveal animation */}
-              <h1 className={`text-3xl md:text-5xl mb-4 md:mb-6 leading-tight md:leading-loose hero-heading hero-text`}>
+              <h1 className={`text-3xl md:text-5xl mb-4 leading-tight hero-heading hero-text text-white`}>
                 <span className="md:hidden inline-block">AI Receptionist for Restaurants</span>
                 <span className="hidden md:inline-block">AI Restaurant Receptionist &amp; Ordering System</span>
               </h1>
-              <p className={`text-base md:text-xl mb-6 md:mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
+              <p className={`text-base md:text-xl mb-6 text-white md:text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
-              <div className={`flex flex-col gap-3 md:gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
+              <div className={`flex flex-col gap-3 cta-fade ${showCTA ? 'show' : ''}`}>
                 <Button
                   size="lg"
-                  className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md text-base md:text-lg py-6 md:py-4 font-semibold"
+                  className="font-semibold text-base shadow-lg"
                   onClick={() => onNavigate('demo')}
                 >
                   Book a Demo
                 </Button>
                 <Button
                   size="lg"
-                  className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium text-base md:text-lg py-6 md:py-4"
+                  variant="secondary"
+                  className="font-medium text-base shadow-md"
                   onClick={() => onNavigate('demo')}
                 >
                   Try Live AI Demo
@@ -130,8 +134,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 
                 {/* Click to call button - mobile only */}
                 <a 
-                  href="tel:+61123456789" 
-                  className="md:hidden flex items-center justify-center gap-2 bg-green-600 text-white border border-green-600 hover:bg-green-700 px-6 py-6 rounded-lg shadow-md font-semibold text-base transition-colors"
+                  href="tel:+61403982811" 
+                  className="md:hidden flex items-center justify-center gap-2 bg-green-600 text-white border-2 border-green-600 hover:bg-green-700 hover:border-green-700 px-6 py-3 rounded-lg shadow-md font-semibold text-base transition-colors min-h-[48px]"
                 >
                   <Phone className="w-5 h-5" />
                   Call Us Now
@@ -150,8 +154,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 className="w-full max-h-[80vh] h-auto object-cover"
                 loading="lazy"
               />
-              {/* subtle overlay to ensure text legibility */}
-              <div className="absolute inset-0 pointer-events-none hero-overlay" />
             </div>
           </div>
         </div>
@@ -174,11 +176,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 data-reveal
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <Card className="border-2 hover:border-primary transition-colors">
-                  <CardContent className="p-6">
+                <Card className="border-2 hover:border-primary transition-colors shadow-md hover:shadow-lg">
+                  <CardContent className="p-5 md:p-6">
                     <div className="mb-4">{feature.icon}</div>
-                    <h3 className="text-xl mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <h3 className="text-lg md:text-xl mb-2 md:mb-3 font-semibold">{feature.title}</h3>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
               </div>
@@ -212,9 +214,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
   <section className="py-12 md:py-20 bg-background" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-4xl mb-6 md:mb-8">Trusted by Local Restaurants</h2>
-          <Card className="bg-card border-0">
-            <CardContent className="p-6 md:p-8">
-              <p className="text-base md:text-xl mb-4 md:mb-6 italic">
+          <Card className="bg-card border shadow-lg">
+            <CardContent className="p-5 md:p-8">
+              <p className="text-base md:text-xl mb-4 md:mb-6 italic leading-relaxed">
                 "DineTalk has been a game-changer for our restaurant. We never miss a booking
                 anymore, and our staff can focus on what they do best — serving great food."
               </p>
@@ -225,7 +227,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
                 />
                 <div className="text-left">
-                  <p className="text-sm md:text-base">Jashan</p>
+                  <p className="text-sm md:text-base font-medium">Jashan</p>
                   <p className="text-xs md:text-sm text-muted-foreground">Owner, Jashan da Dhaba</p>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import { visualEditing } from '../lib/stackbit-sdk';
 import footerContent from '../content/footer.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
 import { pageToPath } from '../lib/routing';
+import { Button } from './ui/button';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -94,7 +95,28 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
+        {/* Footer CTAs - stacked on mobile */}
+        <div className="border-t border-border mt-8 pt-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center max-w-md mx-auto mb-8">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto"
+              onClick={() => onNavigate('demo')}
+            >
+              Book a Demo
+            </Button>
+            <Button
+              size="lg"
+              variant="secondary"
+              className="w-full sm:w-auto"
+              onClick={() => onNavigate('demo')}
+            >
+              Try Live AI Demo
+            </Button>
+          </div>
+        </div>
+
+        <div className="border-t border-border pt-8 text-center text-muted-foreground">
           <p>&copy; {currentYear} DineTalk. All rights reserved.</p>
         </div>
       </div>

@@ -62,42 +62,45 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-20">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-12 md:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl mb-6" {...ve.field('hero.heading')}>
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-5xl mb-4 md:mb-6" {...ve.field('hero.heading')}>
             {page.hero.heading}
           </h1>
-          <p className="text-xl text-muted-foreground" {...ve.field('hero.description')}>
+          <p className="text-lg md:text-xl text-muted-foreground" {...ve.field('hero.description')}>
             {page.hero.description}
           </p>
         </div>
 
-        <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8" data-reveal>
+        <div className="bg-card rounded-2xl shadow-lg p-5 md:p-8" data-reveal>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={faq.question}
                 value={`item-${index}`}
                 {...ve.repeaterItem('faqs', index)}
+                className="py-1"
               >
-                <AccordionTrigger className="text-left" {...ve.field(`faqs[${index}].question`)}>
+                <AccordionTrigger className="text-left text-base md:text-sm hover:no-underline hover:text-primary py-4" {...ve.field(`faqs[${index}].question`)}>
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent
-                  className="text-muted-foreground mt-3 leading-relaxed"
+                  className="text-muted-foreground mt-2 leading-relaxed text-sm md:text-base space-y-3"
                   {...ve.field(`faqs[${index}].answer`)}
                 >
-                  {faq.answer}
+                  {faq.answer.split('\n').map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
 
-        <div className="mt-10 text-center" data-reveal>
-          <h2 className="text-2xl mb-4">Still have questions?</h2>
-          <p className="mb-6 opacity-90">
+        <div className="mt-8 md:mt-10 text-center" data-reveal>
+          <h2 className="text-xl md:text-2xl mb-3 md:mb-4">Still have questions?</h2>
+          <p className="mb-4 md:mb-6 text-muted-foreground text-sm md:text-base">
             Our team is here to help. Get in touch and we'll answer any questions you have.
           </p>
           <div className="flex items-center justify-center mt-10">
