@@ -163,15 +163,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
   {/* Features Section */}
-  <section className="py-12 md:py-20 bg-background" data-reveal>
+  <section className="py-10 md:py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-6 md:mb-12">
             <h2 className="text-2xl md:text-4xl mb-3 md:mb-4">Why Choose DineTalk?</h2>
-            <p className="text-lg md:text-xl text-muted-foreground">
+            <p className="text-base md:text-xl text-muted-foreground">
               Built for restaurants, cafés, and takeaways
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -179,11 +179,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 data-reveal
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <Card className="border-2 hover:border-primary transition-colors">
-                  <CardContent className="p-6">
+                <Card className="border-2 hover:border-primary transition-colors shadow-md">
+                  <CardContent className="p-5 md:p-6">
                     <div className="mb-4">{feature.icon}</div>
-                    <h3 className="text-xl mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <h3 className="text-lg md:text-xl mb-2 md:mb-3">{feature.title}</h3>
+                    <p className="text-sm md:text-base text-muted-foreground">{feature.description}</p>
                   </CardContent>
                 </Card>
               </div>
@@ -193,11 +193,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
   {/* How It Works Section */}
-  <section className="py-12 md:py-20 bg-secondary" data-reveal>
+  <section className="py-10 md:py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-6 md:mb-12">
             <h2 className="text-2xl md:text-4xl mb-3 md:mb-4">How It Works</h2>
-            <p className="text-lg md:text-xl text-muted-foreground">Get started in three simple steps</p>
+            <p className="text-base md:text-xl text-muted-foreground">Get started in three simple steps</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {steps.map((step, index) => (
@@ -214,12 +214,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
   {/* Testimonial Section */}
-  <section className="py-12 md:py-20 bg-background" data-reveal>
+  <section className="py-10 md:py-20 bg-background" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-4xl mb-6 md:mb-8">Trusted by Local Restaurants</h2>
-          <Card className="bg-card border-0">
-            <CardContent className="p-6 md:p-8">
-              <p className="text-base md:text-xl mb-4 md:mb-6 italic">
+          <Card className="bg-card border-0 shadow-xl">
+            <CardContent className="p-5 md:p-8">
+              <p className="text-base md:text-xl mb-4 md:mb-6 italic leading-relaxed">
                 "DineTalk has been a game-changer for our restaurant. We never miss a booking
                 anymore, and our staff can focus on what they do best — serving great food."
               </p>
@@ -230,7 +230,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
                 />
                 <div className="text-left">
-                  <p className="text-sm md:text-base">Jashan</p>
+                  <p className="text-sm md:text-base font-medium">Jashan</p>
                   <p className="text-xs md:text-sm text-muted-foreground">Owner, Jashan da Dhaba</p>
                 </div>
               </div>

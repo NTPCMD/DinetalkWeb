@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from './ui/accordion';
 import { Mail } from 'lucide-react';
+import { Button } from './ui/button';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { visualEditing } from '../lib/stackbit-sdk';
 import faqContent from '../content/pages/faq.json';
@@ -62,18 +63,18 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-20">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-12 md:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl mb-6" {...ve.field('hero.heading')}>
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-5xl mb-4 md:mb-6" {...ve.field('hero.heading')}>
             {page.hero.heading}
           </h1>
-          <p className="text-xl text-muted-foreground" {...ve.field('hero.description')}>
+          <p className="text-lg md:text-xl text-muted-foreground" {...ve.field('hero.description')}>
             {page.hero.description}
           </p>
         </div>
 
-        <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8" data-reveal>
+        <div className="bg-card rounded-2xl shadow-lg p-4 md:p-8" data-reveal>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem
@@ -81,11 +82,14 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
                 value={`item-${index}`}
                 {...ve.repeaterItem('faqs', index)}
               >
-                <AccordionTrigger className="text-left" {...ve.field(`faqs[${index}].question`)}>
+                <AccordionTrigger 
+                  className="text-left text-base md:text-lg py-4 hover:no-underline" 
+                  {...ve.field(`faqs[${index}].question`)}
+                >
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent
-                  className="text-muted-foreground mt-3 leading-relaxed"
+                  className="text-muted-foreground mt-2 md:mt-3 leading-relaxed text-sm md:text-base pb-4"
                   {...ve.field(`faqs[${index}].answer`)}
                 >
                   {faq.answer}
@@ -95,20 +99,21 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
-        <div className="mt-10 text-center" data-reveal>
-          <h2 className="text-2xl mb-4">Still have questions?</h2>
-          <p className="mb-6 opacity-90">
+        <div className="mt-8 md:mt-10 text-center" data-reveal>
+          <h2 className="text-xl md:text-2xl mb-3 md:mb-4">Still have questions?</h2>
+          <p className="mb-6 text-sm md:text-base text-muted-foreground">
             Our team is here to help. Get in touch and we'll answer any questions you have.
           </p>
-          <div className="flex items-center justify-center mt-10">
-            {/* Contact button: orange background, white text, rounded, centered */}
-            <button
-              className="inline-flex items-center gap-3 bg-[#e58e23] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f29b3a]"
+          <div className="flex items-center justify-center">
+            <Button
+              variant="primary"
+              size="lg"
+              className="gap-3 min-h-[48px]"
               onClick={() => onNavigate?.('contact')}
             >
               <Mail size={18} />
-              <span>Still have questions? Contact Us</span>
-            </button>
+              <span>Contact Us</span>
+            </Button>
           </div>
         </div>
       </div>
