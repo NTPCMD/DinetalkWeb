@@ -252,17 +252,17 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
       
       {/* Sticky Bottom CTA Bar - Mobile Only */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#2b2d35] border-t border-white/10 p-3 shadow-lg flex gap-2">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#2b2d35] border-t border-white/10 px-4 pt-4 pb-8 shadow-lg flex flex-col items-stretch gap-3">
         <Button
           size="lg"
-          className="flex-1 bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md font-semibold text-sm py-5"
+          className="w-full bg-[#F97316] text-white border border-[#F97316] hover:bg-[#ea580c] hover:border-[#ea580c] shadow-md font-semibold text-base px-5 py-3 rounded-xl"
           onClick={() => onNavigate('demo')}
         >
           Book Demo
         </Button>
         <Button
           size="lg"
-          className="flex-1 bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 shadow-md font-medium text-sm py-5"
+          className="w-full bg-[#3B82F6] text-white border border-[#3B82F6] hover:bg-[#2563eb] hover:border-[#2563eb] shadow-md font-semibold text-base px-5 py-3 rounded-xl"
           onClick={() => onNavigate('demo')}
         >
           Try AI Demo
