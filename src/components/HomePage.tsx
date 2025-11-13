@@ -106,8 +106,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div>
               {/* Ensure hero text is visible immediately and not hidden by reveal animation */}
               <h1 className={`text-3xl md:text-5xl mb-4 md:mb-6 leading-tight md:leading-loose hero-heading hero-text`}>
-                <span className="block md:hidden">AI Receptionist for Restaurants</span>
-                <span className="hidden md:block">AI Restaurant Receptionist &amp; Ordering System</span>
+                <span className="md:hidden inline-block">AI Receptionist for Restaurants</span>
+                <span className="hidden md:inline-block">AI Restaurant Receptionist &amp; Ordering System</span>
               </h1>
               <p className={`text-base md:text-xl mb-6 md:mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.

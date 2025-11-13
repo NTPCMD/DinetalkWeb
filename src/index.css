@@ -1747,6 +1747,13 @@ html { scroll-behavior: smooth; }
   }
 }
 
+/* Add md:inline-block utility for desktop hero title */
+@media (width >= 48rem) {
+  .md\:inline-block {
+    display: inline-block !important;
+  }
+}
+
 /* Hero text shadow for readability */
 .hero-text-shadow {
   text-shadow: 0 4px 18px rgba(0,0,0,0.6);
