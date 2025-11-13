@@ -97,32 +97,37 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* Hero Section */}
       <section
         id="hero"
-        className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
+        className="relative bg-gradient-to-br from-background to-secondary py-8 md:py-20 min-h-[500px] md:min-h-[600px] parallax"
         ref={heroRef as any}
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+        {/* Mobile backdrop blur overlay */}
+        <div className="absolute inset-0 md:hidden backdrop-blur-[2px] bg-black/30 pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="pt-4 md:pt-0">
               {/* Ensure hero text is visible immediately and not hidden by reveal animation */}
-              <h1 className={`text-3xl md:text-5xl mb-4 md:mb-6 leading-tight md:leading-loose hero-heading hero-text`}>
+              <h1 className={`text-3xl md:text-5xl mb-3 md:mb-6 leading-tight md:leading-loose hero-heading hero-text`}>
                 <span className="md:hidden inline-block">AI Receptionist for Restaurants</span>
                 <span className="hidden md:inline-block">AI Restaurant Receptionist &amp; Ordering System</span>
               </h1>
-              <p className={`text-base md:text-xl mb-6 md:mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
+              <p className={`text-base md:text-xl mb-4 md:mb-8 text-foreground/90 ${showTagline ? 'in-view' : 'title-fade'} hero-text`}>
                 DineTalk answers restaurant calls, manages bookings, and takes orders 24 / 7 using natural-sounding AI.
               </p>
               <div className={`flex flex-col gap-3 md:gap-4 cta-fade ${showCTA ? 'show' : ''}`}>
                 <Button
+                  variant="primary"
                   size="lg"
-                  className="bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md text-base md:text-lg py-6 md:py-4 font-semibold"
+                  className="text-base md:text-lg min-h-[48px] md:min-h-[52px]"
                   onClick={() => onNavigate('demo')}
                 >
                   Book a Demo
                 </Button>
                 <Button
+                  variant="secondary"
                   size="lg"
-                  className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium text-base md:text-lg py-6 md:py-4"
+                  className="text-base md:text-lg min-h-[48px] md:min-h-[52px]"
                   onClick={() => onNavigate('demo')}
                 >
                   Try Live AI Demo
@@ -131,7 +136,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 {/* Click to call button - mobile only */}
                 <a 
                   href="tel:+61123456789" 
-                  className="md:hidden flex items-center justify-center gap-2 bg-green-600 text-white border border-green-600 hover:bg-green-700 px-6 py-6 rounded-lg shadow-md font-semibold text-base transition-colors"
+                  className="md:hidden flex items-center justify-center gap-2 bg-green-600 text-white border border-green-600 hover:bg-green-700 px-6 py-4 rounded-lg shadow-md font-semibold text-base transition-colors min-h-[48px]"
                 >
                   <Phone className="w-5 h-5" />
                   Call Us Now

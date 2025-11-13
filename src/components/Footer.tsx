@@ -3,6 +3,7 @@ import { visualEditing } from '../lib/stackbit-sdk';
 import footerContent from '../content/footer.json';
 import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
 import { pageToPath } from '../lib/routing';
+import { Button } from './ui/button';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -14,7 +15,36 @@ export function Footer({ onNavigate }: FooterProps) {
   const ve = visualEditing({ objectId: 'src/content/footer.json' });
 
   return (
-  <footer className="bg-secondary text-secondary-foreground mt-auto">
+    <>
+      {/* Bottom CTA Section - Above Footer */}
+      <section className="bg-background py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-4xl mb-4 md:mb-6">Ready to Get Started?</h2>
+          <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8">
+            Transform your restaurant's call handling with DineTalk's AI receptionist.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center max-w-md md:max-w-none mx-auto">
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full md:w-auto min-h-[48px]"
+              onClick={() => onNavigate('demo')}
+            >
+              Book a Demo
+            </Button>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="w-full md:w-auto min-h-[48px]"
+              onClick={() => onNavigate('contact')}
+            >
+              Contact Us
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-secondary text-secondary-foreground mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
@@ -99,5 +129,6 @@ export function Footer({ onNavigate }: FooterProps) {
         </div>
       </div>
     </footer>
+    </>
   );
 }

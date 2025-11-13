@@ -1705,6 +1705,25 @@ html { scroll-behavior: smooth; }
   body {
     padding-bottom: 80px; /* Space for sticky bottom CTA bar */
   }
+  
+  /* Mobile spacing tokens */
+  .mobile-spacing-sm {
+    margin-bottom: 16px;
+  }
+  
+  .mobile-spacing-md {
+    margin-bottom: 24px;
+  }
+  
+  .mobile-spacing-lg {
+    margin-bottom: 40px;
+  }
+  
+  /* Section spacing */
+  section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
 }
 
 /* Sticky bottom CTA bar styling */

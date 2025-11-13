@@ -141,10 +141,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               </a>
             ))}
             <Button
+              variant="primary"
               asChild
-              className={`bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md ${
-                currentPage === cta.path ? 'shadow-button' : ''
-              }`}
+              className={currentPage === cta.path ? 'shadow-button' : ''}
               aria-current={currentPage === cta.path ? 'page' : undefined}
               aria-label="Book a DineTalk demo"
               {...ve.field('cta.label')}
@@ -163,9 +162,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden z-50"
+            className="md:hidden z-50 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={24} aria-hidden /> : <Menu size={24} aria-hidden />}
           </button>
@@ -173,29 +173,35 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/10 bg-[#363640] text-white z-40">
-            <div className="flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a
+          <div 
+            className="md:hidden py-6 border-t border-white/10 bg-[#363640] text-white z-40"
+            role="dialog"
+            aria-label="Mobile navigation menu"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item, index) => (
+                <button
                   key={item.path}
-                  href={pageToPath(item.path)}
+                  ref={index === 0 ? firstMobileLinkRef : undefined}
                   onClick={(event) => {
                     event.preventDefault();
                     onNavigate(item.path);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left transition-colors nav-link px-2 py-2 ${
+                  className={`text-left transition-colors nav-link px-4 py-4 min-h-[48px] rounded-md hover:bg-white/5 ${
                     currentPage === item.path
-                      ? 'text-white'
+                      ? 'text-white font-semibold bg-white/10'
                       : 'text-white/80 hover:text-white'
                   }`}
+                  aria-current={currentPage === item.path ? 'page' : undefined}
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
               <Button
+                variant="primary"
                 asChild
-                className="shadow-button bg-[#e58e23] text-white border border-[#e58e23] hover:bg-[#f29b3a] hover:border-[#f29b3a] shadow-md"
+                className="mt-4 mx-4"
               >
                 <a
                   href={pageToPath(cta.path)}
