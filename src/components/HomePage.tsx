@@ -129,8 +129,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </Button>
                 
                 {/* Click to call button - mobile only */}
-                <a 
-                  href="tel:+61123456789" 
+                <a
+                  href="tel:+61403982811"
                   className="md:hidden flex items-center justify-center gap-2 bg-green-600 text-white border border-green-600 hover:bg-green-700 px-6 py-6 rounded-lg shadow-md font-semibold text-base transition-colors"
                 >
                   <Phone className="w-5 h-5" />
