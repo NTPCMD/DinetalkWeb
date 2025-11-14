@@ -7,10 +7,10 @@ import { usePageMetadata } from '../hooks/usePageMetadata';
 import aboutContent from '../content/pages/about.json';
 
 const CHEF_IMAGE_BASE =
-  'https://images.unsplash.com/photo-1698653223689-24b0bfd5150b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMHJlc3RhdXJhbnR8ZW58MXx8fHwxNzYxMTgyNzM1fDA&ixlib=rb-4.1.0&q=80&utm_source=figma&utm_medium=referral';
+  'https://images.unsplash.com/photo-1698653223689-24b0bfd5150b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMHJlc3RhdXJhbnR8ZW58MXx8fHwxNzYxMTU3OTc3fDA&ixlib=rb-4.1.0&q=80';
 
 const INTERIOR_IMAGE_BASE =
-  'https://images.unsplash.com/photo-1667388968964-4aa652df0a9b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBkaW5pbmd8ZW58MXx8fHwxNzYxMTE1NzQ3fDA&ixlib=rb-4.1.0&q=80&utm_source=figma&utm_medium=referral';
+  'https://images.unsplash.com/photo-1667388968964-4aa652df0a9b?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBkaW5pbmd8ZW58MXx8fHwxNzYxMTE1NzQ3fDA&ixlib=rb-4.1.0&q=80';
 
 interface AboutPageProps {
   onNavigate?: (page: string) => void;
@@ -75,8 +75,8 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
 
   return (
     <div className="min-h-screen">
-  {/* Hero Section */}
-  <section className="bg-gradient-to-br from-background to-secondary py-12 md:py-20" data-reveal>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-background to-secondary py-12 md:py-20" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl mb-6" {...ve.field('hero.heading')}>
             {page.hero.heading}
@@ -87,8 +87,8 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
         </div>
       </section>
 
-  {/* Mission Section */}
-  <section className="py-20 bg-background" data-reveal>
+      {/* Mission Section */}
+      <section className="py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -128,8 +128,8 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
         </div>
       </section>
 
-  {/* Values Section */}
-  <section className="py-20 bg-secondary" data-reveal>
+      {/* Values Section */}
+      <section className="py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4" {...ve.field('values.heading')}>
@@ -159,8 +159,8 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
         </div>
       </section>
 
-  {/* Story Section */}
-  <section className="py-20 bg-background" data-reveal>
+      {/* Story Section */}
+      <section className="py-20 bg-background" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-2xl overflow-hidden shadow-xl">
@@ -175,27 +175,48 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               />
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl mb-6" {...ve.field('story.heading')}>
-                {page.story.heading}
+              <h2 className="text-3xl md:text-4xl mb-6">
+                Our Story
               </h2>
-              <div className="space-y-4">
-                {page.story.paragraphs.map((paragraph, index) => (
-                  <p
-                    key={paragraph}
-                    className="text-muted-foreground"
-                    {...ve.field(`story.paragraphs[${index}]`)}
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+              <p className="text-muted-foreground mb-4">
+                My name is Rav, and I'm a 15-year-old young entrepreneur based in Perth. I grew up
+                around family who run Indian restaurants, cafes, and different hospitality
+                businesses, so I've seen the industry from the inside.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                One thing I noticed early was how busy and stressful running a restaurant can be.
+                During peak hours, phones wouldn't stop ringing. Customers were waiting, staff were
+                rushing, and calls were being missed — which meant missed bookings, frustrated
+                customers, and lost business. Sometimes customers tried calling after hours, but no
+                one was available to answer. I saw this happening all the time in my uncles'
+                restaurants.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                That's where everything clicked. Because I've always loved technology, coding,
+                building websites, and creating AI workflows, I saw a problem that I could actually
+                solve — even at my age. So I started working on an idea: an AI receptionist that
+                answers calls instantly, handles bookings, and reduces pressure on staff.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                That idea became DineTalk. My goal isn't just to build another tech tool — it's to
+                create something that genuinely helps restaurant owners breathe a little easier.
+                Something that gives customers a smoother experience, reduces wait times, and helps
+                small businesses operate like big ones.
+              </p>
+              <p className="text-muted-foreground">
+                I'm still young, but I'm using everything I know — coding, AI automation, websites,
+                problem-solving, and real business insight from my family — to build a system that
+                makes a real difference. This is just the beginning, and I'm excited to grow
+                DineTalk into a product that supports restaurants all over Australia… starting with
+                the ones that inspired the idea in the first place.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-  {/* CTA Section */}
-  <section className="py-20 bg-primary text-primary-foreground" data-reveal>
+      {/* CTA Section */}
+      <section className="py-20 bg-primary text-primary-foreground" data-reveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl mb-6" {...ve.field('cta.heading')}>
             {page.cta.heading}
@@ -222,8 +243,6 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             >
               {page.cta.secondary.label}
             </Button>
-
-
           </div>
         </div>
       </section>
