@@ -187,6 +187,28 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* Perth Landing Page Link Section */}
+      <section className="py-12 bg-gradient-to-br from-primary/5 to-primary/10" data-reveal>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-lg text-muted-foreground mb-4">
+              Looking for an{' '}
+              <a
+                href="/perth-ai-receptionist"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('perthLanding');
+                }}
+                className="text-primary hover:underline font-semibold"
+              >
+                AI receptionist for restaurants in Perth
+              </a>
+              ? Learn how DineTalk helps Perth venues with 24/7 phone answering and automated bookings.
+            </p>
+          </div>
+        </div>
+      </section>
+
   {/* How It Works Section */}
   <section className="py-12 md:py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

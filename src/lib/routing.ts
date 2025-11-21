@@ -6,6 +6,7 @@ const pageToPathMap = {
   demo: '/demo',
   privacy: '/privacy',
   terms: '/terms',
+  perthLanding: '/perth-ai-receptionist',
 } as const;
 
 type PageKey = keyof typeof pageToPathMap;

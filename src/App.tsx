@@ -10,6 +10,7 @@ import { ContactPage } from './components/ContactPage';
 import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { TermsOfServicePage } from './components/TermsOfServicePage';
+import { PerthLandingPage } from './components/PerthLandingPage';
 import { ensureValidPath, pageToPath, pathToPage } from './lib/routing';
 
 export default function App() {
@@ -120,6 +121,8 @@ export default function App() {
         return <PrivacyPolicyPage />;
       case 'terms':
         return <TermsOfServicePage />;
+      case 'perthLanding':
+        return <PerthLandingPage onNavigate={handleNavigate} />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }

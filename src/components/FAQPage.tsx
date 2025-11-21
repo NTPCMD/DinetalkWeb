@@ -111,6 +111,24 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
             </button>
           </div>
         </div>
+
+        {/* Internal Link to Perth Page */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 text-center" data-reveal>
+          <p className="text-muted-foreground">
+            Looking for an{' '}
+            <a
+              href="/perth-ai-receptionist"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate?.('perthLanding');
+              }}
+              className="text-primary hover:underline font-semibold"
+            >
+              AI receptionist for restaurants in Perth
+            </a>
+            ? Learn how DineTalk serves Western Australian hospitality venues.
+          </p>
+        </div>
       </div>
     </div>
   );

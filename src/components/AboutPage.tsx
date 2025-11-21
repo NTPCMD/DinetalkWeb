@@ -246,6 +246,28 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           </div>
         </div>
       </section>
+
+      {/* Internal Link to Perth Page */}
+      <section className="py-12 bg-secondary" data-reveal>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-lg text-muted-foreground">
+              Serving Perth restaurants with our{' '}
+              <a
+                href="/perth-ai-receptionist"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate?.('perthLanding');
+                }}
+                className="text-primary hover:underline font-semibold"
+              >
+                Perth restaurant phone answering system
+              </a>
+              . Discover how we're helping Western Australian venues never miss a call.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
