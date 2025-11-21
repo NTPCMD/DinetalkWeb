@@ -5,7 +5,6 @@
   "quickLinks": [
     { "label": "Home", "path": "home" },
     { "label": "About", "path": "about" },
-    { "label": "Blog", "path": "blog" },
     { "label": "Perth AI Receptionist", "path": "perthLanding" },
     { "label": "FAQ", "path": "faq" },
     { "label": "Contact", "path": "contact" },
