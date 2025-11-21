@@ -41,7 +41,7 @@ export function pathToPage(path: string): string {
   }
   
   const entry = Object.entries(pageToPathMap).find(([, value]) => value === normalized);
-  return (entry ? entry[0] : 'home') as PageKey;
+  return entry ? entry[0] : 'home';
 }
 
 export function isKnownPage(page: string): boolean {
