@@ -2,6 +2,7 @@
   "links": [
     { "label": "Home", "path": "home" },
     { "label": "About", "path": "about" },
+    { "label": "Blog", "path": "blog" },
     { "label": "FAQ", "path": "faq" },
     { "label": "Contact", "path": "contact" }
   ],

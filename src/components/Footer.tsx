@@ -29,7 +29,7 @@ export function Footer({ onNavigate }: FooterProps) {
             >
               <img
                 src={logo}
-                alt="DineTalk"
+                alt="DineTalk AI Restaurant Receptionist Perth Logo"
                 className="h-16 w-auto"
                 loading="lazy"
                 decoding="async"

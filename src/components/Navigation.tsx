@@ -116,7 +116,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             className="flex items-center"
             aria-label="Navigate to DineTalk home page"
           >
-            <img src={logo} alt="DineTalk" className="h-10 md:h-14 w-auto" />
+            <img src={logo} alt="DineTalk AI Restaurant Receptionist Perth" className="h-10 md:h-14 w-auto" />
           </a>
 
           {/* Desktop Navigation */}

@@ -118,7 +118,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
                 src={`${CHEF_IMAGE_BASE}&w=1280`}
                 srcSet={`${CHEF_IMAGE_BASE}&w=640 640w, ${CHEF_IMAGE_BASE}&w=960 960w, ${CHEF_IMAGE_BASE}&w=1280 1280w`}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="Chef preparing food in a busy restaurant kitchen"
+                alt="Perth restaurant chef preparing food in busy kitchen using DineTalk phone system"
                 className="w-full h-auto object-cover"
                 width={1280}
                 height={853}
@@ -168,7 +168,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
                 src={`${INTERIOR_IMAGE_BASE}&w=1280`}
                 srcSet={`${INTERIOR_IMAGE_BASE}&w=640 640w, ${INTERIOR_IMAGE_BASE}&w=960 960w, ${INTERIOR_IMAGE_BASE}&w=1280 1280w`}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="Warm restaurant interior with diners"
+                alt="Perth restaurant interior with diners enjoying service powered by AI receptionist"
                 className="w-full h-auto object-cover"
                 width={1280}
                 height={853}
