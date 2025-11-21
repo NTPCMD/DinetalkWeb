@@ -1,0 +1,160 @@
+{
+  "hero": {
+    "heading": "Perth's #1 AI Restaurant Receptionist",
+    "subheading": "Never Miss Another Call or Booking Again",
+    "description": "The intelligent phone answering system trusted by Perth restaurants to handle calls, take bookings, and answer customer questions 24/7 — even during your busiest service hours."
+  },
+  "problem": {
+    "heading": "Perth Restaurant Owners Face These Daily Challenges",
+    "items": [
+      "Missing calls during peak lunch and dinner rushes",
+      "Losing bookings to competitors who answer faster",
+      "Staff stretched thin between serving and answering phones",
+      "No time to follow up on customer enquiries after hours",
+      "Inconsistent service quality during busy periods"
+    ]
+  },
+  "solution": {
+    "heading": "How DineTalk's AI Receptionist Transforms Your Perth Restaurant",
+    "description": "DineTalk is specifically designed for Western Australian restaurants, cafes, and hospitality venues. Our AI receptionist answers every call in seconds, takes accurate bookings, handles customer enquiries, and integrates seamlessly with your existing POS system.",
+    "benefits": [
+      {
+        "title": "Answer Every Call Instantly",
+        "description": "No more missed opportunities. Our AI picks up every call within 2 seconds, 24/7, including weekends and public holidays. Perfect for Perth's competitive dining scene."
+      },
+      {
+        "title": "Take Bookings Automatically",
+        "description": "Customers can book tables any time, day or night. DineTalk checks availability in real-time and confirms reservations instantly, reducing no-shows and maximizing your covers."
+      },
+      {
+        "title": "Seamless POS Integration",
+        "description": "Works with leading Australian POS systems. Bookings sync automatically with your existing software, eliminating double-handling and reducing errors."
+      },
+      {
+        "title": "Local Perth Knowledge",
+        "description": "Understands local enquiries, knows Perth suburbs, can provide directions, and handles common questions about parking, dietary options, and special events specific to WA venues."
+      }
+    ]
+  },
+  "keywords": {
+    "heading": "Serving Perth's Diverse Restaurant Community",
+    "description": "From Northbridge bistros to Fremantle seafood restaurants, from CBD fine dining to beachside cafes in Cottesloe and Scarborough — DineTalk supports Perth restaurants of all sizes and cuisines."
+  },
+  "stats": {
+    "heading": "The Numbers Speak for Themselves",
+    "items": [
+      {
+        "value": "100%",
+        "label": "Call Answer Rate",
+        "description": "Never miss a booking opportunity"
+      },
+      {
+        "value": "24/7",
+        "label": "Always Available",
+        "description": "Even during Perth public holidays"
+      },
+      {
+        "value": "2 sec",
+        "label": "Average Answer Time",
+        "description": "Faster than any human receptionist"
+      },
+      {
+        "value": "35%",
+        "label": "Booking Increase",
+        "description": "Average lift for Perth venues"
+      }
+    ]
+  },
+  "features": {
+    "heading": "Built for Perth Restaurants",
+    "items": [
+      {
+        "title": "Smart Call Routing",
+        "description": "Handles booking enquiries, menu questions, dietary requirements, and general information — all without human intervention."
+      },
+      {
+        "title": "Multi-Language Support",
+        "description": "Serves Perth's multicultural dining scene with support for multiple languages and accents."
+      },
+      {
+        "title": "Custom Greetings",
+        "description": "Reflects your restaurant's unique personality and brand voice in every conversation."
+      },
+      {
+        "title": "Real-Time Updates",
+        "description": "Instantly aware of your opening hours, special events, menu changes, and seasonal offerings."
+      },
+      {
+        "title": "Analytics Dashboard",
+        "description": "Track call volumes, booking trends, and customer enquiries specific to your Perth location."
+      },
+      {
+        "title": "SMS Confirmations",
+        "description": "Automatic booking confirmations and reminders to reduce no-shows for your venue."
+      }
+    ]
+  },
+  "testimonials": {
+    "heading": "What Perth Restaurant Owners Say",
+    "description": "Join dozens of Western Australian venues already using DineTalk to streamline operations and increase bookings."
+  },
+  "local": {
+    "heading": "Why Perth Restaurants Choose DineTalk",
+    "description": "Understanding the unique challenges of running a restaurant in Western Australia, we've built DineTalk to address the specific needs of Perth's hospitality industry. From handling enquiries about Perth's best wine regions to managing bookings during major events like Perth Festival and Fringe, our AI knows the local landscape.",
+    "points": [
+      "Built with Australian privacy laws and business regulations in mind",
+      "Understands Perth geography, suburbs, and local landmarks",
+      "Handles timezone queries and international visitor enquiries",
+      "Integrates with popular Australian POS and booking systems",
+      "Pricing in Australian dollars with no hidden international fees",
+      "Local support team based in Western Australia"
+    ]
+  },
+  "howItWorks": {
+    "heading": "Get Started in Three Simple Steps",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Quick Setup",
+        "description": "We connect DineTalk to your phone line and POS system in under 30 minutes. No complex installation or hardware required."
+      },
+      {
+        "number": "2",
+        "title": "Customise Your AI",
+        "description": "Train your AI receptionist with your menu, booking policies, opening hours, and special instructions. We handle Perth-specific details automatically."
+      },
+      {
+        "number": "3",
+        "title": "Go Live",
+        "description": "Start taking calls and bookings immediately. Your AI receptionist is ready to serve your customers 24/7 from day one."
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Common Questions from Perth Restaurant Owners",
+    "items": [
+      {
+        "question": "How does DineTalk handle Perth-specific enquiries?",
+        "answer": "Our AI is trained on Perth geography, local landmarks, and common customer questions specific to WA restaurants. It can provide directions, discuss parking options, and answer questions about local events and attractions."
+      },
+      {
+        "question": "What if a caller has a complex request?",
+        "answer": "DineTalk handles 95% of calls autonomously. For complex situations requiring human judgment, the system can transfer calls to your staff or take detailed messages for follow-up."
+      },
+      {
+        "question": "Does it work with my existing POS system?",
+        "answer": "DineTalk integrates with all major Australian POS systems including Square, Lightspeed, TouchBistro, and many others popular in Perth venues."
+      },
+      {
+        "question": "What happens during peak times like Friday night service?",
+        "answer": "This is where DineTalk shines. While your team focuses on delivering exceptional dining experiences, our AI handles all incoming calls simultaneously — no busy signals, no missed opportunities."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Ready to Transform Your Perth Restaurant?",
+    "description": "Join the growing number of Perth restaurants that never miss a call or booking. See DineTalk in action with a free demo.",
+    "primaryButton": "Book Your Free Demo",
+    "secondaryButton": "Call Us Now: 0403 982 811"
+  }
+}
