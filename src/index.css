@@ -2293,3 +2293,95 @@ html { scroll-behavior: smooth; }
   border-color: #16a34a !important;
 }
 
+
+:root {
+  --danao-gold: #d4af37;
+  --danao-black: #050505;
+}
+
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--danao-gold);
+  transition: width 0.25s ease;
+}
+
+.nav-underline:hover::after,
+.nav-underline:focus-visible::after {
+  width: 100%;
+}
+
+.lux-card {
+  background: linear-gradient(145deg, rgba(10, 10, 10, 0.92), rgba(15, 15, 15, 0.94));
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.lux-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08), transparent 30%);
+  pointer-events: none;
+}
+
+.lux-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--danao-gold);
+  box-shadow: 0 20px 50px rgba(212, 175, 55, 0.25);
+}
+
+.lux-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.lux-button:hover {
+  transform: translateY(-1px);
+}
+
+.lux-button-primary {
+  background: var(--danao-gold);
+  color: #0a0a0a;
+  border-color: var(--danao-gold);
+  box-shadow: 0 12px 28px rgba(212, 175, 55, 0.35);
+}
+
+.lux-button-primary:hover {
+  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.4);
+  background: #e2c060;
+  border-color: #e2c060;
+}
+
+.lux-button-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.lux-button-ghost:hover {
+  border-color: var(--danao-gold);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}

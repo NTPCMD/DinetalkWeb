@@ -1,102 +1,38 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
-import { visualEditing } from '../lib/stackbit-sdk';
-import footerContent from '../content/footer.json';
-import logo from 'figma:asset/1e9bf23945892e4a2dda067e920f48e46fbe1f39.png';
-import { pageToPath } from '../lib/routing';
+import { Link } from 'react-router-dom';
 
-interface FooterProps {
-  onNavigate: (page: string) => void;
-}
-
-export function Footer({ onNavigate }: FooterProps) {
-  const currentYear = new Date().getFullYear();
-  const content = footerContent;
-  const ve = visualEditing({ objectId: 'src/content/footer.json' });
+export function Footer() {
+  const year = new Date().getFullYear();
 
   return (
-  <footer className="bg-secondary text-secondary-foreground mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand */}
-          <div>
-            <a
-              href={pageToPath('home')}
-              onClick={(event) => {
-                event.preventDefault();
-                onNavigate('home');
-              }}
-              className="mb-4 inline-block"
-            >
-              <img
-                src={logo}
-                alt="DineTalk"
-                className="h-16 w-auto"
-                loading="lazy"
-                decoding="async"
-              />
-            </a>
-            <p className="text-muted-foreground" {...ve.field('brand.description')}>
-              {content.brand.description}
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="mb-4">Quick Links</h3>
-            <div className="flex flex-col gap-2">
-              {content.quickLinks.map((link, index) => (
-                <a
-                  key={link.path}
-                  href={pageToPath(link.path)}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onNavigate(link.path);
-                  }}
-                  className="text-muted-foreground hover:text-primary transition-colors text-left"
-                  {...ve.field(`quickLinks[${index}].label`)}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="mb-4">Contact Info</h3>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-start gap-2 text-muted-foreground">
-                <MapPin size={20} className="mt-0.5 flex-shrink-0" />
-                <span {...ve.field('contact.location')}>{content.contact.location}</span>
-              </div>
-              <div className="flex items-start gap-2 text-muted-foreground">
-                <Phone size={20} className="mt-0.5 flex-shrink-0" />
-                <div className="flex flex-col">
-                  <a href={content.contact.phone.href} className="hover:text-primary transition-colors" {...ve.field('contact.phone.label')}>
-                    {content.contact.phone.label}
-                  </a>
-                  <a href={content.contact.demo.href} className="hover:text-primary transition-colors text-sm" {...ve.field('contact.demo.label')}>
-                    {content.contact.demo.label}
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Mail size={20} className="flex-shrink-0" />
-                <a
-                  href={content.contact.email.href}
-                  className="hover:text-primary transition-colors"
-                  {...ve.field('contact.email.label')}
-                >
-                  {content.contact.email.label}
-                </a>
-              </div>
-            </div>
+    <footer className="bg-[#0a0a0a] border-t border-[#d4af37]/30 text-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid gap-8 md:grid-cols-3">
+        <div className="space-y-3" data-reveal>
+          <p className="text-sm uppercase tracking-[0.25em] text-[#d4af37]">Danao Group</p>
+          <p className="text-lg font-semibold">Premium multi-industry services across Australia.</p>
+          <p className="text-sm text-white/70">
+            From digital to logistics, we orchestrate seamless experiences with concierge-level care.
+          </p>
+        </div>
+        <div className="space-y-3" data-reveal>
+          <h3 className="text-lg font-semibold text-[#d4af37]">Quick Links</h3>
+          <div className="flex flex-col gap-2 text-white/80">
+            <Link to="/" className="hover:text-[#d4af37] transition-colors">Home</Link>
+            <Link to="/services" className="hover:text-[#d4af37] transition-colors">Services</Link>
+            <Link to="/concierge" className="hover:text-[#d4af37] transition-colors">Concierge</Link>
+            <Link to="/contact" className="hover:text-[#d4af37] transition-colors">Contact</Link>
           </div>
         </div>
-
-        <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-          <p>&copy; {currentYear} DineTalk. All rights reserved.</p>
+        <div className="space-y-3" data-reveal>
+          <h3 className="text-lg font-semibold text-[#d4af37]">Get in touch</h3>
+          <p className="text-white/80">info@danao.group</p>
+          <p className="text-white/80">+61 403 982 811</p>
+          <p className="text-white/60 text-sm">
+            Brisbane &amp; nationwide support for premium hospitality, retail, logistics, digital and concierge needs.
+          </p>
         </div>
+      </div>
+      <div className="border-t border-[#d4af37]/20 py-5 text-center text-white/60 text-sm">
+        © {year} Danao Group. All rights reserved.
       </div>
     </footer>
   );
