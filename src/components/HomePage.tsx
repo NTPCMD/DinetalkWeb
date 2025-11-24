@@ -120,13 +120,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 >
                   Book a Demo
                 </Button>
-                <Button
-                  size="lg"
-                  className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium text-base md:text-lg py-6 md:py-4"
-                  onClick={() => onNavigate('demo')}
+                <a
+                  href="tel:+61860104462"
+                  className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium text-base md:text-lg py-6 md:py-4 flex items-center justify-center rounded-lg"
+                  aria-label="Call +61 8 6010 4462"
                 >
                   Try Live AI Demo
-                </Button>
+                </a>
                 
                 {/* Click to call button - mobile only */}
                 <a
@@ -260,13 +260,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
         >
           Book Demo
         </Button>
-        <Button
-          size="lg"
-          className="w-full bg-[#3B82F6] text-white border border-[#3B82F6] hover:bg-[#2563eb] hover:border-[#2563eb] shadow-md font-semibold text-base px-5 py-3 rounded-xl"
-          onClick={() => onNavigate('demo')}
+        <a
+          href="tel:+61860104462"
+          className="w-full bg-[#3B82F6] text-white border border-[#3B82F6] hover:bg-[#2563eb] hover:border-[#2563eb] shadow-md font-semibold text-base px-5 py-3 rounded-xl flex items-center justify-center"
+          aria-label="Call +61 8 6010 4462"
         >
           Try AI Demo
-        </Button>
+        </a>
       </div>
     </div>
   );
