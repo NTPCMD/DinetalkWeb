@@ -137,11 +137,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   Call Us Now
                 </a>
               </div>
-
-              {/* small bounce scroll indicator */}
-              <div className="scroll-indicator hidden md:flex" aria-hidden>
-                <div className="dot" />
-              </div>
             </div>
             <div className="hidden md:block rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
