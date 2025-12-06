@@ -70,14 +70,16 @@
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background: #fff; padding-top: 80px; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background: #fff; padding-top: 70px; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    header { position: fixed; top: 0; left: 0; right: 0; width: 100%; background: linear-gradient(135deg, #ff9936 0%, #ff6b35 100%); color: white; padding: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; }
-    nav { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 28px; font-weight: 700; font-family: 'Poppins', sans-serif; }
-    .nav-links { display: flex; gap: 30px; list-style: none; }
-    .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
-    .nav-links a:hover { opacity: 0.8; }
+    header { position: fixed; top: 0; left: 0; right: 0; width: 100%; background: #2b2d35; color: white; padding: 0; box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2); z-index: 1000; border-bottom: 1px solid rgba(0, 0, 0, 0.35); }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .logo { font-size: 24px; font-weight: 700; font-family: 'Poppins', sans-serif; color: white; text-decoration: none; }
+    .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: white; }
+    .demo-button { background: #e58e23 !important; color: white !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; border: 1px solid #e58e23; transition: background 0.3s, border-color 0.3s; box-shadow: 0 2px 8px rgba(229, 142, 35, 0.3); }
+    .demo-button:hover { background: #f29b3a !important; border-color: #f29b3a; }
     .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 80px 0; text-align: center; }
     h1 { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
     h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; margin: 40px 0 20px; color: #1a1a2e; }
@@ -99,7 +101,10 @@
     .internal-links a { color: #ff6b35; text-decoration: none; font-weight: 500; transition: color 0.3s; }
     .internal-links a:hover { color: #ff9936; }
     .cta-section { background: linear-gradient(135deg, #ff9936 0%, #ff6b35 100%); color: white; padding: 80px 0; text-align: center; margin: 60px 0 0; }
-    .cta-section h2 { color: white; }
+    .cta-section h2 { color: white; font-size: 42px; }
+    .cta-section p { font-size: 20px; margin-bottom: 35px; }
+    .cta-section .cta-button { background: white; color: #ff6b35; font-size: 20px; padding: 18px 50px; font-weight: 700; }
+    .cta-section .cta-button:hover { background: #f8f8f8; color: #ff9936; transform: translateY(-3px); }
     .cta-section p { font-size: 20px; margin-bottom: 30px; }
     footer { background: #1a1a2e; color: white; padding: 40px 0; text-align: center; }
     .footer-links { display: flex; justify-content: center; gap: 30px; list-style: none; margin-bottom: 20px; flex-wrap: wrap; }
@@ -118,12 +123,12 @@
   <header>
     <div class="container">
       <nav>
-        <div class="logo">DineTalk</div>
+        <a href="/" class="logo">DineTalk</a>
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
           <li><a href="/about">About</a></li>
-          <li><a href="/demo">Book Demo</a></li>
           <li><a href="/contact">Contact</a></li>
+          <li><a href="/demo" class="demo-button">Book Demo</a></li>
         </ul>
       </nav>
     </div>
@@ -255,7 +260,7 @@
     <div class="container">
       <h2>Ready to Transform Your Restaurant?</h2>
       <p>Join hundreds of Perth restaurants using DineTalk to handle their calls and bookings.</p>
-      <a href="/demo" class="cta-button">Book Your Free Demo</a>
+      <a href="/demo" class="cta-button">Schedule Your Free Demo</a>
     </div>
   </section>
   
