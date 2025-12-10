@@ -146,7 +146,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div className="hidden md:block rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=800&utm_source=figma&utm_medium=referral"
-                alt="AI receptionist taking restaurant booking over phone"
+                alt="Perth restaurant AI receptionist system answering phone calls and taking bookings automatically"
                 className="w-full max-h-[80vh] h-auto object-cover"
                 loading="lazy"
               />
@@ -187,6 +187,28 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* Perth Landing Page Link Section */}
+      <section className="py-12 bg-gradient-to-br from-primary/5 to-primary/10" data-reveal>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-lg text-muted-foreground mb-4">
+              Looking for an{' '}
+              <a
+                href="/perth-ai-receptionist"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('perthLanding');
+                }}
+                className="text-primary hover:underline font-semibold"
+              >
+                AI receptionist for restaurants in Perth
+              </a>
+              ? Learn how DineTalk helps Perth venues with 24/7 phone answering and automated bookings.
+            </p>
+          </div>
+        </div>
+      </section>
+
   {/* How It Works Section */}
   <section className="py-12 md:py-20 bg-secondary" data-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -221,7 +243,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               <div className="flex items-center justify-center gap-4">
                 <ImageWithFallback
                   src="https://dogswampsc.com.au/assets/content/images/IMG-20241126-WA0016256821.jpeg"
-                  alt="Jashan"
+                  alt="Jashan, Perth restaurant owner using DineTalk AI receptionist"
                   className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
                 />
                 <div className="text-left">

@@ -10,6 +10,9 @@ import { ContactPage } from './components/ContactPage';
 import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { TermsOfServicePage } from './components/TermsOfServicePage';
+import { PerthLandingPage } from './components/PerthLandingPage';
+import { BlogPage } from './components/BlogPage';
+import { BlogPostPage } from './components/BlogPostPage';
 import { ensureValidPath, pageToPath, pathToPage } from './lib/routing';
 
 export default function App() {
@@ -120,7 +123,16 @@ export default function App() {
         return <PrivacyPolicyPage />;
       case 'terms':
         return <TermsOfServicePage />;
+      case 'perthLanding':
+        return <PerthLandingPage onNavigate={handleNavigate} />;
+      case 'blog':
+        return <BlogPage onNavigate={handleNavigate} />;
       default:
+        // Handle blog post pages
+        if (currentPage.startsWith('blogPost-')) {
+          const slug = currentPage.substring(9);
+          return <BlogPostPage slug={slug} onNavigate={handleNavigate} />;
+        }
         return <HomePage onNavigate={handleNavigate} />;
     }
   };
