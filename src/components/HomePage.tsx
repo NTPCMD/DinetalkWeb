@@ -99,7 +99,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
         id="hero"
         className="relative bg-gradient-to-br from-background to-secondary py-12 md:py-20 parallax"
         ref={heroRef as any}
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')` }}
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIw[...]` }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -123,7 +123,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <Button
                   size="lg"
                   className="bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors shadow-md font-medium text-base md:text-lg py-6 md:py-4"
-                  onClick={() => onNavigate('demo')}
+                  onClick={() => (window.location.href = 'tel:+61860104462')}
                 >
                   Try Live AI Demo
                 </Button>
@@ -145,7 +145,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             </div>
             <div className="hidden md:block rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGVufDF8fHx8MTc2MTE4MjczNHww&ixlib=rb-4.1.0&q=80&w=800&utm_source=figma&utm_medium=referral"
+                src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGV[...]"
                 alt="AI receptionist taking restaurant booking over phone"
                 className="w-full max-h-[80vh] h-auto object-cover"
                 loading="lazy"
@@ -263,7 +263,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
         <Button
           size="lg"
           className="w-full bg-[#3B82F6] text-white border border-[#3B82F6] hover:bg-[#2563eb] hover:border-[#2563eb] shadow-md font-semibold text-base px-5 py-3 rounded-xl"
-          onClick={() => onNavigate('demo')}
+          onClick={() => (window.location.href = 'tel:+61860104462')}
         >
           Try AI Demo
         </Button>
