@@ -111,6 +111,23 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
                     {paragraph}
                   </p>
                 ))}
+                <p className="text-muted-foreground">
+                  We also run a dedicated service hub for venues looking for an{' '}
+                  <a
+                    href="/pages/perth-ai-receptionist.html"
+                    className="text-primary font-semibold underline-offset-4 hover:underline"
+                  >
+                    AI receptionist for restaurants in Perth
+                  </a>{' '}
+                  so local teams can rely on a responsive{' '}
+                  <a
+                    href="/pages/perth-ai-receptionist.html#phone-answering"
+                    className="text-primary font-semibold underline-offset-4 hover:underline"
+                  >
+                    Perth restaurant phone answering system
+                  </a>{' '}
+                  tailored to Western Australian diners.
+                </p>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl">
@@ -118,7 +135,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
                 src={`${CHEF_IMAGE_BASE}&w=1280`}
                 srcSet={`${CHEF_IMAGE_BASE}&w=640 640w, ${CHEF_IMAGE_BASE}&w=960 960w, ${CHEF_IMAGE_BASE}&w=1280 1280w`}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="Chef preparing food in a busy restaurant kitchen"
+                alt="Chef preparing food in a busy Perth restaurant kitchen"
                 className="w-full h-auto object-cover"
                 width={1280}
                 height={853}
@@ -168,7 +185,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
                 src={`${INTERIOR_IMAGE_BASE}&w=1280`}
                 srcSet={`${INTERIOR_IMAGE_BASE}&w=640 640w, ${INTERIOR_IMAGE_BASE}&w=960 960w, ${INTERIOR_IMAGE_BASE}&w=1280 1280w`}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="Warm restaurant interior with diners"
+                alt="Warm Perth restaurant interior with diners enjoying dinner"
                 className="w-full h-auto object-cover"
                 width={1280}
                 height={853}

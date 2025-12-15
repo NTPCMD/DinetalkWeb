@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leveraging Caller Data to Improve Menu Engineering | DineTalk Blog</title>
+  <meta name="description" content="Leveraging Caller Data to Improve Menu Engineering - Practical guidance for Perth and WA restaurant teams looking to modernise phone answering and reservations with AI-backed workflows." />
+  <meta name="keywords" content="Perth restaurant tips, WA hospitality automation, caller-data-menu-engineering, ai receptionist guidance, perth bookings" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="DineTalk Australia" />
+  <meta name="geo.region" content="AU-WA" />
+  <meta name="geo.placename" content="Perth, Western Australia" />
+  <link rel="canonical" href="https://dinetalk.com.au/pages/blog/caller-data-menu-engineering" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dinetalk.com.au/pages/blog/caller-data-menu-engineering" />
+  <meta property="og:title" content="Leveraging Caller Data to Improve Menu Engineering | DineTalk Blog" />
+  <meta property="og:description" content="Leveraging Caller Data to Improve Menu Engineering - Practical guidance for Perth and WA restaurant teams looking to modernise phone answering and reservations with AI-backed workflows." />
+  <meta property="og:image" content="https://dinetalk.com.au/assets/og-image.jpg" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://dinetalk.com.au/pages/blog/caller-data-menu-engineering" />
+  <meta name="twitter:title" content="Leveraging Caller Data to Improve Menu Engineering | DineTalk Blog" />
+  <meta name="twitter:description" content="Leveraging Caller Data to Improve Menu Engineering - Practical guidance for Perth and WA restaurant teams looking to modernise phone answering and reservations with AI-backed workflows." />
+  <meta name="twitter:image" content="https://dinetalk.com.au/assets/og-image.jpg" />
+  
+  <meta name="theme-color" content="#ff9936" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;500&display=swap" />
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "DineTalk",
+    "description": "Leveraging Caller Data to Improve Menu Engineering - Practical guidance for Perth and WA restaurant teams looking to modernise phone answering and reservations with AI-backed workflows.",
+    "url": "https://dinetalk.com.au/pages/blog/caller-data-menu-engineering",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Perth",
+      "addressRegion": "WA",
+      "addressCountry": "AU"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-31.9505",
+      "longitude": "115.8605"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Perth, Western Australia"
+    }
+  }
+  </script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background: #fff; padding-top: 70px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    header { position: fixed; top: 0; left: 0; right: 0; width: 100%; background: #2b2d35; color: white; padding: 0; box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2); z-index: 1000; border-bottom: 1px solid rgba(0, 0, 0, 0.35); }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .logo { font-size: 24px; font-weight: 700; font-family: 'Poppins', sans-serif; color: white; text-decoration: none; }
+    .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: white; }
+    .demo-button { background: #e58e23 !important; color: white !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; border: 1px solid #e58e23; transition: background 0.3s, border-color 0.3s; box-shadow: 0 2px 8px rgba(229, 142, 35, 0.3); }
+    .demo-button:hover { background: #f29b3a !important; border-color: #f29b3a; }
+    .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 80px 0; text-align: center; }
+    h1 { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
+    h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; margin: 40px 0 20px; color: #1a1a2e; }
+    h3 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 600; margin: 30px 0 15px; color: #16213e; }
+    .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.9; }
+    .cta-button { display: inline-block; background: #ff9936; color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 18px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 15px rgba(255, 153, 54, 0.3); }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 153, 54, 0.4); }
+    .content { padding: 60px 0; }
+    .content-section { margin-bottom: 50px; }
+    .content-section p { margin-bottom: 15px; font-size: 18px; color: #555; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+    .feature-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s; }
+    .feature-card:hover { transform: translateY(-5px); }
+    .feature-card h3 { margin-top: 0; color: #ff9936; }
+    .internal-links { background: #f8f9fa; padding: 40px; border-radius: 12px; margin: 40px 0; }
+    .internal-links h3 { margin-top: 0; }
+    .internal-links ul { list-style: none; padding: 0; }
+    .internal-links li { margin: 10px 0; }
+    .internal-links a { color: #ff6b35; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .internal-links a:hover { color: #ff9936; }
+    .cta-section { background: linear-gradient(135deg, #ff9936 0%, #ff6b35 100%); color: white; padding: 80px 0; text-align: center; margin: 60px 0 0; }
+    .cta-section h2 { color: white; font-size: 42px; }
+    .cta-section p { font-size: 20px; margin-bottom: 35px; }
+    .cta-section .cta-button { background: white; color: #ff6b35; font-size: 20px; padding: 18px 50px; font-weight: 700; }
+    .cta-section .cta-button:hover { background: #f8f8f8; color: #ff9936; transform: translateY(-3px); }
+    .cta-section p { font-size: 20px; margin-bottom: 30px; }
+    footer { background: #1a1a2e; color: white; padding: 40px 0; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 30px; list-style: none; margin-bottom: 20px; flex-wrap: wrap; }
+    .footer-links a { color: white; text-decoration: none; opacity: 0.8; transition: opacity 0.3s; }
+    .footer-links a:hover { opacity: 1; }
+    img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
+    @media (max-width: 768px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 28px; }
+      .hero { padding: 60px 0; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="/" class="logo">DineTalk</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/demo" class="demo-button">Book Demo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="container">
+      <h1>Leveraging Caller Data to Improve Menu Engineering</h1>
+      <p>Leveraging Caller Data to Improve Menu Engineering - Practical guidance for Perth and WA restaurant teams looking to modernise phone answering and reservations with AI-backed workflows.</p>
+      <a href="/demo" class="cta-button">Talk to the DineTalk Perth Team</a>
+    </div>
+  </section>
+  
+  <main class="content">
+    <div class="container">
+      
+      <div class="content-section">
+        <p><em>Published on 15 December 2025</em></p>
+
+        <h2>Why This Matters to Perth Hospitality</h2>
+        <p>Leveraging Caller Data to Improve Menu Engineering is becoming a high-priority topic for venues competing for bookings across Perth and Western Australia. Operators need practical answers that account for local diner expectations and WA's tourism calendar.</p>
+
+        <h3>Common Challenges</h3>
+        <p>Missed calls, slow responses, and limited after-hours coverage cost Perth venues real revenue. AI reception creates a dependable safety net that protects every opportunity.</p>
+
+        <h3>Action Plan for WA Venues</h3>
+        <p>Audit your current phone flows, define scripts that match your brand voice, and connect DineTalk to your booking system so every enquiry receives a timely, accurate response.</p>
+
+        <h2>Local Success Indicators</h2>
+        <p>Track reductions in missed calls, improvements in booking conversion rate, and guest feedback mentioning fast answers. These metrics show whether your AI receptionist is delivering Perth-ready service.</p>
+      </div>
+    
+    </div>
+  </main>
+  
+  
+  <section class="internal-links">
+    <div class="container">
+      <h3>Related Pages</h3>
+      <ul>
+        <li><a href="/">DineTalk Home</a></li><li><a href="/demo">Book a Demo</a></li><li><a href="/pages/ai-restaurant-receptionist">AI Receptionist Features</a></li><li><a href="/pages/perth-ai-receptionist">Perth AI Receptionist</a></li><li><a href="/pages/restaurant-call-answering-service">Restaurant Phone Answering</a></li>
+      </ul>
+    </div>
+  </section>
+  
+  
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Transform Your Restaurant?</h2>
+      <p>Join hundreds of Perth restaurants using DineTalk to handle their calls and bookings.</p>
+      <a href="/demo" class="cta-button">Schedule Your Free Demo</a>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+      </ul>
+      <p>&copy; 2025 DineTalk Australia. All rights reserved.</p>
+      <p>Serving restaurants across Perth and Western Australia</p>
+    </div>
+  </footer>
+</body>
+</html>

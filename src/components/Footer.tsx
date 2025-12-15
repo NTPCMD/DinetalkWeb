@@ -29,7 +29,7 @@ export function Footer({ onNavigate }: FooterProps) {
             >
               <img
                 src={logo}
-                alt="DineTalk"
+                alt="DineTalk AI receptionist for Perth restaurants"
                 className="h-16 w-auto"
                 loading="lazy"
                 decoding="async"
@@ -58,6 +58,12 @@ export function Footer({ onNavigate }: FooterProps) {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/pages/perth-ai-receptionist.html"
+                className="text-muted-foreground hover:text-primary transition-colors text-left"
+              >
+                AI receptionist for restaurants in Perth
+              </a>
             </div>
           </div>
 

@@ -95,6 +95,27 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           </Accordion>
         </div>
 
+        <div className="mt-10 bg-secondary/60 rounded-2xl p-6 md:p-8" data-reveal>
+          <h2 className="text-2xl font-semibold mb-3">Need location-specific guidance?</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            Read our dedicated Perth overview to understand how our{' '}
+            <a
+              href="/pages/perth-ai-receptionist.html"
+              className="text-primary font-semibold underline-offset-4 hover:underline"
+            >
+              AI receptionist for restaurants in Perth
+            </a>{' '}
+            doubles as a{' '}
+            <a
+              href="/pages/perth-ai-receptionist.html#phone-answering"
+              className="text-primary font-semibold underline-offset-4 hover:underline"
+            >
+              Perth restaurant phone answering system
+            </a>{' '}
+            built for WA venues.
+          </p>
+        </div>
+
         <div className="mt-10 text-center" data-reveal>
           <h2 className="text-2xl mb-4">Still have questions?</h2>
           <p className="mb-6 opacity-90">

@@ -138,6 +138,24 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </a>
               </div>
 
+              <p className="mt-4 text-sm md:text-base text-foreground/80 leading-relaxed">
+                Looking for an{' '}
+                <a
+                  href="/pages/perth-ai-receptionist.html"
+                  className="text-primary font-semibold underline-offset-4 hover:underline"
+                >
+                  AI receptionist for restaurants in Perth
+                </a>
+                ? Explore how DineTalk delivers a{' '}
+                <a
+                  href="/pages/perth-ai-receptionist.html#phone-answering"
+                  className="text-primary font-semibold underline-offset-4 hover:underline"
+                >
+                  Perth restaurant phone answering system
+                </a>{' '}
+                that keeps bookings flowing day and night.
+              </p>
+
               {/* small bounce scroll indicator */}
               <div className="scroll-indicator hidden md:flex" aria-hidden>
                 <div className="dot" />
@@ -146,7 +164,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div className="hidden md:block rounded-2xl overflow-hidden shadow-xl md:bg-transparent">
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1758216169108-d1b62d114582?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwcGhvbmUlMjBjYWxsfGV[...]"
-                alt="AI receptionist taking restaurant booking over phone"
+                alt="AI receptionist for Perth restaurants taking booking over the phone"
                 className="w-full max-h-[80vh] h-auto object-cover"
                 loading="lazy"
               />

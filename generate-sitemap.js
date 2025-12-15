@@ -8,6 +8,40 @@ const today = new Date().toISOString().split('T')[0];
 const pagesDir = path.join(__dirname, 'pages');
 const pageFiles = fs.readdirSync(pagesDir).filter(f => f.endsWith('.html'));
 
+// Explicit product slug list to ensure accurate categorisation
+const productSlugs = [
+  'ai-restaurant-receptionist.html',
+  'automated-booking-system.html',
+  'pos-system-integration.html',
+  'menu-management-software.html',
+  'customer-communication-platform.html',
+  'ai-fine-dining-restaurants.html',
+  'cafe-booking-system.html',
+  'bar-reservation-management.html',
+  'quick-service-restaurant-ai.html',
+  'food-truck-booking-solution.html',
+  'catering-order-management.html',
+  'restaurant-call-answering-service.html',
+  'table-reservation-system.html',
+  'restaurant-crm-software.html',
+  'waitlist-management-tool.html',
+  'multi-location-restaurant-solution.html',
+  'restaurant-analytics-dashboard.html',
+  'voice-ordering-system.html',
+  'restaurant-sms-marketing.html',
+  'delivery-integration-platform.html',
+  'multilingual-ai-receptionist.html',
+  'ai-reservation-waitlist-assistant.html',
+  'restaurant-event-booking-assistant.html',
+  'hospitality-ai-compliance-toolkit.html',
+  'ai-caller-sentiment-detection.html',
+  'ai-shift-handover-notes.html',
+  'restaurant-vip-caller-recognition.html',
+  'ai-function-enquiry-routing.html',
+  'swan-valley-winery-phone-automation.html',
+  'ai-allergy-safe-ordering-assistant.html'
+];
+
 // Start building sitemap
 let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -62,38 +96,9 @@ let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 `;
 
 // Categorize pages
-const suburbPages = pageFiles.filter(f => 
-  !f.startsWith('blog-') && 
-  !f.includes('-restaurant-') && 
-  !f.includes('-booking-') && 
-  !f.includes('-system-') &&
-  !f.includes('-management-') &&
-  !f.includes('-platform') &&
-  !f.includes('-service') &&
-  !f.includes('-software') &&
-  !f.includes('-solution') &&
-  !f.includes('-tool') &&
-  !f.includes('-dashboard') &&
-  !f.includes('-marketing') &&
-  !f.includes('-crm') &&
-  !f.includes('cafe-') &&
-  !f.includes('bar-') &&
-  !f.includes('food-') &&
-  !f.includes('catering-') &&
-  !f.includes('table-') &&
-  !f.includes('waitlist-') &&
-  !f.includes('multi-') &&
-  !f.includes('voice-') &&
-  !f.includes('delivery-') &&
-  !f.includes('quick-')
-);
-
 const blogPages = pageFiles.filter(f => f.startsWith('blog-'));
-
-const productPages = pageFiles.filter(f => 
-  !f.startsWith('blog-') && 
-  !suburbPages.includes(f)
-);
+const productPages = pageFiles.filter(f => productSlugs.includes(f));
+const suburbPages = pageFiles.filter(f => !blogPages.includes(f) && !productPages.includes(f));
 
 // Add Local SEO Suburb Pages
 sitemap += `  <!-- Local SEO Suburb Pages (${suburbPages.length}) -->\n`;
