@@ -4,9 +4,26 @@ const path = require('path');
 const baseUrl = 'https://dinetalk.com.au';
 const today = new Date().toISOString().split('T')[0];
 
-// Get all HTML files from pages directory
+// Get all HTML files from pages directory (recursively, future-proofed for subfolders)
 const pagesDir = path.join(__dirname, 'pages');
-const pageFiles = fs.readdirSync(pagesDir).filter(f => f.endsWith('.html'));
+
+function collectHtmlFiles(dir, prefix = '') {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    const relativePath = path.join(prefix, entry.name);
+
+    if (entry.isDirectory()) {
+      return collectHtmlFiles(path.join(dir, entry.name), relativePath);
+    }
+
+    if (entry.isFile() && entry.name.endsWith('.html')) {
+      return relativePath;
+    }
+
+    return [];
+  });
+}
+
+const pageFiles = collectHtmlFiles(pagesDir).sort();
 
 // Explicit product slug list to ensure accurate categorisation
 const productSlugs = [
@@ -48,6 +65,8 @@ let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Generated on ${today} -->
 
   <!-- Main Pages -->
   <url>
@@ -96,14 +115,14 @@ let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 `;
 
 // Categorize pages
-const blogPages = pageFiles.filter(f => f.startsWith('blog-'));
-const productPages = pageFiles.filter(f => productSlugs.includes(f));
-const suburbPages = pageFiles.filter(f => !blogPages.includes(f) && !productPages.includes(f));
+const blogPages = pageFiles.filter(f => f.startsWith('blog-')).sort();
+const productPages = pageFiles.filter(f => productSlugs.includes(f)).sort();
+const suburbPages = pageFiles.filter(f => !blogPages.includes(f) && !productPages.includes(f)).sort();
 
 // Add Local SEO Suburb Pages
 sitemap += `  <!-- Local SEO Suburb Pages (${suburbPages.length}) -->\n`;
 suburbPages.forEach(file => {
-  const slug = file.replace('.html', '');
+  const slug = file.replace(/\\/g, '/').replace('.html', '');
   sitemap += `  <url>
     <loc>${baseUrl}/pages/${slug}</loc>
     <lastmod>${today}</lastmod>
@@ -116,7 +135,7 @@ suburbPages.forEach(file => {
 // Add Blog Articles
 sitemap += `\n  <!-- Blog Articles (${blogPages.length}) -->\n`;
 blogPages.forEach(file => {
-  const slug = file.replace('.html', '');
+  const slug = file.replace(/\\/g, '/').replace('.html', '');
   sitemap += `  <url>
     <loc>${baseUrl}/pages/${slug}</loc>
     <lastmod>${today}</lastmod>
@@ -129,7 +148,7 @@ blogPages.forEach(file => {
 // Add Product Landing Pages
 sitemap += `\n  <!-- Product Landing Pages (${productPages.length}) -->\n`;
 productPages.forEach(file => {
-  const slug = file.replace('.html', '');
+  const slug = file.replace(/\\/g, '/').replace('.html', '');
   sitemap += `  <url>
     <loc>${baseUrl}/pages/${slug}</loc>
     <lastmod>${today}</lastmod>
