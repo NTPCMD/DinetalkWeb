@@ -218,6 +218,18 @@ const perthSuburbs = [
   'Willetton', 'Bull Creek', 'Canning Vale', 'Bentley', 'Riverton'
 ];
 
+// Additional WA suburbs and regional hubs to expand local coverage
+const expandedWARegions = [
+  'Rockingham', 'Mandurah', 'Joondalup', 'Ellenbrook', 'Kwinana',
+  'Armadale', 'Gosnells', 'Kelmscott', 'Beckenham', 'Belmont',
+  'Guildford', 'Midland', 'Bassendean', 'Forrestfield', 'Belmont Park',
+  'Hillarys', 'Whitfords', 'Duncraig', 'Kingsley', 'Woodvale',
+  'Swan Valley', 'Scarborough Beachfront', 'Cannington', 'Welshpool', 'Bibra Lake',
+  'Cockburn Central', 'Success', 'Atwell', 'Harrisdale', 'Piara Waters',
+  'Byford', 'Serpentine', 'Mundaring', 'Kalamunda', 'Roleystone',
+  'Champion Lakes', 'South Fremantle', 'Halls Head', 'Dawesville', 'Shoalwater'
+];
+
 // Blog article topics
 const blogTopics = [
   { title: 'How AI is Revolutionising Perth Restaurants in 2024', slug: 'ai-revolutionising-perth-restaurants-2024' },
@@ -262,6 +274,30 @@ const blogTopics = [
   { title: 'Why Restaurant Websites Need Built-in Booking', slug: 'restaurant-websites-built-in-booking' }
 ];
 
+// Additional Perth-focused long-form articles
+const expandedBlogTopics = [
+  { title: 'How Perth Restaurants Can Automate After-Hours Calls', slug: 'automate-after-hours-calls-perth' },
+  { title: 'AI Upselling Playbook for Perth Venues', slug: 'ai-upselling-playbook-perth' },
+  { title: 'Reducing Wait Times in Busy WA Restaurants', slug: 'reducing-wait-times-wa-restaurants' },
+  { title: 'Data Privacy Considerations for Hospitality AI in Australia', slug: 'hospitality-ai-data-privacy-australia' },
+  { title: 'How to Launch a New Venue in Perth with AI Support', slug: 'launch-new-venue-perth-ai-support' },
+  { title: 'Voice AI Scripts That Convert Perth Callers', slug: 'voice-ai-scripts-perth-callers' },
+  { title: 'Seasonal Campaign Ideas for WA Restaurants', slug: 'seasonal-campaign-ideas-wa-restaurants' },
+  { title: 'Building Multilingual Phone Flows for Perth Diners', slug: 'multilingual-phone-flows-perth' },
+  { title: 'How to Handle Large Group Bookings Automatically', slug: 'handle-large-group-bookings-automatically' },
+  { title: 'Preventing Missed Functions and Event Enquiries', slug: 'preventing-missed-event-enquiries' },
+  { title: 'Boosting Takeaway Orders with AI Phone Assistants', slug: 'boosting-takeaway-orders-ai-assistants' },
+  { title: 'Designing Accessibility-Friendly Phone Menus', slug: 'accessibility-friendly-phone-menus' },
+  { title: 'Leveraging Caller Data to Improve Menu Engineering', slug: 'caller-data-menu-engineering' },
+  { title: 'Hospitality AI ROI Benchmarks for Perth Operators', slug: 'hospitality-ai-roi-perth' },
+  { title: 'Crisis Communication Playbooks for WA Venues', slug: 'crisis-communication-playbooks-wa' },
+  { title: '24/7 Support Expectations from Perth Diners', slug: '24-7-support-expectations-perth' },
+  { title: 'How AI Protects Revenue During Staff Shortages', slug: 'ai-protects-revenue-staff-shortages' },
+  { title: 'Improving Function Space Utilisation with AI', slug: 'function-space-utilisation-ai' },
+  { title: 'AI Reception for Winery Restaurants in Swan Valley', slug: 'ai-reception-winery-restaurants-swan-valley' },
+  { title: 'WA Tourism Season Readiness Checklist for Restaurants', slug: 'wa-tourism-season-readiness' }
+];
+
 // Product landing pages
 const productPages = [
   { title: 'AI Restaurant Receptionist', slug: 'ai-restaurant-receptionist', feature: 'AI Receptionist' },
@@ -284,6 +320,20 @@ const productPages = [
   { title: 'Voice Ordering System', slug: 'voice-ordering-system', feature: 'Voice Orders' },
   { title: 'Restaurant SMS Marketing', slug: 'restaurant-sms-marketing', feature: 'SMS Marketing' },
   { title: 'Delivery Integration Platform', slug: 'delivery-integration-platform', feature: 'Delivery Management' }
+];
+
+// Additional feature landing pages for deeper coverage
+const expandedProductPages = [
+  { title: 'Multilingual AI Receptionist', slug: 'multilingual-ai-receptionist', feature: 'Multilingual Reception' },
+  { title: 'AI Reservation Waitlist Assistant', slug: 'ai-reservation-waitlist-assistant', feature: 'Smart Waitlists' },
+  { title: 'Restaurant Event Booking Assistant', slug: 'restaurant-event-booking-assistant', feature: 'Event Booking' },
+  { title: 'Hospitality AI Compliance Toolkit', slug: 'hospitality-ai-compliance-toolkit', feature: 'Compliance Tools' },
+  { title: 'AI Caller Sentiment Detection', slug: 'ai-caller-sentiment-detection', feature: 'Sentiment Analysis' },
+  { title: 'AI Shift-Handover Notes for Restaurants', slug: 'ai-shift-handover-notes', feature: 'Shift Handover' },
+  { title: 'Restaurant VIP Caller Recognition', slug: 'restaurant-vip-caller-recognition', feature: 'VIP Recognition' },
+  { title: 'AI Function Enquiry Routing', slug: 'ai-function-enquiry-routing', feature: 'Event Routing' },
+  { title: 'Swan Valley Winery Phone Automation', slug: 'swan-valley-winery-phone-automation', feature: 'Winery Automation' },
+  { title: 'AI Allergy-Safe Ordering Assistant', slug: 'ai-allergy-safe-ordering-assistant', feature: 'Allergy Safety' }
 ];
 
 // Generate suburb pages
@@ -367,6 +417,67 @@ perthSuburbs.forEach((suburb, index) => {
   console.log(`Created: ${filename}`);
 });
 
+console.log('\nGenerating 40 Additional WA Local SEO Pages...');
+expandedWARegions.forEach((suburb) => {
+  const slug = suburb.toLowerCase().replace(/ /g, '-');
+  const data = {
+    title: `AI Receptionist for ${suburb} Restaurants | DineTalk Perth & WA`,
+    description: `DineTalk provides AI-powered call answering and booking automation for restaurants in ${suburb}, Perth and WA. Reduce missed calls, capture every reservation, and deliver 24/7 hospitality.` ,
+    keywords: `AI receptionist ${suburb}, restaurant phone answering ${suburb}, Perth hospitality automation, booking AI ${suburb}, DineTalk ${suburb}`,
+    canonical: `https://dinetalk.com.au/pages/${slug}`,
+    h1: `AI Restaurant Receptionist Serving ${suburb} Venues`,
+    localArea: `${suburb}, Perth, Western Australia`,
+    content: `
+      <div class="content-section">
+        <h2>Always-On Phone Support for ${suburb} Venues</h2>
+        <p>${suburb} restaurants, cafes, and pubs deserve reliable phone coverage. DineTalk answers calls instantly, captures bookings, and routes enquiries without placing pressure on your front-of-house team.</p>
+        <p>Our Perth-based AI receptionist understands local dining expectations, from weekend rushes to regional tourism seasons across Western Australia.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>24/7 Answering</h3>
+          <p>Never miss a booking, even during peak service or after hours in ${suburb}.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Local Knowledge</h3>
+          <p>Shares parking tips, directions, and venue details tailored to ${suburb} diners.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Smart Routing</h3>
+          <p>Sends urgent calls to managers while handling routine questions automatically.</p>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>Why ${suburb} Operators Choose DineTalk</h2>
+        <p>Hospitality teams across ${suburb} and greater Perth trust DineTalk to reduce no-shows, improve caller experience, and keep staff focused on guests in venue.</p>
+
+        <h3>Quick Setup</h3>
+        <p>Launch in under a week with menu training, booking rules, and custom scripts for ${suburb} locals.</p>
+
+        <h3>Compliant and Secure</h3>
+        <p>Australian-hosted, privacy-conscious AI that protects guest data while delivering consistent service.</p>
+
+        <h3>Proven ROI</h3>
+        <p>Venues across Western Australia recover lost revenue from missed calls and secure more repeat guests.</p>
+      </div>
+    `,
+    internalLinks: [
+      { url: '/', text: 'DineTalk Home' },
+      { url: '/pages/perth-ai-receptionist', text: 'Perth AI Receptionist' },
+      { url: '/pages/ai-restaurant-receptionist', text: 'AI Receptionist Features' },
+      { url: '/pages/automated-booking-system', text: 'Booking Automation' },
+      { url: '/pages/restaurant-call-answering-service', text: 'Call Answering Service' }
+    ]
+  };
+
+  const filename = `${slug}.html`;
+  const filepath = path.join(__dirname, 'pages', filename);
+  fs.writeFileSync(filepath, generateSEOPage(data));
+  console.log(`Created: ${filename}`);
+});
+
 // Generate blog articles
 console.log('\nGenerating 40 Blog Articles...');
 blogTopics.forEach((topic, index) => {
@@ -438,6 +549,47 @@ blogTopics.forEach((topic, index) => {
     ]
   };
   
+  const filename = `blog-${topic.slug}.html`;
+  const filepath = path.join(__dirname, 'pages', filename);
+  fs.writeFileSync(filepath, generateSEOPage(data));
+  console.log(`Created: ${filename}`);
+});
+
+console.log('\nGenerating 20 Additional Blog Articles...');
+expandedBlogTopics.forEach((topic) => {
+  const data = {
+    title: `${topic.title} | DineTalk Blog`,
+    description: `${topic.title} - Practical guidance for Perth and WA restaurant teams looking to modernise phone answering and reservations with AI-backed workflows.`,
+    keywords: `Perth restaurant tips, WA hospitality automation, ${topic.slug}, ai receptionist guidance, perth bookings`,
+    canonical: `https://dinetalk.com.au/pages/blog/${topic.slug}`,
+    h1: topic.title,
+    content: `
+      <div class="content-section">
+        <p><em>Published on ${new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+
+        <h2>Why This Matters to Perth Hospitality</h2>
+        <p>${topic.title} is becoming a high-priority topic for venues competing for bookings across Perth and Western Australia. Operators need practical answers that account for local diner expectations and WA's tourism calendar.</p>
+
+        <h3>Common Challenges</h3>
+        <p>Missed calls, slow responses, and limited after-hours coverage cost Perth venues real revenue. AI reception creates a dependable safety net that protects every opportunity.</p>
+
+        <h3>Action Plan for WA Venues</h3>
+        <p>Audit your current phone flows, define scripts that match your brand voice, and connect DineTalk to your booking system so every enquiry receives a timely, accurate response.</p>
+
+        <h2>Local Success Indicators</h2>
+        <p>Track reductions in missed calls, improvements in booking conversion rate, and guest feedback mentioning fast answers. These metrics show whether your AI receptionist is delivering Perth-ready service.</p>
+      </div>
+    `,
+    ctaText: 'Talk to the DineTalk Perth Team',
+    internalLinks: [
+      { url: '/', text: 'DineTalk Home' },
+      { url: '/demo', text: 'Book a Demo' },
+      { url: '/pages/ai-restaurant-receptionist', text: 'AI Receptionist Features' },
+      { url: '/pages/perth-ai-receptionist', text: 'Perth AI Receptionist' },
+      { url: '/pages/restaurant-call-answering-service', text: 'Restaurant Phone Answering' }
+    ]
+  };
+
   const filename = `blog-${topic.slug}.html`;
   const filepath = path.join(__dirname, 'pages', filename);
   fs.writeFileSync(filepath, generateSEOPage(data));
@@ -567,10 +719,63 @@ productPages.forEach((product, index) => {
   console.log(`Created: ${filename}`);
 });
 
-console.log('\n✅ Successfully generated all 100 SEO pages!');
-console.log('- 40 Local SEO suburb pages');
-console.log('- 40 Blog articles');
-console.log('- 20 Product landing pages');
+console.log('\nGenerating 10 Additional Feature Landing Pages...');
+expandedProductPages.forEach((product) => {
+  const data = {
+    title: `${product.title} for Perth Restaurants | DineTalk`,
+    description: `${product.title} designed for Perth and WA venues. DineTalk's ${product.feature} keeps phones covered, bookings accurate, and guest experiences seamless.`,
+    keywords: `${product.title.toLowerCase()}, perth restaurant automation, wa hospitality technology, ${product.slug}, dinetalk features`,
+    canonical: `https://dinetalk.com.au/pages/${product.slug}`,
+    h1: `${product.title} for Perth Hospitality`,
+    content: `
+      <div class="content-section">
+        <h2>${product.feature} Built for WA Venues</h2>
+        <p>DineTalk's ${product.feature.toLowerCase()} is tuned for Australian hospitality, including Perth's diverse dining scene and regional tourism hubs.</p>
+
+        <h3>Rapid Deployment</h3>
+        <p>Launch in days with scripts, booking rules, and escalation paths tailored to your brand.</p>
+
+        <h3>Operational Consistency</h3>
+        <p>Give every caller the same accurate answers, no matter when they reach out or who is on shift.</p>
+
+        <h3>Data You Can Act On</h3>
+        <p>Track call reasons, booking intent, and frequent questions to refine service and staffing plans.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Benefits for Perth Restaurants</h2>
+        <p>Keep your team focused on guests in venue while DineTalk manages the phones with reliable, brand-safe automation.</p>
+
+        <h3>Reduce No-Shows</h3>
+        <p>Automatic confirmations and reminders cut costly gaps in your book.</p>
+
+        <h3>Convert More Enquiries</h3>
+        <p>Immediate, knowledgeable answers help callers choose your venue over competing Perth restaurants.</p>
+
+        <h3>Protect Brand Voice</h3>
+        <p>Scripts reflect your hospitality style, specials, and menu notes so every guest feels understood.</p>
+      </div>
+    `,
+    ctaText: 'See How This Feature Works',
+    internalLinks: [
+      { url: '/', text: 'DineTalk Home' },
+      { url: '/demo', text: 'Book a Demo' },
+      { url: '/pages/perth-ai-receptionist', text: 'Perth AI Receptionist' },
+      { url: '/pages/automated-booking-system', text: 'Automated Booking System' },
+      { url: '/pages/restaurant-analytics-dashboard', text: 'Restaurant Analytics' }
+    ]
+  };
+
+  const filename = `${product.slug}.html`;
+  const filepath = path.join(__dirname, 'pages', filename);
+  fs.writeFileSync(filepath, generateSEOPage(data));
+  console.log(`Created: ${filename}`);
+});
+
+console.log('\n✅ Successfully generated 150 SEO pages!');
+console.log('- 80 Local SEO suburb/regional pages');
+console.log('- 60 Blog articles');
+console.log('- 30 Product landing pages');
 console.log('\nAll pages include:');
 console.log('✓ Complete SEO metadata (title, description, keywords)');
 console.log('✓ Open Graph and Twitter card tags');
