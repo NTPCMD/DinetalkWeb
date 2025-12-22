@@ -1,6 +1,7 @@
 [build]
-  publish = "build"
-  command = "vite build && cp sitemap.xml robots.txt build/"
+  publish = "dist"
+  command = "vite build && cp sitemap.xml robots.txt dist/"
+  
 [[redirects]]
   from = "/portal/*"
   to = "/portal/index.html"
