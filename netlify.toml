@@ -1,3 +1,7 @@
 [build]
   publish = "build"
   command = "vite build && cp sitemap.xml robots.txt build/"
+[[redirects]]
+  from = "/portal/*"
+  to = "/portal/index.html"
+  status = 200
