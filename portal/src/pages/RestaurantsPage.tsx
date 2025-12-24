@@ -79,26 +79,28 @@ export default function RestaurantsPage() {
         {loading && <p>Loading…</p>}
         {!loading && restaurants.length === 0 && <p>No restaurants yet.</p>}
         {!loading && restaurants.length > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Timezone</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {restaurants.map((r) => (
-                <tr key={r.id}>
-                  <td>{r.name}</td>
-                  <td>{r.timezone}</td>
-                  <td>
-                    <Link to={`/r/${r.id}/dashboard`}>Open</Link>
-                  </td>
+          <div className="table-container">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Timezone</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {restaurants.map((r) => (
+                  <tr key={r.id}>
+                    <td>{r.name}</td>
+                    <td>{r.timezone}</td>
+                    <td>
+                      <Link to={`/r/${r.id}/dashboard`}>Open</Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

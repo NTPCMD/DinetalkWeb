@@ -38,48 +38,50 @@ export default function CallsPage() {
         {loading && <p>Loading…</p>}
         {!loading && calls.length === 0 && <p>No calls yet.</p>}
         {!loading && calls.length > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Started</th>
-                <th>Status</th>
-                <th>Duration</th>
-                <th>Recording</th>
-                <th>Transcript</th>
-                <th>Notes/Tags</th>
-              </tr>
-            </thead>
-            <tbody>
-              {calls.map((call) => (
-                <tr key={call.retell_call_id}>
-                  <td>{call.from_number ?? 'Unknown'}</td>
-                  <td>{call.to_number ?? 'Unknown'}</td>
-                  <td>{call.started_at ? new Date(call.started_at).toLocaleString() : '—'}</td>
-                  <td>{call.status ?? '—'}</td>
-                  <td>{call.duration_seconds ? `${call.duration_seconds}s` : '—'}</td>
-                  <td>
-                    {restaurant.recordings_enabled && call.recording_url ? (
-                      <audio controls src={call.recording_url} />
-                    ) : (
-                      <span className="text-muted">Unavailable</span>
-                    )}
-                  </td>
-                  <td style={{ maxWidth: 240 }}>
-                    {restaurant.transcripts_enabled && call.transcript ? (
-                      <div style={{ whiteSpace: 'pre-wrap' }}>{call.transcript}</div>
-                    ) : (
-                      <span className="text-muted">Hidden</span>
-                    )}
-                  </td>
-                  <td>
-                    <textarea className="input" placeholder="Optional notes or tags" rows={2} />
-                  </td>
+          <div className="table-container">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Started</th>
+                  <th>Status</th>
+                  <th>Duration</th>
+                  <th>Recording</th>
+                  <th>Transcript</th>
+                  <th>Notes/Tags</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {calls.map((call) => (
+                  <tr key={call.retell_call_id}>
+                    <td>{call.from_number ?? 'Unknown'}</td>
+                    <td>{call.to_number ?? 'Unknown'}</td>
+                    <td>{call.started_at ? new Date(call.started_at).toLocaleString() : '—'}</td>
+                    <td>{call.status ?? '—'}</td>
+                    <td>{call.duration_seconds ? `${call.duration_seconds}s` : '—'}</td>
+                    <td>
+                      {restaurant.recordings_enabled && call.recording_url ? (
+                        <audio controls src={call.recording_url} />
+                      ) : (
+                        <span className="text-muted">Unavailable</span>
+                      )}
+                    </td>
+                    <td style={{ maxWidth: 240 }}>
+                      {restaurant.transcripts_enabled && call.transcript ? (
+                        <div style={{ whiteSpace: 'pre-wrap' }}>{call.transcript}</div>
+                      ) : (
+                        <span className="text-muted">Hidden</span>
+                      )}
+                    </td>
+                    <td>
+                      <textarea className="input" placeholder="Optional notes or tags" rows={2} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

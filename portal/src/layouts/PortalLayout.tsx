@@ -12,11 +12,13 @@ export default function PortalLayout() {
   const [selectedId, setSelectedId] = useState<string | undefined>(() =>
     localStorage.getItem('portal:lastRestaurant') || undefined,
   );
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (params.id) {
       setSelectedId(params.id);
       localStorage.setItem('portal:lastRestaurant', params.id);
+      setMenuOpen(false);
     }
   }, [params.id]);
 
@@ -48,14 +50,25 @@ export default function PortalLayout() {
     setSelectedId(id);
     localStorage.setItem('portal:lastRestaurant', id);
     navigate(`/r/${id}/dashboard`);
+    setMenuOpen(false);
   };
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
-        <div className="mb-4">
-          <div className="text-sm text-muted">Account</div>
-          <div className="font-semibold">{account?.name ?? 'N/A'}</div>
+      <aside className={`sidebar ${menuOpen ? 'sidebar-open' : ''}`}>
+        <div className="sidebar-header">
+          <div>
+            <div className="text-sm text-muted">Account</div>
+            <div className="font-semibold">{account?.name ?? 'N/A'}</div>
+          </div>
+          <button
+            className="icon-button hide-desktop"
+            type="button"
+            aria-label="Close navigation"
+            onClick={() => setMenuOpen(false)}
+          >
+            ✕
+          </button>
         </div>
         <div className="mb-4">
           <div className="text-sm text-muted">Restaurant</div>
@@ -81,6 +94,7 @@ export default function PortalLayout() {
               key={link.to}
               to={link.to}
               className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </NavLink>
@@ -90,7 +104,27 @@ export default function PortalLayout() {
           Logout
         </button>
       </aside>
+      {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} />}
       <main className="content">
+        <div className="mobile-topbar">
+          <button
+            className="icon-button"
+            type="button"
+            aria-label="Open navigation"
+            onClick={() => setMenuOpen(true)}
+          >
+            ☰
+          </button>
+          <div className="mobile-topbar__titles">
+            <div className="mobile-topbar__account">{account?.name ?? 'Account'}</div>
+            <div className="mobile-topbar__restaurant">
+              {currentRestaurant ? currentRestaurant.name : 'Select a restaurant'}
+            </div>
+          </div>
+          <button className="link-button" type="button" onClick={signOut}>
+            Logout
+          </button>
+        </div>
         <Outlet context={{ restaurant: currentRestaurant, restaurants }} />
       </main>
     </div>
