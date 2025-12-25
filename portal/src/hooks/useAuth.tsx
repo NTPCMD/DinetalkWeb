@@ -25,6 +25,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const loadAccountWithRetry = async (userId: string) => {
     let attempts = 0;
     let found: Account | null = null;
+    const start = Date.now();
 
     // Keep loading state scoped to the fetch cycle so ProtectedRoute can render
     // a provisioning UI instead of an "account not found" error.
@@ -39,13 +40,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
         continue;
       }
 
-      const { data, error } = await supabase
+      const { data, error, status } = await supabase
         .from('accounts')
         .select('*')
         .eq('owner_user_id', userId)
         .maybeSingle();
 
+      const stillSettling = status && (status === 401 || status === 406);
+      const withinGrace = Date.now() - start < 1200;
+
       if (error) {
+        if (stillSettling && withinGrace) {
+          attempts += 1;
+          await delay(400);
+          continue;
+        }
         console.error('Failed to load account', error);
       }
 
@@ -54,7 +63,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       if (!found) {
         attempts += 1;
         if (attempts < 3) {
-          await delay(350);
+          await delay(400);
         }
       }
     }

@@ -35,12 +35,14 @@
 
     <script>
       (function () {
-        // Fallback: if Supabase sends users to the marketing root with an auth code,
-        // forward them into the portal callback route to complete the session exchange.
+        // Fallback: if Supabase sends users to the marketing root with an auth code or error,
+        // forward them into the portal routes to complete the session exchange or show an error.
         var search = window.location.search || '';
         if (search.indexOf('code=') !== -1) {
           var target = '/portal/auth/callback' + search + (window.location.hash || '');
           window.location.replace(target);
+        } else if (search.indexOf('error=') !== -1) {
+          window.location.replace('/portal/login' + search + (window.location.hash || ''));
         }
       })();
     </script>

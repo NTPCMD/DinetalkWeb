@@ -25,6 +25,12 @@ export default function App() {
     if (params.has('code')) {
       const target = `${window.location.origin}/portal/auth/callback${window.location.search}${window.location.hash}`;
       window.location.replace(target);
+      return;
+    }
+
+    if (params.has('error')) {
+      const target = `${window.location.origin}/portal/login${window.location.search}${window.location.hash}`;
+      window.location.replace(target);
     }
   }, []);
 

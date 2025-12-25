@@ -7,13 +7,25 @@ export default function AuthCallbackPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.exchangeCodeForSession(window.location.href).then(({ error: exchangeError }) => {
+    let cancelled = false;
+    const run = async () => {
+      const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(window.location.href);
       if (exchangeError) {
-        setError(exchangeError.message);
-      } else {
+        if (!cancelled) setError(exchangeError.message);
+        return;
+      }
+
+      const session = await waitForStableSession();
+      if (!cancelled && session) {
         navigate('/restaurants', { replace: true });
       }
-    });
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
   }, [navigate]);
 
   if (error) {
@@ -33,4 +45,19 @@ export default function AuthCallbackPage() {
       <p>Completing sign in…</p>
     </div>
   );
+}
+
+async function waitForStableSession(attempts = 3, delayMs = 350) {
+  let tries = 0;
+  while (tries < attempts) {
+    const { data } = await supabase.auth.getSession();
+    if (data.session) return data.session;
+
+    tries += 1;
+    if (tries < attempts) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+
+  return null;
 }
