@@ -21,7 +21,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+
     supabase.auth.getSession().then(({ data }) => {
+      if (!active) return;
       setSession(data.session);
       setUser(data.session?.user ?? null);
       setLoading(false);
@@ -36,16 +39,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
     });
 
     return () => {
+      active = false;
       authListener.subscription.unsubscribe();
     };
   }, []);
 
   useEffect(() => {
-    if (!session) {
+    if (!session?.user) {
       setAccount(null);
       return;
     }
-    refreshAccount();
+
+    ensureProvisioned(session.user).then(() => refreshAccount());
   }, [session]);
 
   const refreshAccount = async () => {
@@ -80,4 +85,42 @@ export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');
   return ctx;
+}
+
+async function ensureProvisioned(user: User) {
+  const fullName =
+    (typeof user.user_metadata?.full_name === 'string' && user.user_metadata.full_name) || user.email;
+
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (!profile && !profileError) {
+    const { error } = await supabase.from('profiles').insert({
+      id: user.id,
+      email: user.email,
+      full_name: fullName,
+    });
+    if (error) {
+      console.error('Failed to create profile', error);
+    }
+  }
+
+  const { data: existingAccount, error: accountError } = await supabase
+    .from('accounts')
+    .select('id')
+    .eq('owner_user_id', user.id)
+    .maybeSingle();
+
+  if (!existingAccount && !accountError) {
+    const { error } = await supabase.from('accounts').insert({
+      owner_user_id: user.id,
+      name: fullName || 'My Account',
+    });
+    if (error) {
+      console.error('Failed to create account', error);
+    }
+  }
 }

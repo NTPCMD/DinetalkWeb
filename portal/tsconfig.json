@@ -18,6 +18,7 @@
       "@/components/*": ["src/components/*"],
       "@/lib/*": ["src/lib/*"],
       "@/types/*": ["src/types/*"],
+      "@/types": ["src/types/index"],
       "@/hooks/*": ["src/hooks/*"],
       "@/pages/*": ["src/pages/*"]
     }
