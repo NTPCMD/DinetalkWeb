@@ -1,7 +1,7 @@
 [build]
   publish = "dist"
-  command = "vite build && cp sitemap.xml robots.txt dist/"
-  
+  command = "npm run build && npm ci --prefix portal && npm run build --prefix portal && mkdir -p dist/portal && cp -r portal/dist/. dist/portal && cp sitemap.xml robots.txt dist/"
+
 [[redirects]]
   from = "/portal/*"
   to = "/portal/index.html"

@@ -1,11 +1,46 @@
+# DineTalk Website Layout & Client Portal
 
-  # DineTalk Website Layout
+This repository contains the marketing site plus a Supabase-backed client portal for restaurant owners.
 
-  This is a code bundle for DineTalk Website Layout. The original project is available at 
+## Prerequisites
+- Node.js 18+
+- npm
+- Supabase project with existing tables and RLS as provisioned
 
-  ## Running the code
+## Environment variables
+Set these locally (e.g. `.env` files) and in Netlify:
 
-  Run `npm i` to install the dependencies.
+```
+VITE_SUPABASE_URL=<your-supabase-url>
+VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+SUPABASE_SERVICE_ROLE_KEY=<service-role-key-for-functions>
+```
 
-  Run `npm run dev` to start the development server.
-  
+## Development
+
+### Marketing site (root)
+```
+npm install
+npm run dev
+```
+
+### Client portal (Vite + React + TypeScript)
+```
+cd portal
+npm install
+npm run dev
+```
+The portal runs on `/portal` with SPA routing that supports `/portal/*`.
+
+## Building for Netlify
+The Netlify build packs both apps:
+```
+npm run build             # builds marketing site to dist/
+npm run build --prefix portal
+cp -r portal/dist dist/portal
+cp sitemap.xml robots.txt dist/
+```
+Netlify will publish the `dist` directory. Redirects for `/portal/*` are already configured in `netlify.toml`.
+
+## Retell webhook (optional storage stub)
+A Netlify function exists at `/.netlify/functions/retell-webhook` that accepts POST payloads from Retell, maps restaurants by `retell_phone_number`, and upserts `call_logs` using the Supabase REST API. Provide `VITE_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` so the function can authenticate.

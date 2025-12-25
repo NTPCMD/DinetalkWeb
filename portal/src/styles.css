@@ -1,0 +1,269 @@
+:root {
+  color-scheme: light;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  color: #0b0f1a;
+  background-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #0c1a33;
+  color: #ffffff;
+  padding: 24px;
+  flex-shrink: 0;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.sidebar nav a.active, .sidebar nav a:hover {
+  background: #14294a;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d9e2f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(12, 26, 51, 0.06);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background: #1d4ed8;
+  border-radius: 10px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(29, 78, 216, 0.18);
+}
+
+.button.secondary {
+  background: #0b0f1a;
+  color: #ffffff;
+}
+
+.input, .select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #bcc9e0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #0b0f1a;
+}
+
+.form-row {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #d9e2f0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #0c1a33;
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+}
+
+.flex { display: flex; }
+.gap { gap: 12px; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.text-muted { color: #1f2937; }
+
+.icon-button {
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.link-button {
+  background: transparent;
+  border: none;
+  color: #1d4ed8;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mobile-topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #0c1a33;
+  color: #ffffff;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
+.mobile-topbar__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-topbar__account {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.mobile-topbar__restaurant {
+  font-weight: 700;
+}
+
+.nav-overlay {
+  display: none;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table-container .table {
+  min-width: 640px;
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    max-width: 320px;
+    width: 86%;
+    min-height: 100vh;
+    z-index: 10;
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 8;
+  }
+
+  .mobile-topbar {
+    display: flex;
+  }
+
+  .hide-desktop {
+    display: inline-flex;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 961px) {
+  .mobile-topbar {
+    display: none;
+  }
+
+  .hide-desktop {
+    display: none;
+  }
+}
