@@ -19,6 +19,52 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
   const [loading, setLoading] = useState(true);
+  const [accountLoading, setAccountLoading] = useState(false);
+  const [provisioning, setProvisioning] = useState(false);
+
+  const loadAccountWithRetry = async (userId: string) => {
+    let attempts = 0;
+    let found: Account | null = null;
+
+    // Keep loading state scoped to the fetch cycle so ProtectedRoute can render
+    // a provisioning UI instead of an "account not found" error.
+    setAccountLoading(true);
+    setProvisioning(false);
+
+    while (attempts < 3 && !found) {
+      const stableSession = await waitForStableSession();
+      if (!stableSession) {
+        attempts += 1;
+        await delay(350);
+        continue;
+      }
+
+      const { data, error } = await supabase
+        .from('accounts')
+        .select('*')
+        .eq('owner_user_id', userId)
+        .maybeSingle();
+
+      if (error) {
+        console.error('Failed to load account', error);
+      }
+
+      found = data ?? null;
+
+      if (!found) {
+        attempts += 1;
+        if (attempts < 3) {
+          await delay(350);
+        }
+      }
+    }
+
+    setAccount(found);
+    setAccountLoading(false);
+    setProvisioning(!found);
+
+    return Boolean(found);
+  };
 
   useEffect(() => {
     let active = true;
@@ -47,26 +93,46 @@ export function AuthProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     if (!session?.user) {
       setAccount(null);
+      setProvisioning(false);
+      setAccountLoading(false);
       return;
     }
 
-    ensureProvisioned(session.user).then(() => refreshAccount());
+    let cancelled = false;
+    const attemptLoad = async () => {
+      const stableSession = await waitForStableSession();
+      if (!stableSession) return;
+
+      await ensureProvisioned(session.user);
+      const found = await loadAccountWithRetry(session.user.id);
+      if (cancelled) return;
+
+      if (!found) {
+        setProvisioning(true);
+      }
+    };
+
+    attemptLoad();
+
+    return () => {
+      cancelled = true;
+    };
   }, [session]);
+
+  useEffect(() => {
+    if (!session?.user || account || accountLoading) return;
+
+    const retryId = window.setTimeout(() => {
+      loadAccountWithRetry(session.user!.id);
+    }, 1000);
+
+    return () => window.clearTimeout(retryId);
+  }, [session, account, accountLoading]);
 
   const refreshAccount = async () => {
     if (!session?.user) return;
-    setLoading(true);
-    const { data, error } = await supabase
-      .from('accounts')
-      .select('*')
-      .eq('owner_user_id', session.user.id)
-      .maybeSingle();
-
-    if (error) {
-      console.error('Failed to load account', error);
-    }
-    setAccount(data ?? null);
-    setLoading(false);
+    setProvisioning(false);
+    await loadAccountWithRetry(session.user.id);
   };
 
   const signOut = async () => {
@@ -75,7 +141,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
   };
 
   return (
-    <AuthContext.Provider value={{ session, user, account, loading, refreshAccount, signOut }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        user,
+        account,
+        loading: loading || accountLoading || provisioning,
+        refreshAccount,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -123,4 +198,21 @@ async function ensureProvisioned(user: User) {
       console.error('Failed to create account', error);
     }
   }
+}
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function waitForStableSession(attempts = 3, delayMs = 350) {
+  let tries = 0;
+  while (tries < attempts) {
+    const { data } = await supabase.auth.getSession();
+    if (data.session) return data.session;
+
+    tries += 1;
+    if (tries < attempts) {
+      await delay(delayMs);
+    }
+  }
+
+  return null;
 }

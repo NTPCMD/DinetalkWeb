@@ -17,9 +17,9 @@ function ProtectedRoute() {
   const { session, account, loading } = useAuth();
   const location = useLocation();
 
-  if (loading) return <div style={{ padding: 24 }}>Loading…</div>;
+  if (loading) return <div style={{ padding: 24 }}>Setting up your account…</div>;
   if (!session) return <Navigate to="/login" replace state={{ from: location }} />;
-  if (!account) return <div style={{ padding: 24 }}>Account not found.</div>;
+  if (!account) return <div style={{ padding: 24 }}>Setting up your account…</div>;
 
   return <Outlet />;
 }
@@ -28,6 +28,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
