@@ -21,6 +21,16 @@ export default function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('code')) {
+      const target = `${window.location.origin}/portal/auth/callback${window.location.search}${window.location.hash}`;
+      window.location.replace(target);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const normalized = ensureValidPath(window.location.pathname);
     if (normalized !== window.location.pathname) {
       window.history.replaceState({}, '', normalized);
