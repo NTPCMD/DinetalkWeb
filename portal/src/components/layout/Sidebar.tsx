@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Buildings, PhoneCall } from 'lucide-react';
+import { Building2, PhoneCall } from 'lucide-react';
 
 interface Props {
   restaurantId?: string;
@@ -21,7 +21,7 @@ export function Sidebar({ restaurantId }: Props) {
       </div>
       <nav className="space-y-1">
         <NavLink to="/restaurants" className={navLinkClass} end>
-          <Buildings className="h-4 w-4" />
+          <Building2 className="h-4 w-4" />
           Restaurants
         </NavLink>
         {restaurantId ? (
