@@ -1,45 +1,58 @@
-import { FormEvent, useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/hooks/useAuth';
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { session } = useAuth();
-  const [searchParams] = useSearchParams();
-
-  useEffect(() => {
-    if (session) {
-      navigate('/restaurants', { replace: true });
-    }
-  }, [session, navigate]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error, data } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+        emailRedirectTo: `${window.location.origin}/portal/auth/callback`,
+      },
     });
+
     if (error) {
       setMessage(error.message);
     } else {
-      const redirectTo = searchParams.get('next') ?? '/restaurants';
-      navigate(redirectTo);
+      if (data.session) {
+        navigate('/restaurants');
+      } else {
+        setMessage('Check your email to confirm your account.');
+      }
     }
     setLoading(false);
   };
 
   return (
     <div style={{ maxWidth: 460, margin: '80px auto', padding: 24 }} className="card">
-      <h2>Login</h2>
-      <p className="text-muted">Enter your credentials to access the portal.</p>
+      <h2>Create account</h2>
+      <p className="text-muted">Start managing your restaurants in the portal.</p>
       <form onSubmit={handleSubmit}>
+        <div className="form-row">
+          <label htmlFor="name">Full name</label>
+          <input
+            id="name"
+            className="input"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            placeholder="Alex Smith"
+            required
+          />
+        </div>
         <div className="form-row">
           <label htmlFor="email">Email</label>
           <input
@@ -64,16 +77,14 @@ export default function LoginPage() {
             required
           />
         </div>
-        <div className="flex justify-between align-center mb-3" style={{ gap: 12 }}>
-          <Link to="/forgot-password" className="link-button">
-            Forgot password?
-          </Link>
-          <Link to="/signup" className="link-button">
-            Create account
+        <div className="flex align-center mb-3" style={{ gap: 8 }}>
+          <span>Already have an account?</span>
+          <Link to="/login" className="link-button">
+            Sign in
           </Link>
         </div>
         <button className="button" type="submit" disabled={loading}>
-          {loading ? 'Signing in…' : 'Sign in'}
+          {loading ? 'Creating…' : 'Create account'}
         </button>
       </form>
       {message && <p className="mb-3">{message}</p>}

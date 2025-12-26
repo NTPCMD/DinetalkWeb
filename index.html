@@ -33,6 +33,20 @@
     <meta name="theme-color" content="#ff9936" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <script>
+      (function () {
+        // Fallback: if Supabase sends users to the marketing root with an auth code or error,
+        // forward them into the portal routes to complete the session exchange or show an error.
+        var search = window.location.search || '';
+        if (search.indexOf('code=') !== -1) {
+          var target = '/portal/auth/callback' + search + (window.location.hash || '');
+          window.location.replace(target);
+        } else if (search.indexOf('error=') !== -1) {
+          window.location.replace('/portal/login' + search + (window.location.hash || ''));
+        }
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
