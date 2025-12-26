@@ -1,6 +1,6 @@
 # DineTalk Website Layout & Client Portal
 
-This repository contains the marketing site plus a Supabase-backed client portal for restaurant owners.
+This repository contains the public marketing site plus the `/portal` customer portal for the Voice AI Wrapper v0.1.
 
 ## Prerequisites
 - Node.js 18+
@@ -17,6 +17,12 @@ VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 SUPABASE_SERVICE_ROLE_KEY=<service-role-key-for-functions>
 ```
 
+Portal auth uses **email + password only**. Configure Supabase redirect URLs to include:
+
+- `https://dinetalk.com.au/portal/auth/callback`
+- `https://dinetalk.com.au/portal/*`
+- `http://localhost:5174/portal/auth/callback` (local dev)
+
 ## Development
 
 ### Marketing site (root)
@@ -31,15 +37,10 @@ cd portal
 npm install
 npm run dev
 ```
-The portal runs on `/portal` with SPA routing that supports `/portal/*`.
 
-Supabase redirect URLs should include:
-- `https://dinetalk.com.au/portal`
-- `https://dinetalk.com.au/portal/`
-- `https://dinetalk.com.au/portal/*`
-- `https://dinetalk.com.au/portal/auth/callback`
+The portal runs on `/portal` with SPA routing for `/portal/*`. Signup uses `supabase.auth.signUp` with `emailRedirectTo = ${window.location.origin}/portal/auth/callback`. The callback route exchanges the code, polls for a stable session, checks `accounts` provisioning, then forwards to `/portal/restaurants`.
 
-The app uses email + password auth flows with a dedicated callback route. New signups are provisioned by the client to ensure `profiles` and `accounts` rows exist (id = `auth.uid()`).
+Account provisioning is asynchronous. If an account row is not found yet, the UI shows “Setting up your account…” and retries silently before surfacing any errors.
 
 ## Building for Netlify
 The Netlify build packs both apps:

@@ -1,108 +1,113 @@
-import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useOutletContext, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { EmptyState } from '@/components/common/EmptyState';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/hooks/useAuth';
-import { useRestaurants } from '@/hooks/useRestaurants';
+import type { PortalOutletContext } from '@/routes/types';
 
 export default function RestaurantsPage() {
-  const { account } = useAuth();
-  const { restaurants, setRestaurants, loading } = useRestaurants(account?.id);
+  const { account, restaurants, refreshRestaurants } = useOutletContext<PortalOutletContext>();
   const [name, setName] = useState('');
-  const [timezone, setTimezone] = useState('Australia/Sydney');
+  const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
 
-  const handleCreate = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!account) return;
-    setSaving(true);
+  const handleCreate = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setCreating(true);
     setError(null);
-    const { data, error: insertError } = await supabase
-      .from('restaurants')
-      .insert({
-        account_id: account.id,
-        name,
-        timezone,
-        calls_portal_enabled: false,
-        recordings_enabled: false,
-        transcripts_enabled: false,
-      })
-      .select()
-      .single();
+    const { error: insertError } = await supabase.from('restaurants').insert({
+      name,
+      account_id: account.id,
+    });
+    setCreating(false);
 
     if (insertError) {
       setError(insertError.message);
-    } else if (data) {
-      setRestaurants([data, ...restaurants]);
-      setName('');
+      return;
     }
-    setSaving(false);
+
+    setName('');
+    await refreshRestaurants();
   };
 
   return (
-    <div className="content">
-      <div className="header">
-        <h2>Your restaurants</h2>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-slate-900">Restaurants</h1>
+          <p className="text-sm text-slate-600">Manage the locations connected to your Voice AI agent.</p>
+        </div>
       </div>
-      <div className="card">
-        <h3>Create restaurant</h3>
-        <form onSubmit={handleCreate}>
-          <div className="form-row">
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              className="input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle>Add a restaurant</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form className="grid grid-cols-1 gap-4 md:grid-cols-[2fr,auto]" onSubmit={handleCreate}>
+            <div className="space-y-2">
+              <Label htmlFor="restaurant-name">Name</Label>
+              <Input
+                id="restaurant-name"
+                placeholder="Frankie's Pizza"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex items-end">
+              <Button type="submit" disabled={creating || !name.trim()} className="w-full md:w-auto">
+                {creating ? 'Creating...' : 'Create restaurant'}
+              </Button>
+            </div>
+          </form>
+          {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle>Locations</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {restaurants.length === 0 ? (
+            <EmptyState
+              title="No restaurants yet"
+              description="Create your first restaurant to start reviewing call history."
             />
-          </div>
-          <div className="form-row">
-            <label htmlFor="tz">Timezone</label>
-            <input
-              id="tz"
-              className="input"
-              value={timezone}
-              onChange={(e) => setTimezone(e.target.value)}
-              placeholder="Australia/Sydney"
-              required
-            />
-          </div>
-          <button className="button" disabled={saving}>
-            {saving ? 'Creating…' : 'Create'}
-          </button>
-        </form>
-        {error && <p className="text-muted">{error}</p>}
-      </div>
-      <div className="card">
-        <h3>Restaurants</h3>
-        {loading && <p>Loading…</p>}
-        {!loading && restaurants.length === 0 && <p>No restaurants yet.</p>}
-        {!loading && restaurants.length > 0 && (
-          <div className="table-container">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Timezone</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {restaurants.map((r) => (
-                  <tr key={r.id}>
-                    <td>{r.name}</td>
-                    <td>{r.timezone}</td>
-                    <td>
-                      <Link to={`/r/${r.id}/dashboard`}>Open</Link>
-                    </td>
-                  </tr>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Calls</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {restaurants.map((restaurant) => (
+                  <TableRow key={restaurant.id}>
+                    <TableCell className="font-medium text-slate-900">{restaurant.name}</TableCell>
+                    <TableCell className="text-sm text-slate-600">{restaurant.calls_portal_enabled ? 'Enabled' : 'Disabled'}</TableCell>
+                    <TableCell className="text-right text-sm">
+                      <Link
+                        to={`/r/${restaurant.id}/calls`}
+                        className="text-primary font-semibold hover:underline"
+                      >
+                        View calls
+                      </Link>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+              </TableBody>
+            </Table>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
