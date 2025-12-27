@@ -9,7 +9,12 @@ export interface Restaurant {
   name: string;
   account_id?: string;
   calls_portal_enabled?: boolean;
+  phone_number?: string | null;
+  transfer_phone?: string | null;
+  address?: string | null;
+  timezone?: string | null;
   created_at?: string;
+  features?: Record<string, unknown> | null;
 }
 
 export interface CallLog {

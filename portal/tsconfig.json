@@ -16,9 +16,11 @@
     "baseUrl": "./",
     "paths": {
       "@/components/*": ["src/components/*"],
+      "@/context/*": ["src/context/*"],
       "@/lib/*": ["src/lib/*"],
+      "@/ui/*": ["src/ui/*"],
       "@/types/*": ["src/types/*"],
-      "@/types": ["src/types/index"],
+      "@/types": ["src/types"],
       "@/hooks/*": ["src/hooks/*"],
       "@/pages/*": ["src/pages/*"]
     }

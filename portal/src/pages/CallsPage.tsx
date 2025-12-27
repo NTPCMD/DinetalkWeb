@@ -1,73 +1,33 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { format } from 'date-fns';
-import { supabase } from '@/lib/supabaseClient';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { EmptyState } from '@/components/common/EmptyState';
-import { LoadingState } from '@/components/common/LoadingState';
-import { Button } from '@/components/ui/button';
-import type { PortalOutletContext } from '@/routes/types';
-import type { CallLog, Restaurant } from '@/types';
+import { Phone, Volume2, FileText } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
+import { Badge } from '@/ui/badge';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/ui/sheet';
+import { useCallLogs } from '@/hooks/useCallLogs';
+import type { CallLog } from '@/types';
 
-export default function CallsPage() {
-  const { restaurantId } = useParams<{ restaurantId: string }>();
-  const navigate = useNavigate();
-  const { restaurants } = useOutletContext<PortalOutletContext>();
-  const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
-  const [calls, setCalls] = useState<CallLog[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+function getOutcomeBadge(status?: string) {
+  const outcome = status?.toLowerCase();
+  const variants: Record<string, { variant: 'default' | 'secondary' | 'destructive'; label: string }> = {
+    answered: { variant: 'default', label: 'Answered' },
+    completed: { variant: 'default', label: 'Completed' },
+    missed: { variant: 'destructive', label: 'Missed' },
+    transferred: { variant: 'secondary', label: 'Transferred' },
+  };
+  const config = (outcome && variants[outcome]) || variants.answered;
+  return <Badge variant={config.variant}>{config.label}</Badge>;
+}
+
+export function CallsPage() {
+  const { calls, loading, error } = useCallLogs();
   const [selectedCall, setSelectedCall] = useState<CallLog | null>(null);
 
   useEffect(() => {
-    const loadRestaurantAndCalls = async () => {
-      if (!restaurantId) return;
-      setLoading(true);
-      setError(null);
-      const { data: restaurantRow, error: restaurantError } = await supabase
-        .from('restaurants')
-        .select('id, name, calls_portal_enabled')
-        .eq('id', restaurantId)
-        .maybeSingle();
-
-      if (restaurantError) {
-        setError(restaurantError.message);
-        setLoading(false);
-        return;
-      }
-
-      if (!restaurantRow) {
-        setError('Restaurant not found.');
-        setLoading(false);
-        return;
-      }
-
-      setRestaurant(restaurantRow as Restaurant);
-
-      const { data: callRows, error: callError } = await supabase
-        .from('call_logs')
-        .select('id, restaurant_id, customer_name, customer_phone, status, recording_url, transcript, created_at, duration_seconds')
-        .eq('restaurant_id', restaurantRow.id)
-        .order('created_at', { ascending: false });
-
-      if (callError) {
-        setError(callError.message);
-        setLoading(false);
-        return;
-      }
-
-      const parsedCalls = (callRows as CallLog[]) ?? [];
-      setCalls(parsedCalls);
-      setSelectedCall(parsedCalls[0] ?? null);
-      setLoading(false);
-    };
-
-    void loadRestaurantAndCalls();
-  }, [restaurantId]);
-
-  const callsEnabled = restaurant?.calls_portal_enabled ?? false;
+    if (!selectedCall && calls.length > 0) {
+      setSelectedCall(calls[0]);
+    }
+  }, [calls, selectedCall]);
 
   const formattedCalls = useMemo(
     () =>
@@ -75,131 +35,137 @@ export default function CallsPage() {
         ...call,
         createdLabel: call.created_at ? format(new Date(call.created_at), 'MMM d, yyyy h:mm a') : '—',
       })),
-    [calls]
+    [calls],
   );
 
-  if (!restaurantId) {
-    return <EmptyState title="Choose a restaurant" description="Select a location to view call history." />;
-  }
-
-  if (loading) {
-    return <LoadingState message="Loading call history..." className="min-h-[60vh]" />;
-  }
-
-  if (error) {
-    return (
-      <div className="space-y-4">
-        <Card>
-          <CardContent className="py-10 text-center text-sm text-red-600">{error}</CardContent>
-        </Card>
-        <Button variant="outline" onClick={() => navigate('/restaurants')}>
-          Back to restaurants
-        </Button>
-      </div>
-    );
-  }
-
-  if (!callsEnabled) {
-    return <EmptyState title="Call history not enabled" description="This restaurant is not configured for call logs." />;
-  }
-
   return (
-    <div className="grid grid-cols-1 gap-6 xl:grid-cols-[2fr,1fr]">
-      <div className="space-y-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Call history</h1>
-          <p className="text-sm text-slate-600">Recent calls for {restaurant?.name}</p>
-        </div>
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle>Calls</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            {formattedCalls.length === 0 ? (
-              <EmptyState title="No calls yet" description="Call activity will appear here once your agent is live." />
-            ) : (
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Time</TableHead>
-                      <TableHead>Customer</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Duration</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {formattedCalls.map((call) => (
-                      <TableRow key={call.id} onClick={() => setSelectedCall(call)} className="cursor-pointer">
-                        <TableCell>{call.createdLabel}</TableCell>
-                        <TableCell className="font-medium text-slate-900">
-                          {call.customer_name || call.customer_phone || 'Unknown caller'}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={call.status === 'completed' ? 'success' : 'default'}>
-                            {call.status || '—'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{call.duration_seconds ? `${call.duration_seconds}s` : '—'}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-semibold text-foreground">Calls</h1>
+        <p className="mt-1 text-muted-foreground">View and manage all call activity</p>
       </div>
 
-      <div className="space-y-4">
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle>Call details</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-slate-700">
-            {selectedCall ? (
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xs uppercase text-slate-500">Customer</p>
-                  <p className="font-semibold text-slate-900">
-                    {selectedCall.customer_name || selectedCall.customer_phone || 'Unknown caller'}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div>
-                    <p className="text-slate-500">Placed</p>
-                    <p className="font-semibold text-slate-900">{selectedCall.created_at ? formattedCalls.find((c) => c.id === selectedCall.id)?.createdLabel : '—'}</p>
+      <Card className="shadow-sm">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle>Call History</CardTitle>
+            {loading ? <span className="text-xs text-muted-foreground">Loading...</span> : null}
+          </div>
+        </CardHeader>
+        <CardContent>
+          {error ? (
+            <p className="text-sm text-destructive">{error}</p>
+          ) : formattedCalls.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No calls yet. Activity will appear once calls are processed.</p>
+          ) : (
+            <div className="space-y-1">
+              <div className="grid grid-cols-6 gap-4 border-b pb-3 text-sm font-medium text-muted-foreground">
+                <div className="col-span-2">Caller / Time</div>
+                <div>Duration</div>
+                <div>Status</div>
+                <div>Recording</div>
+                <div>Transcript</div>
+              </div>
+
+              {formattedCalls.map((call) => (
+                <button
+                  type="button"
+                  key={call.id}
+                  className="grid grid-cols-6 gap-4 border-b py-4 text-left transition-colors last:border-0 hover:bg-muted/40"
+                  onClick={() => setSelectedCall(call)}
+                >
+                  <div className="col-span-2">
+                    <p className="font-medium text-foreground">{call.customer_phone || call.customer_name || 'Unknown caller'}</p>
+                    <p className="text-sm text-muted-foreground">{call.createdLabel}</p>
                   </div>
-                  <div>
-                    <p className="text-slate-500">Status</p>
-                    <p className="font-semibold text-slate-900">{selectedCall.status || '—'}</p>
+                  <div className="flex items-center text-foreground">
+                    {call.duration_seconds ? `${call.duration_seconds}s` : '—'}
+                  </div>
+                  <div className="flex items-center">{getOutcomeBadge(call.status)}</div>
+                  <div className="flex items-center text-muted-foreground">
+                    {call.recording_url ? <Volume2 className="h-4 w-4 text-primary" /> : <span className="text-sm">—</span>}
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    {call.transcript ? <FileText className="h-4 w-4 text-green-600" /> : <span className="text-sm">—</span>}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <Sheet open={!!selectedCall} onOpenChange={() => setSelectedCall(null)}>
+        <SheetContent className="w-full overflow-y-auto sm:max-w-2xl">
+          {selectedCall && (
+            <>
+              <SheetHeader>
+                <SheetTitle>Call Details</SheetTitle>
+              </SheetHeader>
+
+              <div className="mt-6 space-y-6">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                      <Phone className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-lg font-semibold">{selectedCall.customer_phone || selectedCall.customer_name || 'Unknown caller'}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {selectedCall.created_at ? format(new Date(selectedCall.created_at), 'MMM d, yyyy h:mm a') : '—'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 rounded-lg bg-muted/60 p-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Duration</p>
+                      <p className="font-medium text-foreground">{selectedCall.duration_seconds ? `${selectedCall.duration_seconds}s` : '—'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Status</p>
+                      <div className="mt-1">{getOutcomeBadge(selectedCall.status)}</div>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <p className="text-slate-500">Duration</p>
-                  <p className="font-semibold text-slate-900">{selectedCall.duration_seconds ? `${selectedCall.duration_seconds}s` : '—'}</p>
-                </div>
+
                 {selectedCall.recording_url ? (
                   <div className="space-y-2">
-                    <p className="text-slate-500">Recording</p>
-                    <audio controls className="w-full">
-                      <source src={selectedCall.recording_url} />
-                    </audio>
+                    <h3 className="flex items-center gap-2 font-medium">
+                      <Volume2 className="h-4 w-4" />
+                      Recording
+                    </h3>
+                    <div className="rounded-lg bg-muted/60 p-4">
+                      <audio controls className="w-full">
+                        <source src={selectedCall.recording_url} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
                   </div>
-                ) : null}
+                ) : (
+                  <div className="rounded-lg bg-muted/60 p-4 text-center text-muted-foreground">Recording unavailable</div>
+                )}
+
                 {selectedCall.transcript ? (
                   <div className="space-y-2">
-                    <p className="text-slate-500">Transcript</p>
-                    <div className="rounded-md bg-slate-50 p-3 text-slate-800">{selectedCall.transcript}</div>
+                    <h3 className="flex items-center gap-2 font-medium">
+                      <FileText className="h-4 w-4" />
+                      Transcript
+                    </h3>
+                    <div className="space-y-2 rounded-lg bg-muted/60 p-4 text-left text-sm">
+                      {selectedCall.transcript.split('\n').map((line: string, index: number) => (
+                        <p key={index}>{line}</p>
+                      ))}
+                    </div>
                   </div>
-                ) : null}
+                ) : (
+                  <div className="rounded-lg bg-muted/60 p-4 text-center text-muted-foreground">Transcript unavailable</div>
+                )}
               </div>
-            ) : (
-              <EmptyState title="Select a call" description="Choose a call to see details and playback." />
-            )}
-          </CardContent>
-        </Card>
-      </div>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
