@@ -5,11 +5,72 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  --background: 0 0% 100%;
+  --foreground: 243.53 15% 6%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 243.53 15% 6%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 243.53 15% 6%;
+
+  --primary: 243.53 81% 4%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 240 12% 95%;
+  --secondary-foreground: 243.53 15% 6%;
+
+  --muted: 240 12% 93%;
+  --muted-foreground: 240 7% 48%;
+
+  --accent: 220 16% 93%;
+  --accent-foreground: 243.53 15% 6%;
+
+  --destructive: 348 80% 46%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 240 10% 85%;
+  --input: 240 10% 90%;
+  --ring: 240 6% 65%;
+
+  --radius: 10px;
 }
 
-body {
-  @apply bg-slate-50 text-slate-900 antialiased font-[Inter];
+.dark {
+  --background: 240 11% 10%;
+  --foreground: 0 0% 100%;
+  --card: 240 11% 10%;
+  --card-foreground: 0 0% 100%;
+  --popover: 240 11% 10%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 243 81% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 8% 18%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 240 8% 20%;
+  --muted-foreground: 240 5% 75%;
+  --accent: 240 8% 20%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 348 63% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 8% 20%;
+  --input: 240 8% 25%;
+  --ring: 240 10% 60%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold text-foreground;
+  }
 }
 
 #root {

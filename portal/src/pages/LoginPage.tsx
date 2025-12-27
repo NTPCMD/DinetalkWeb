@@ -1,64 +1,59 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabaseClient';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@/ui/button';
+import { Input } from '@/ui/input';
+import { Label } from '@/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { useAuthContext } from '@/context/AuthContext';
 
-export default function LoginPage() {
-  const { session } = useAuthContext();
-  const navigate = useNavigate();
-  const location = useLocation();
+export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { signIn, session, loading } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (session) {
-      navigate('/restaurants');
+    if (session && !loading) {
+      navigate('/dashboard', { replace: true });
     }
-  }, [session, navigate]);
+  }, [session, loading, navigate]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError(null);
-    setLoading(true);
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    setLoading(false);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
 
-    if (signInError) {
-      setError(signInError.message);
-      return;
+    try {
+      await signIn(email, password);
+      navigate('/dashboard', { replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to sign in.');
+    } finally {
+      setIsLoading(false);
     }
-
-    const redirect = (location.state as { from?: Location })?.from?.pathname ?? '/restaurants';
-    navigate(redirect);
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <Card className="w-full max-w-md shadow-card">
-        <CardHeader>
-          <CardTitle>Sign in to DineTalk</CardTitle>
+    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl">Welcome back</CardTitle>
+          <CardDescription>Sign in to manage your AI phone receptionist</CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
-                required
-                autoComplete="email"
+                placeholder="owner@restaurant.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                required
+                autoComplete="email"
               />
             </div>
             <div className="space-y-2">
@@ -66,23 +61,23 @@ export default function LoginPage() {
               <Input
                 id="password"
                 type="password"
-                required
-                autoComplete="current-password"
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
               />
             </div>
-            {error ? <p className="text-sm text-red-600">{error}</p> : null}
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign in'}
+            {error ? <p className="text-sm text-destructive">{error}</p> : null}
+            <Button type="submit" className="w-full" disabled={isLoading || loading}>
+              {isLoading ? 'Signing in...' : 'Sign in'}
             </Button>
+            <div className="text-center">
+              <Link to="/forgot-password" className="text-sm text-primary hover:underline">
+                Forgot password?
+              </Link>
+            </div>
           </form>
-          <p className="mt-4 text-center text-sm text-slate-600">
-            No account?{' '}
-            <Link className="text-primary font-semibold" to="/signup">
-              Create one
-            </Link>
-          </p>
         </CardContent>
       </Card>
     </div>
