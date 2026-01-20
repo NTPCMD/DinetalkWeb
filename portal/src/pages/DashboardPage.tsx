@@ -3,6 +3,7 @@ import { Phone, PhoneMissed, Clock, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { Badge } from '@/ui/badge';
 import { useCallLogs } from '@/hooks/useCallLogs';
+import { getCallerDisplayName } from '@/lib/callLogDisplay';
 import type { CallLog } from '@/types';
 
 function getOutcomeBadge(call: CallLog) {
@@ -79,9 +80,9 @@ export function DashboardPage() {
         </CardHeader>
         <CardContent>
           {error ? (
-            <p className="text-sm text-destructive">{error}</p>
+            <p className="text-sm text-muted-foreground">Call data unavailable.</p>
           ) : recentCalls.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Call activity will appear here once calls start coming in.</p>
+            <p className="text-sm text-muted-foreground">No recent calls yet.</p>
           ) : (
             <div className="space-y-4">
               {recentCalls.map((call) => (
@@ -91,7 +92,7 @@ export function DashboardPage() {
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">{call.customer_phone || call.customer_name || 'Unknown caller'}</p>
+                      <p className="font-medium text-foreground">{getCallerDisplayName(call)}</p>
                       <p className="text-sm text-muted-foreground">
                         {call.created_at ? format(new Date(call.created_at), 'MMM d, yyyy h:mm a') : '—'}
                       </p>

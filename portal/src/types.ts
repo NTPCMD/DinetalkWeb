@@ -22,6 +22,9 @@ export interface CallLog {
   restaurant_id: string;
   customer_name?: string;
   customer_phone?: string;
+  caller_name?: string;
+  caller_number?: string;
+  from_number?: string;
   status?: string;
   recording_url?: string | null;
   transcript?: string | null;

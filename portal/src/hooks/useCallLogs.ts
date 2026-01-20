@@ -25,11 +25,15 @@ export function useCallLogs(): UseCallLogsResult {
 
     const { data, error: callError } = await supabase
       .from('call_logs')
-      .select('id, restaurant_id, customer_name, customer_phone, status, recording_url, transcript, created_at, duration_seconds')
+      .select('*')
       .order('created_at', { ascending: false });
 
     if (callError) {
-      setError(callError.message);
+      if (import.meta.env.DEV) {
+        console.error('Failed to load call logs', callError);
+      }
+      setError('Call data unavailable');
+      setCalls([]);
     } else {
       setCalls((data as CallLog[] | null) ?? []);
     }
