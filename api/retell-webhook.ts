@@ -140,8 +140,13 @@ export default async function handler(req: any, res: any) {
     });
 
     // Upsert call_logs by retell_call_id (you have a unique constraint on it)
-    const retell_call_id =
-      payload.retell_call_id || payload.call_id || payload?.call?.call_id || null;
+   const retell_call_id =
+  payload.retell_call_id ||
+  payload.call_id ||
+  payload?.call?.call_id ||   // <-- THIS is what your real Retell payload uses
+  payload?.call?.id ||
+  null;
+
 
     if (retell_call_id && restaurant_id) {
       const startedAt =
