@@ -117,17 +117,49 @@ export function PortalLayout() {
         <SidebarRail />
       </Sidebar>
       <SidebarInset>
-        <header className="flex items-center justify-between border-b bg-background px-6 py-4">
-          <div className="flex items-center gap-3">
-            <SidebarTrigger className="hidden md:inline-flex" />
-            <div>
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">Restaurant</p>
-              <h2 className="text-xl font-semibold text-foreground">{restaurantName}</h2>
+        <header className="border-b bg-background px-6 py-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <SidebarTrigger className="hidden md:inline-flex" />
+              <div>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Restaurant</p>
+                <h2 className="text-xl font-semibold text-foreground">{restaurantName}</h2>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2 rounded-full bg-muted/70 px-3 py-1 text-xs font-medium text-green-700">
-            <Circle className="h-3 w-3 fill-green-500 text-green-500" />
-            AI Active
+            <div className="flex items-center gap-3">
+              <nav className="flex items-center gap-2 text-sm font-medium">
+                <NavLink
+                  to="/"
+                  end
+                  className={({ isActive }) =>
+                    cn(
+                      'rounded-full px-3 py-1 text-muted-foreground transition-colors hover:text-foreground',
+                      isActive && 'bg-muted text-foreground',
+                    )
+                  }
+                >
+                  Dashboard
+                </NavLink>
+                <NavLink
+                  to="/calls"
+                  className={({ isActive }) =>
+                    cn(
+                      'rounded-full px-3 py-1 text-muted-foreground transition-colors hover:text-foreground',
+                      isActive && 'bg-muted text-foreground',
+                    )
+                  }
+                >
+                  Call Logs
+                </NavLink>
+              </nav>
+              <div className="flex items-center gap-2 rounded-full bg-muted/70 px-3 py-1 text-xs font-medium text-green-700">
+                <Circle className="h-3 w-3 fill-green-500 text-green-500" />
+                AI Active
+              </div>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
           </div>
         </header>
         <div className="flex-1 overflow-auto bg-muted/40">

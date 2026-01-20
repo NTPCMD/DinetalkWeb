@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route element={<ProtectedRoute />}>
-            <Route element={<PortalLayout />}>
+            <Route path="/" element={<PortalLayout />}>
               <Route index element={<DashboardPage />} />
               <Route path="/dashboard" element={<Navigate to="/" replace />} />
               <Route path="/calls" element={<CallsPage />} />
