@@ -110,7 +110,7 @@ export default async function handler(req: any, res: any) {
 
     if (toNumber) {
       const r = await supabaseFetch(
-        `${SUPABASE_URL}/rest/v1/restaurants?select=id,retell_phone_number&retell_phone_number=eq.${toNumber}&limit=1`,
+        `${SUPABASE_URL}/rest/v1/restaurants?select=id,retell_phone_number&retell_phone_number=eq.${encodeURIComponent(toNumber)}&limit=1`,
         SERVICE_ROLE
       );
 
