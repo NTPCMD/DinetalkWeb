@@ -13,7 +13,7 @@ import { supabase } from '@/lib/supabaseClient';
 import type { Restaurant } from '@/types';
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Calls', href: '/calls', icon: Phone },
   { name: 'Analytics', href: '/analytics', icon: ChartBar },
 ];
