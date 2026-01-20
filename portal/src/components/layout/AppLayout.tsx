@@ -4,9 +4,6 @@ import {
   LayoutDashboard,
   Phone,
   ChartBar,
-  MessageSquare,
-  CreditCard,
-  Settings,
   LogOut,
   Circle,
 } from 'lucide-react';
@@ -19,9 +16,6 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Calls', href: '/calls', icon: Phone },
   { name: 'Analytics', href: '/analytics', icon: ChartBar },
-  { name: 'SMS', href: '/sms', icon: MessageSquare },
-  { name: 'Billing', href: '/billing', icon: CreditCard },
-  { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
 export interface PortalOutletContext {
