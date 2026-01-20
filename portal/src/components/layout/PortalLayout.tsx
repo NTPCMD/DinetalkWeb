@@ -23,7 +23,7 @@ import type { Restaurant } from '@/types';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard, end: true },
-  { name: 'Calls', href: '/calls', icon: Phone },
+  { name: 'Call Logs', href: '/calls', icon: Phone },
   { name: 'Analytics', href: '/analytics', icon: ChartBar },
 ];
 
@@ -73,7 +73,7 @@ export function PortalLayout() {
         <SidebarHeader className="gap-3 px-3 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-wide text-sidebar-foreground/60">DineTalk Portal</p>
+              <p className="text-xs uppercase tracking-wide text-sidebar-foreground/60">DineTalk Client Portal</p>
               <h1 className="text-base font-semibold text-sidebar-foreground">Operations</h1>
             </div>
             <SidebarTrigger className="md:hidden" />
