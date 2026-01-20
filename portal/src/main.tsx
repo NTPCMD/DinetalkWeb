@@ -23,13 +23,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
-              <Route index element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route index element={<DashboardPage />} />
+              <Route path="/dashboard" element={<Navigate to="/" replace />} />
               <Route path="/calls" element={<CallsPage />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
             </Route>
           </Route>
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
