@@ -10,9 +10,6 @@ import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { CallsPage } from '@/pages/CallsPage';
 import { AnalyticsPage } from '@/pages/AnalyticsPage';
-import { SMSPage } from '@/pages/SMSPage';
-import { BillingPage } from '@/pages/BillingPage';
-import { SettingsPage } from '@/pages/SettingsPage';
 import { Toaster } from '@/ui/sonner';
 import './index.css';
 
@@ -30,9 +27,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/calls" element={<CallsPage />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
-              <Route path="/sms" element={<SMSPage />} />
-              <Route path="/billing" element={<BillingPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
             </Route>
           </Route>
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
