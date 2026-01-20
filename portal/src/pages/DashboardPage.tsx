@@ -21,7 +21,10 @@ function getOutcomeBadge(call: CallLog) {
 export function DashboardPage() {
   const { calls, loading, error } = useCallLogs();
 
-  const todayCalls = calls.filter((call) => (call.created_at ? isToday(new Date(call.created_at)) : false));
+  const todayCalls = calls.filter((call) => {
+    const timestamp = call.started_at ?? call.created_at;
+    return timestamp ? isToday(new Date(timestamp)) : false;
+  });
   const totalToday = todayCalls.length;
   const missedToday = todayCalls.filter((call) => call.status?.toLowerCase() === 'missed').length;
   const handledToday = todayCalls.filter((call) => call.status?.toLowerCase() !== 'missed').length;
@@ -94,7 +97,9 @@ export function DashboardPage() {
                     <div>
                       <p className="font-medium text-foreground">{getCallerDisplayName(call)}</p>
                       <p className="text-sm text-muted-foreground">
-                        {call.created_at ? format(new Date(call.created_at), 'MMM d, yyyy h:mm a') : '—'}
+                        {call.started_at || call.created_at
+                          ? format(new Date(call.started_at ?? call.created_at ?? ''), 'MMM d, yyyy h:mm a')
+                          : '—'}
                       </p>
                     </div>
                   </div>

@@ -21,14 +21,17 @@ export interface CallLog {
   id: string;
   restaurant_id: string;
   customer_name?: string;
-  customer_phone?: string;
   caller_name?: string;
   caller_number?: string;
-  from_number?: string;
+  from_number?: string | null;
+  to_number?: string | null;
+  retell_call_id?: string | null;
   status?: string;
   recording_url?: string | null;
   transcript?: string | null;
-  created_at?: string;
+  started_at?: string | null;
+  ended_at?: string | null;
+  created_at?: string | null;
   duration_seconds?: number | null;
-  metadata?: Record<string, unknown> | null;
+  raw_payload?: Record<string, unknown> | null;
 }

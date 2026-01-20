@@ -25,8 +25,10 @@ export function useCallLogs(): UseCallLogsResult {
 
     const { data, error: callError } = await supabase
       .from('call_logs')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .select(
+        'id, restaurant_id, retell_call_id, from_number, to_number, started_at, ended_at, duration_seconds, status, recording_url, transcript, raw_payload, created_at',
+      )
+      .order('started_at', { ascending: false });
 
     if (callError) {
       if (import.meta.env.DEV) {

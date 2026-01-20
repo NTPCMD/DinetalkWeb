@@ -12,7 +12,7 @@ export const getCallerDisplayName = (call: CallLog): string => {
   if (call.customer_name) return call.customer_name;
   if (call.caller_name) return call.caller_name;
 
-  const number = call.caller_number ?? call.from_number ?? call.customer_phone;
+  const number = call.caller_number ?? call.from_number;
   const masked = maskPhoneNumber(number);
 
   return masked ?? 'Unknown caller';

@@ -34,7 +34,9 @@ export function CallsPage() {
     () =>
       calls.map((call) => ({
         ...call,
-        createdLabel: call.created_at ? format(new Date(call.created_at), 'MMM d, yyyy h:mm a') : '—',
+        createdLabel: call.started_at || call.created_at
+          ? format(new Date(call.started_at ?? call.created_at ?? ''), 'MMM d, yyyy h:mm a')
+          : '—',
       })),
     [calls],
   );
@@ -113,7 +115,9 @@ export function CallsPage() {
                     <div>
                       <p className="text-lg font-semibold">{getCallerDisplayName(selectedCall)}</p>
                       <p className="text-sm text-muted-foreground">
-                        {selectedCall.created_at ? format(new Date(selectedCall.created_at), 'MMM d, yyyy h:mm a') : '—'}
+                        {selectedCall.started_at || selectedCall.created_at
+                          ? format(new Date(selectedCall.started_at ?? selectedCall.created_at ?? ''), 'MMM d, yyyy h:mm a')
+                          : '—'}
                       </p>
                     </div>
                   </div>
