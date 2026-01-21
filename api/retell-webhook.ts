@@ -119,38 +119,69 @@ export default async function handler(req: any, res: any) {
       restaurant_id = restaurant?.id ?? null;
     }
 
+    const receivedAt = new Date().toISOString();
+
     // Write webhook event (always)
-    await supabaseFetch(`${SUPABASE_URL}/rest/v1/webhook_events`, SERVICE_ROLE, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify({
-        source: "retell",
-        received_at: new Date().toISOString(),
-        to_number: toNumber ?? null,
-        from_number: fromNumber ?? null,
+    const webhookEventResponse = await supabaseFetch(
+      `${SUPABASE_URL}/rest/v1/webhook_events`,
+      SERVICE_ROLE,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify({
+          source: "retell",
+          received_at: receivedAt,
+          to_number: toNumber ?? null,
+          from_number: fromNumber ?? null,
+          restaurant_id,
+          status: payload.event ?? payload.status ?? payload?.call?.call_status ?? null,
+          error: payload.error ?? null,
+          // IMPORTANT: store as JSON object so it stays jsonb in Supabase
+          payload,
+        }),
+      }
+    );
+
+    const webhookEventData = await webhookEventResponse.json();
+    const webhookEventId = Array.isArray(webhookEventData)
+      ? webhookEventData[0]?.id
+      : webhookEventData?.id;
+
+    const retellCallId =
+      payload.retell_call_id ??
+      payload.call?.call_id ??
+      payload.call_id ??
+      null;
+
+    if (!retellCallId) {
+      if (webhookEventId) {
+        await supabaseFetch(
+          `${SUPABASE_URL}/rest/v1/webhook_events?id=eq.${webhookEventId}`,
+          SERVICE_ROLE,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Prefer: "return=minimal",
+            },
+            body: JSON.stringify({ error: "Missing retell_call_id in payload" }),
+          }
+        );
+      }
+      return res.status(200).json({
+        ok: true,
         restaurant_id,
-        status: payload.event ?? payload.status ?? payload?.call?.call_status ?? null,
-        error: payload.error ?? null,
-        // IMPORTANT: store as JSON object so it stays jsonb in Supabase
-        payload,
-      }),
-    });
+        matched_to_number: toNumber,
+      });
+    }
 
     // Upsert call_logs by retell_call_id (you have a unique constraint on it)
-   const retell_call_id =
-  payload.retell_call_id ||
-  payload.call_id ||
-  payload?.call?.call_id ||   // <-- THIS is what your real Retell payload uses
-  payload?.call?.id ||
-  null;
-
-
-    if (retell_call_id && restaurant_id) {
+    if (retellCallId) {
       const startedAt =
-        payload.started_at || payload?.call?.start_timestamp || new Date().toISOString();
+        payload.started_at || payload?.call?.start_timestamp || null;
 
       const endedAt = payload.ended_at || payload?.call?.end_timestamp || null;
 
@@ -176,7 +207,7 @@ export default async function handler(req: any, res: any) {
           },
           body: JSON.stringify({
             restaurant_id,
-            retell_call_id,
+            retell_call_id: retellCallId,
             from_number: fromNumber ?? null,
             to_number: toNumber ?? null,
             started_at: startedAt,
@@ -186,8 +217,7 @@ export default async function handler(req: any, res: any) {
             recording_url: recordingUrl,
             transcript,
             raw_payload: payload,
-            // created_at exists on the table; if default exists, you can remove this.
-            created_at: new Date().toISOString(),
+            created_at: receivedAt,
           }),
         }
       );
