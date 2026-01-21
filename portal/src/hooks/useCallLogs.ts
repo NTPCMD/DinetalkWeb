@@ -25,7 +25,7 @@ export function useCallLogs(): UseCallLogsResult {
 
     const { data, error: callError } = await supabase
       .from('call_logs')
-      .select('id, restaurant_id, customer_name, customer_phone, status, recording_url, transcript, created_at, duration_seconds')
+      .select('id, restaurant_id, from_number, status, recording_url, transcript, created_at, duration_seconds')
       .order('created_at', { ascending: false });
 
     if (callError) {

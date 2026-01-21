@@ -7,8 +7,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/ui/sheet';
 import { useCallLogs } from '@/hooks/useCallLogs';
 import type { CallLog } from '@/types';
 
-function getOutcomeBadge(status?: string) {
-  const outcome = status?.toLowerCase();
+function getOutcomeBadge(status: string) {
+  const outcome = status.toLowerCase();
   const variants: Record<string, { variant: 'default' | 'secondary' | 'destructive'; label: string }> = {
     answered: { variant: 'default', label: 'Answered' },
     completed: { variant: 'default', label: 'Completed' },
@@ -75,7 +75,7 @@ export function CallsPage() {
                   onClick={() => setSelectedCall(call)}
                 >
                   <div className="col-span-2">
-                    <p className="font-medium text-foreground">{call.customer_phone || call.customer_name || 'Unknown caller'}</p>
+                    <p className="font-medium text-foreground">{call.from_number || 'Unknown caller'}</p>
                     <p className="text-sm text-muted-foreground">{call.createdLabel}</p>
                   </div>
                   <div className="flex items-center text-foreground">
@@ -110,7 +110,7 @@ export function CallsPage() {
                       <Phone className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-lg font-semibold">{selectedCall.customer_phone || selectedCall.customer_name || 'Unknown caller'}</p>
+                      <p className="text-lg font-semibold">{selectedCall.from_number || 'Unknown caller'}</p>
                       <p className="text-sm text-muted-foreground">
                         {selectedCall.created_at ? format(new Date(selectedCall.created_at), 'MMM d, yyyy h:mm a') : '—'}
                       </p>
