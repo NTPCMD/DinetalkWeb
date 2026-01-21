@@ -15,9 +15,11 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
+      "@/app/*": ["src/app/*"],
       "@/components/*": ["src/components/*"],
       "@/context/*": ["src/context/*"],
       "@/lib/*": ["src/lib/*"],
+      "@/utils/*": ["src/utils/*"],
       "@/ui/*": ["src/ui/*"],
       "@/types/*": ["src/types/*"],
       "@/types": ["src/types"],
