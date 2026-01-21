@@ -20,12 +20,10 @@ export interface Restaurant {
 export interface CallLog {
   id: string;
   restaurant_id: string;
-  customer_name?: string;
-  customer_phone?: string;
-  status?: string;
+  from_number?: string | null;
+  status: string;
   recording_url?: string | null;
   transcript?: string | null;
   created_at?: string;
   duration_seconds?: number | null;
-  metadata?: Record<string, unknown> | null;
 }

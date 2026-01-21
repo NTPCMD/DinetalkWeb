@@ -22,7 +22,7 @@ export function AnalyticsPage() {
       const dayLabel = format(callDate, 'EEE');
       const dayEntry = days.find((d) => d.day === dayLabel);
       if (!dayEntry) return;
-      if (call.status?.toLowerCase() === 'missed') {
+      if (call.status.toLowerCase() === 'missed') {
         dayEntry.missed += 1;
       } else {
         dayEntry.answered += 1;

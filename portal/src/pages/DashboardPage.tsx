@@ -6,7 +6,7 @@ import { useCallLogs } from '@/hooks/useCallLogs';
 import type { CallLog } from '@/types';
 
 function getOutcomeBadge(call: CallLog) {
-  const outcome = call.status?.toLowerCase();
+  const outcome = call.status.toLowerCase();
   const variants: Record<string, { variant: 'default' | 'secondary' | 'destructive'; label: string }> = {
     answered: { variant: 'default', label: 'Answered' },
     completed: { variant: 'default', label: 'Completed' },
@@ -22,8 +22,8 @@ export function DashboardPage() {
 
   const todayCalls = calls.filter((call) => (call.created_at ? isToday(new Date(call.created_at)) : false));
   const totalToday = todayCalls.length;
-  const missedToday = todayCalls.filter((call) => call.status?.toLowerCase() === 'missed').length;
-  const handledToday = todayCalls.filter((call) => call.status?.toLowerCase() !== 'missed').length;
+  const missedToday = todayCalls.filter((call) => call.status.toLowerCase() === 'missed').length;
+  const handledToday = todayCalls.filter((call) => call.status.toLowerCase() !== 'missed').length;
   const avgDuration = (() => {
     const durations = todayCalls.map((call) => call.duration_seconds ?? 0).filter((d) => d > 0);
     if (!durations.length) return '—';
@@ -91,7 +91,7 @@ export function DashboardPage() {
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">{call.customer_phone || call.customer_name || 'Unknown caller'}</p>
+                      <p className="font-medium text-foreground">{call.from_number || 'Unknown caller'}</p>
                       <p className="text-sm text-muted-foreground">
                         {call.created_at ? format(new Date(call.created_at), 'MMM d, yyyy h:mm a') : '—'}
                       </p>

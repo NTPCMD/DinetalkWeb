@@ -12,7 +12,6 @@ interface Call {
   topic: string;
   duration: number;
   is_after_hours: boolean;
-  outcome?: string;
 }
 
 interface Transcript {
@@ -120,12 +119,6 @@ export function CallDetail({
             </div>
           </div>
 
-          {call.outcome && (
-            <div className="pt-4 border-t">
-              <div className="text-sm text-muted-foreground mb-1">Outcome</div>
-              <div className="font-medium">{call.outcome}</div>
-            </div>
-          )}
         </CardContent>
       </Card>
 
