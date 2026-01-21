@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
-import { PortalLayout } from '@/components/layout/PortalLayout';
+import { AppLayout } from '@/components/layout/AppLayout';
 import { LoginPage } from '@/pages/LoginPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<PortalLayout />}>
+            <Route element={<AppLayout />}>
               <Route index element={<DashboardPage />} />
               <Route path="/dashboard" element={<Navigate to="/" replace />} />
               <Route path="/calls" element={<CallsPage />} />
