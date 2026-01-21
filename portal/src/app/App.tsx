@@ -17,6 +17,12 @@ const supabase = createClient(
 // Server URL
 const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-7234a240`;
 
+const logDevError = (message: string, error: unknown) => {
+  if (import.meta.env.DEV) {
+    console.error(message, error);
+  }
+};
+
 interface Restaurant {
   id: string;
   name: string;
@@ -76,7 +82,7 @@ export default function App() {
 
       if (session?.access_token) {
         setAccessToken(session.access_token);
-        await loadRestaurants(session.access_token);
+        await loadRestaurants();
       }
     } catch (error) {
       console.log('Error checking session:', error);
@@ -103,7 +109,7 @@ export default function App() {
 
       if (session?.access_token) {
         setAccessToken(session.access_token);
-        await loadRestaurants(session.access_token);
+        await loadRestaurants();
         toast.success('Signed in successfully');
       }
     } catch (error: any) {
@@ -155,28 +161,55 @@ export default function App() {
     toast.success('Logged out successfully');
   };
 
-  const loadRestaurants = async (token: string) => {
+  const loadRestaurants = async () => {
     try {
-      const response = await fetch(`${SERVER_URL}/restaurants`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
-      if (!response.ok) {
-        throw new Error('Failed to load restaurants');
+      if (sessionError || !session?.user) {
+        logDevError('Failed to load session for restaurants', sessionError);
+        throw new Error('Unable to load restaurants.');
       }
 
-      const data = await response.json();
-      setRestaurants(data.restaurants || []);
-      
-      if (data.restaurants && data.restaurants.length > 0) {
-        setCurrentRestaurantId(data.restaurants[0].id);
+      type AccountWithRestaurants = {
+        restaurants: { id: string; name: string }[] | null;
+      };
+
+      const { data: accountRows, error: accountError } = await supabase
+        .from('accounts')
+        .select('restaurants ( id, name )')
+        .eq('owner_user_id', session.user.id);
+
+      if (accountError) {
+        logDevError('Failed to load account restaurants', accountError);
+      }
+
+      let restaurantsData =
+        (accountRows as AccountWithRestaurants[] | null)
+          ?.flatMap((row) => row.restaurants ?? []) ?? [];
+
+      if (accountError || restaurantsData.length === 0) {
+        const { data: restaurantRows, error: restaurantError } = await supabase
+          .from('restaurants')
+          .select('id, name');
+
+        if (restaurantError) {
+          logDevError('Failed to load restaurants directly', restaurantError);
+          throw new Error('Unable to load restaurants.');
+        }
+
+        restaurantsData = restaurantRows ?? [];
+      }
+
+      setRestaurants(restaurantsData);
+
+      if (restaurantsData.length > 0) {
+        setCurrentRestaurantId(restaurantsData[0].id);
       } else {
+        setCurrentRestaurantId(null);
         toast.error('No restaurants available. Please contact DineTalk support.');
       }
     } catch (error: any) {
-      console.log('Error loading restaurants:', error);
+      logDevError('Error loading restaurants', error);
       toast.error(error.message || 'Failed to load restaurants');
     }
   };
