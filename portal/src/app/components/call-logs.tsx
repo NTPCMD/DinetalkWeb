@@ -11,7 +11,7 @@ interface Call {
   id: string;
   created_at: string;
   caller: string;
-  status: 'ai_handled' | 'transferred' | 'missed';
+  status: string;
   topic: string;
   duration: number;
   is_after_hours: boolean;
