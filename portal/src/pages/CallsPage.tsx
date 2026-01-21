@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { Badge } from '@/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/ui/sheet';
 import { useCallLogs } from '@/hooks/useCallLogs';
-import { getCallerDisplayName } from '@/lib/callLogDisplay';
 import type { CallLog } from '@/types';
 
 function getOutcomeBadge(status?: string) {
@@ -34,9 +33,7 @@ export function CallsPage() {
     () =>
       calls.map((call) => ({
         ...call,
-        createdLabel: call.started_at || call.created_at
-          ? format(new Date(call.started_at ?? call.created_at ?? ''), 'MMM d, yyyy h:mm a')
-          : '—',
+        createdLabel: call.created_at ? format(new Date(call.created_at), 'MMM d, yyyy h:mm a') : '—',
       })),
     [calls],
   );
@@ -57,9 +54,9 @@ export function CallsPage() {
         </CardHeader>
         <CardContent>
           {error ? (
-            <p className="text-sm text-muted-foreground">Call data unavailable.</p>
+            <p className="text-sm text-destructive">{error}</p>
           ) : formattedCalls.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No recent calls yet.</p>
+            <p className="text-sm text-muted-foreground">No calls yet. Activity will appear once calls are processed.</p>
           ) : (
             <div className="space-y-1">
               <div className="grid grid-cols-6 gap-4 border-b pb-3 text-sm font-medium text-muted-foreground">
@@ -78,7 +75,7 @@ export function CallsPage() {
                   onClick={() => setSelectedCall(call)}
                 >
                   <div className="col-span-2">
-                    <p className="font-medium text-foreground">{getCallerDisplayName(call)}</p>
+                    <p className="font-medium text-foreground">{call.customer_phone || call.customer_name || 'Unknown caller'}</p>
                     <p className="text-sm text-muted-foreground">{call.createdLabel}</p>
                   </div>
                   <div className="flex items-center text-foreground">
@@ -113,11 +110,9 @@ export function CallsPage() {
                       <Phone className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-lg font-semibold">{getCallerDisplayName(selectedCall)}</p>
+                      <p className="text-lg font-semibold">{selectedCall.customer_phone || selectedCall.customer_name || 'Unknown caller'}</p>
                       <p className="text-sm text-muted-foreground">
-                        {selectedCall.started_at || selectedCall.created_at
-                          ? format(new Date(selectedCall.started_at ?? selectedCall.created_at ?? ''), 'MMM d, yyyy h:mm a')
-                          : '—'}
+                        {selectedCall.created_at ? format(new Date(selectedCall.created_at), 'MMM d, yyyy h:mm a') : '—'}
                       </p>
                     </div>
                   </div>
