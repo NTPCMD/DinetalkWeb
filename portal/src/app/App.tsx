@@ -14,9 +14,6 @@ const supabase = createClient(
   publicAnonKey
 );
 
-// Server URL
-const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-7234a240`;
-
 const logDevError = (message: string, error: unknown) => {
   if (import.meta.env.DEV) {
     console.error(message, error);
@@ -45,7 +42,7 @@ interface Call {
   id: string;
   created_at: string;
   caller: string;
-  status: 'ai_handled' | 'transferred' | 'missed';
+  status: string;
   topic: string;
   duration: number;
   is_after_hours: boolean;
@@ -126,18 +123,18 @@ export default function App() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${SERVER_URL}/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name,
+          },
         },
-        body: JSON.stringify({ email, password, name }),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to sign up');
+      if (error) {
+        throw error;
       }
 
       toast.success('Account created! Please sign in.');
@@ -232,18 +229,35 @@ export default function App() {
     if (!accessToken || !currentRestaurantId) return;
 
     try {
-      const response = await fetch(`${SERVER_URL}/analytics/${currentRestaurantId}`, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      });
+      const { data: callLogs, error } = await supabase
+        .from('call_logs')
+        .select('status, duration_seconds')
+        .eq('restaurant_id', currentRestaurantId);
 
-      if (!response.ok) {
-        throw new Error('Failed to load analytics');
+      if (error) {
+        throw error;
       }
 
-      const data = await response.json();
-      setAnalytics(data.analytics);
+      const totalCalls = callLogs?.length ?? 0;
+      const aiHandled = callLogs?.filter(call => call.status === 'ai_handled').length ?? 0;
+      const transferred = callLogs?.filter(call => call.status === 'transferred').length ?? 0;
+      const missed = callLogs?.filter(call => call.status === 'missed').length ?? 0;
+      const avgDuration = totalCalls > 0
+        ? (callLogs ?? []).reduce((sum, call) => sum + (call.duration_seconds ?? 0), 0) / totalCalls
+        : 0;
+      const aiPercentage = totalCalls > 0 ? (aiHandled / totalCalls) * 100 : 0;
+
+      setAnalytics({
+        totalCalls,
+        aiHandled,
+        transferred,
+        missed,
+        afterHours: 0,
+        avgDuration,
+        aiPercentage,
+        callRecordingEnabled: true,
+        callTranscriptsEnabled: true,
+      });
     } catch (error: any) {
       console.log('Error loading analytics:', error);
       toast.error(error.message || 'Failed to load analytics');
@@ -254,22 +268,35 @@ export default function App() {
     if (!accessToken || !currentRestaurantId) return;
 
     try {
-      const response = await fetch(
-        `${SERVER_URL}/calls/${currentRestaurantId}?page=${currentPage}&limit=50`,
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const limit = 50;
+      const offset = (currentPage - 1) * limit;
 
-      if (!response.ok) {
-        throw new Error('Failed to load calls');
+      const { data: callLogs, error: callsError, count } = await supabase
+        .from('call_logs')
+        .select(
+          'id, created_at, status, from_number, duration_seconds, started_at, ended_at',
+          { count: 'exact' }
+        )
+        .eq('restaurant_id', currentRestaurantId)
+        .order('created_at', { ascending: false })
+        .range(offset, offset + limit - 1);
+
+      if (callsError) {
+        throw callsError;
       }
 
-      const data = await response.json();
-      setCalls(data.calls || []);
-      setTotalPages(Math.ceil((data.total || 0) / (data.limit || 50)));
+      const normalizedCalls = (callLogs ?? []).map(call => ({
+        id: call.id,
+        created_at: call.created_at ?? new Date().toISOString(),
+        caller: call.from_number || 'Unknown caller',
+        status: call.status || 'unknown',
+        topic: 'General enquiry',
+        duration: call.duration_seconds ?? 0,
+        is_after_hours: false,
+      }));
+
+      setCalls(normalizedCalls);
+      setTotalPages(Math.ceil((count ?? 0) / limit));
     } catch (error: any) {
       console.log('Error loading calls:', error);
       toast.error(error.message || 'Failed to load calls');
@@ -280,50 +307,38 @@ export default function App() {
     if (!accessToken || !currentRestaurantId) return;
 
     try {
-      const response = await fetch(
-        `${SERVER_URL}/calls/${currentRestaurantId}/${callId}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const { data: callLog, error: callError } = await supabase
+        .from('call_logs')
+        .select(
+          'id, created_at, status, from_number, duration_seconds, transcript, recording_url'
+        )
+        .eq('id', callId)
+        .single();
 
-      if (!response.ok) {
-        throw new Error('Failed to load call details');
+      if (callError || !callLog) {
+        throw callError || new Error('Call not found');
       }
 
-      const data = await response.json();
-      
-      // Try to get recording URL if enabled
-      let recordingUrl = null;
-      const call = data.call;
-      const restaurant = restaurants.find(r => r.id === currentRestaurantId);
-      
-      if (call && restaurant) {
-        try {
-          const recResponse = await fetch(
-            `${SERVER_URL}/recording/${currentRestaurantId}/${callId}`,
-            {
-              headers: {
-                'Authorization': `Bearer ${accessToken}`,
-              },
-            }
-          );
-          
-          if (recResponse.ok) {
-            const recData = await recResponse.json();
-            recordingUrl = recData.url;
-          }
-        } catch (error) {
-          // Recording not available
-          console.log('Recording not available');
-        }
-      }
+      const call = {
+        id: callLog.id,
+        created_at: callLog.created_at ?? new Date().toISOString(),
+        caller: callLog.from_number || 'Unknown caller',
+        status: callLog.status || 'unknown',
+        topic: 'General enquiry',
+        duration: callLog.duration_seconds ?? 0,
+        is_after_hours: false,
+      };
+
+      const transcript = callLog.transcript
+        ? { id: callLog.id, transcript_text: callLog.transcript }
+        : null;
 
       setSelectedCall({
-        ...data,
-        recordingUrl,
+        call,
+        transcript,
+        summary: null,
+        transcriptsEnabled: Boolean(callLog.transcript),
+        recordingUrl: callLog.recording_url ?? null,
       });
       setCurrentView('call-detail');
     } catch (error: any) {
